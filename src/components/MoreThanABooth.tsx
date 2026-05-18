@@ -36,7 +36,14 @@ export function MoreThanABooth() {
           </div>
         </div>
 
+        <input
+          type="checkbox"
+          id="show-all-addons"
+          className="reveal-toggle"
+          aria-label="Show all add-ons"
+        />
         <ul
+          className="addons-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
@@ -46,9 +53,10 @@ export function MoreThanABooth() {
             margin: 0,
           }}
         >
-          {ITEMS.map((it) => (
+          {ITEMS.map((it, i) => (
             <li
               key={it.name}
+              className={`addon-item ${i >= 6 ? 'reveal-extra' : ''}`}
               style={{
                 padding: 18,
                 border: '1px solid var(--line)',
@@ -65,8 +73,7 @@ export function MoreThanABooth() {
                   width: 38,
                   height: 38,
                   borderRadius: 10,
-                  background:
-                    'linear-gradient(160deg, rgba(212,184,124,.25), rgba(212,184,124,.05))',
+                  background: 'linear-gradient(160deg, rgba(212,184,124,.25), rgba(212,184,124,.05))',
                   border: '1px solid rgba(212,184,124,.3)',
                   display: 'grid',
                   placeItems: 'center',
@@ -76,17 +83,11 @@ export function MoreThanABooth() {
                 {it.icon}
               </div>
               <div>
-                <div
-                  style={{
-                    fontFamily: 'var(--serif)',
-                    fontSize: 19,
-                    color: 'var(--ivory)',
-                    lineHeight: 1.1,
-                  }}
-                >
+                <div style={{ fontFamily: 'var(--serif)', fontSize: 19, color: 'var(--ivory)', lineHeight: 1.1 }}>
                   {it.name}
                 </div>
                 <div
+                  className="addon-sub"
                   style={{
                     fontFamily: 'var(--mono)',
                     fontSize: 10,
@@ -102,6 +103,9 @@ export function MoreThanABooth() {
             </li>
           ))}
         </ul>
+        <label htmlFor="show-all-addons" className="reveal-label reveal-label-addons">
+          Show all 12 add-ons
+        </label>
       </div>
     </section>
   );

@@ -371,9 +371,20 @@ export function BoothCards() {
           </div>
         </div>
 
+        {/* CSS-only "Show all" toggle for mobile. Desktop sees all 12; mobile sees 6 then expands. */}
+        <input
+          type="checkbox"
+          id="show-all-booths"
+          className="reveal-toggle"
+          aria-label="Show all booth experiences"
+        />
         <div className="booth-grid">
-          {BOOTHS.map((b) => (
-            <Link key={b.n} href={b.href} className={`booth-card ${b.span}`}>
+          {BOOTHS.map((b, i) => (
+            <Link
+              key={b.n}
+              href={b.href}
+              className={`booth-card ${b.span} ${i >= 6 ? 'reveal-extra' : ''}`}
+            >
               <BoothVisual kind={b.visual} />
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div className="booth-card-num">No. {b.n}</div>
@@ -399,6 +410,9 @@ export function BoothCards() {
             </Link>
           ))}
         </div>
+        <label htmlFor="show-all-booths" className="reveal-label reveal-label-booths">
+          Show all 12 booth experiences
+        </label>
       </div>
     </section>
   );
