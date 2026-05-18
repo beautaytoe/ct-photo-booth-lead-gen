@@ -57,9 +57,9 @@ export default function AboutPage() {
               Statewide <em>Connecticut.</em>
             </h2>
             <p className="lede" style={{ marginTop: 16 }}>
-              Fairfield, New Haven, Hartford, Litchfield, Middlesex, New London, Tolland, and Windham
-              counties. Fairfield County is our highest-volume region — and where our warehouse is
-              based.
+              Service is available across all eight Connecticut counties — Fairfield, New Haven,
+              Hartford, Litchfield, Middlesex, New London, Tolland, and Windham. Fairfield County
+              is featured on the site, but the booth lineup is built for events anywhere in CT.
             </p>
             <div style={{ marginTop: 24 }}>
               <Link href="/service-areas/" className="btn btn-primary">

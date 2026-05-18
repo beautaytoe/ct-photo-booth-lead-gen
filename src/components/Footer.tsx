@@ -19,18 +19,17 @@ export function Footer() {
     <footer className="footer">
       <div className="container">
         <div className="footer-top">
-          <div>
+          <div className="footer-brand">
             <Link href="/" className="brand" style={{ marginBottom: 20 }}>
               <div className="brand-mark">G</div>
-              <div>
+              <div className="brand-text">
                 <div className="brand-name">Gold Coast Photo Booth Co.</div>
-                <div className="brand-sub">{SITE.tagline}</div>
+                <div className="brand-sub">Photo Booth Rental CT</div>
               </div>
             </Link>
             <p style={{ color: 'var(--text-dim)', maxWidth: '38ch', fontSize: 14, lineHeight: 1.6, marginTop: 24 }}>
-              Photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for Connecticut
-              weddings, corporate events, and private celebrations. Coverage available statewide
-              with Fairfield County as the first-priority service area.
+              Premium photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for
+              Connecticut weddings, corporate events, and private celebrations.
             </p>
             <div style={{ marginTop: 24 }}>
               <Link href="/check-availability/" className="btn btn-primary">
@@ -38,8 +37,11 @@ export function Footer() {
               </Link>
             </div>
           </div>
-          <div>
-            <h5>Booths &amp; Add-Ons</h5>
+
+          <details className="footer-col">
+            <summary>
+              <h5 style={{ margin: 0 }}>Booths &amp; Add-Ons</h5>
+            </summary>
             <ul>
               {SERVICES.slice(0, 8).map((s) => (
                 <li key={s.slug}>
@@ -50,9 +52,12 @@ export function Footer() {
                 <Link href="/photo-booth-rental-ct/">All booth experiences →</Link>
               </li>
             </ul>
-          </div>
-          <div>
-            <h5>Counties</h5>
+          </details>
+
+          <details className="footer-col">
+            <summary>
+              <h5 style={{ margin: 0 }}>Counties</h5>
+            </summary>
             <ul>
               {COUNTIES.map((c) => (
                 <li key={c.slug}>
@@ -60,9 +65,12 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div>
-            <h5>Featured CT Towns</h5>
+          </details>
+
+          <details className="footer-col">
+            <summary>
+              <h5 style={{ margin: 0 }}>Featured CT Towns</h5>
+            </summary>
             <ul>
               {featuredTowns.map((t) => (
                 <li key={t.slug}>
@@ -73,7 +81,7 @@ export function Footer() {
                 <Link href="/service-areas/">All CT service areas →</Link>
               </li>
             </ul>
-          </div>
+          </details>
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} {SITE.brand} · Connecticut</span>

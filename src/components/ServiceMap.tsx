@@ -8,16 +8,14 @@ const COUNTIES = [
     id: 'fairfield',
     n: '01',
     name: 'Fairfield County',
-    meta: 'Primary Market',
-    featured: true,
+    meta: 'Gold Coast',
     polygon: '60,300 60,360 80,400 130,420 180,430 230,420 230,350 200,330 160,320 110,310',
   },
   {
     id: 'new-haven',
     n: '02',
     name: 'New Haven County',
-    meta: 'Coastal Service',
-    featured: false,
+    meta: 'Coastal',
     polygon: '230,420 230,350 280,330 330,330 360,370 360,420 320,440 270,440',
   },
   {
@@ -25,7 +23,6 @@ const COUNTIES = [
     n: '03',
     name: 'Litchfield County',
     meta: 'Hill Country',
-    featured: false,
     polygon: '60,180 60,300 180,300 200,260 200,200 160,170 110,170',
   },
   {
@@ -33,7 +30,6 @@ const COUNTIES = [
     n: '04',
     name: 'Hartford County',
     meta: 'Capital Region',
-    featured: false,
     polygon: '200,200 200,330 280,330 310,300 310,200 270,180',
   },
   {
@@ -41,7 +37,6 @@ const COUNTIES = [
     n: '05',
     name: 'Middlesex County',
     meta: 'Shoreline',
-    featured: false,
     polygon: '310,300 360,330 410,360 410,400 360,420 320,420 320,360',
   },
   {
@@ -49,7 +44,6 @@ const COUNTIES = [
     n: '06',
     name: 'New London County',
     meta: 'Eastern Shore',
-    featured: false,
     polygon: '410,290 410,400 510,420 540,400 540,310 480,290',
   },
   {
@@ -57,7 +51,6 @@ const COUNTIES = [
     n: '07',
     name: 'Tolland County',
     meta: 'Northeast',
-    featured: false,
     polygon: '310,200 310,300 410,290 410,200 360,180',
   },
   {
@@ -65,7 +58,6 @@ const COUNTIES = [
     n: '08',
     name: 'Windham County',
     meta: 'Quiet Corner',
-    featured: false,
     polygon: '410,200 410,290 510,290 540,260 540,200 470,180',
   },
 ];
@@ -77,17 +69,17 @@ export function ServiceMap() {
       <div className="container">
         <div className="section-head">
           <div>
-            <span className="eyebrow">07 — Connecticut Service Area</span>
+            <span className="eyebrow">07 — Connecticut Service Areas</span>
             <h2 className="display" style={{ marginTop: 24 }}>
-              Statewide coverage,<br />
-              <em>Fairfield first.</em>
+              Photo booth rentals<br />
+              <em>across Connecticut.</em>
             </h2>
           </div>
           <div className="section-head-right">
             <p className="lede">
-              We serve events across Connecticut, with Fairfield County as our first-priority
-              market. Availability, travel pricing, and setup requirements are confirmed before
-              each booking.
+              Service is available across all eight Connecticut counties, with availability and
+              travel pricing confirmed before booking. Tap a county for the towns we cover there
+              and the booth styles that fit best.
             </p>
           </div>
         </div>
@@ -98,7 +90,7 @@ export function ServiceMap() {
               <Link
                 key={c.id}
                 href={`/photo-booth-rental-${c.id}-county-ct/`}
-                className={`map-row ${c.featured ? 'featured' : ''} ${active === c.id ? 'active' : ''}`}
+                className={`map-row ${active === c.id ? 'active' : ''}`}
                 onMouseEnter={() => setActive(c.id)}
               >
                 <span className="map-row-num">{c.n}</span>
@@ -108,7 +100,7 @@ export function ServiceMap() {
             ))}
           </div>
 
-          <div className="map-svg-wrap">
+          <div className="map-svg-wrap hide-on-mobile">
             <svg viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet">
               <defs>
                 <radialGradient id="featGrad" cx="50%" cy="50%">
@@ -125,14 +117,13 @@ export function ServiceMap() {
 
               {COUNTIES.map((c) => {
                 const isActive = active === c.id;
-                const isFeat = c.featured;
                 return (
                   <g key={c.id} onMouseEnter={() => setActive(c.id)} style={{ cursor: 'pointer' }}>
                     <polygon
                       points={c.polygon}
-                      fill={isFeat ? 'url(#featGrad)' : isActive ? 'rgba(212,184,124,.25)' : 'rgba(255,250,240,.04)'}
-                      stroke={isFeat || isActive ? 'var(--gold)' : 'var(--line-strong)'}
-                      strokeWidth={isFeat ? 1.5 : 1}
+                      fill={isActive ? 'url(#featGrad)' : 'rgba(255,250,240,.04)'}
+                      stroke={isActive ? 'var(--gold)' : 'var(--line-strong)'}
+                      strokeWidth={1}
                       style={{ transition: 'all .3s ease' }}
                     />
                   </g>
@@ -173,11 +164,25 @@ export function ServiceMap() {
                 CONNECTICUT
               </text>
               <text x="40" y="55" fontFamily="var(--mono)" fontSize="8" fill="var(--text-muted)" letterSpacing="2">
-                SERVICE AREAS · 2026
+                SERVICE AREAS
               </text>
             </svg>
           </div>
         </div>
+
+        <p
+          style={{
+            marginTop: 32,
+            fontSize: 13,
+            color: 'var(--text-muted)',
+            fontFamily: 'var(--mono)',
+            letterSpacing: '.18em',
+            textTransform: 'uppercase',
+          }}
+        >
+          Serving events across Connecticut — from Fairfield and New Haven County to Hartford,
+          Litchfield, Middlesex, New London, Tolland, and Windham County.
+        </p>
       </div>
     </section>
   );

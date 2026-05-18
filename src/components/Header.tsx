@@ -20,7 +20,7 @@ export function Header() {
         <div className="nav-inner">
           <Link href="/" className="brand">
             <div className="brand-mark">G</div>
-            <div>
+            <div className="brand-text">
               <div className="brand-name">
                 Gold Coast<span style={{ fontStyle: 'italic', color: 'var(--gold-bright)' }}> Photo Booth Co.</span>
               </div>
@@ -37,8 +37,9 @@ export function Header() {
           </ul>
 
           <div className="nav-cta">
-            <Link href={NAV.cta.href} className="btn btn-primary">
-              {NAV.cta.label}
+            <Link href={NAV.cta.href} className="btn btn-primary nav-cta-btn">
+              <span className="nav-cta-label-full">{NAV.cta.label}</span>
+              <span className="nav-cta-label-short">Book</span>
             </Link>
           </div>
         </div>

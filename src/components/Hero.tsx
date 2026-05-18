@@ -6,9 +6,12 @@ import { Icons } from './Icons';
 
 interface HeroProps {
   eyebrow?: string;
-  /** Three lines of headline. The third line is shown as <em> (italic gold). */
+  /** Three lines of headline (desktop). The third line is shown as <em> (italic gold). */
   titleLines?: [string, string, string];
+  /** Single-string headline shown on mobile only — clearer and keyword-targeted. */
+  mobileTitle?: string;
   subtitle?: string;
+  mobileSubtitle?: string;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   showTrustStrip?: boolean;
@@ -24,8 +27,8 @@ const TRUST_STRIP_ITEMS = [
   'Weddings',
   'Corporate Events',
   'Sweet 16s',
-  'Bar / Bat Mitzvahs',
   'School Events',
+  'Bar / Bat Mitzvahs',
   'Galas',
   'Brand Activations',
 ];
@@ -49,11 +52,13 @@ const CARDS: FloatCardData[] = [
 ];
 
 export function Hero({
-  eyebrow = 'Connecticut Photo Booth Rentals · Fairfield County First',
+  eyebrow = 'Connecticut Photo Booth Rentals',
   titleLines = DEFAULT_LINES,
+  mobileTitle = 'Premium Photo Booth Rentals Across Connecticut',
   subtitle = 'Premium photo booth, 360 booth, glam booth, mirror booth, roaming booth, selfie booth, and audio guestbook rentals for weddings, corporate events, private parties, school events, and celebrations across Connecticut.',
+  mobileSubtitle = '360 booths, glam booths, mirror booths, roaming booths, selfie booths, and audio guestbooks for weddings, parties, corporate events, and celebrations across CT.',
   primaryCta = { label: 'Check Availability', href: '/check-availability/' },
-  secondaryCta = { label: 'View Booth Experiences', href: '#experiences' },
+  secondaryCta = { label: 'View Booths', href: '#experiences' },
   showTrustStrip = true,
 }: HeroProps) {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -88,14 +93,21 @@ export function Hero({
         <div className="hero-inner">
           <div className="hero-left">
             <span className="eyebrow">{eyebrow}</span>
-            <h1 className="display hero-headline">
+
+            {/* Desktop H1 — keep poetic version */}
+            <h1 className="display hero-headline hide-on-mobile">
               {titleLines[0]}
               <br />
               {titleLines[1]}
               <br />
               <em>{titleLines[2]}</em>
             </h1>
-            <p className="hero-sub">{subtitle}</p>
+            {/* Mobile H1 — clear and keyword-targeted */}
+            <h1 className="display hero-headline-mobile show-on-mobile">{mobileTitle}</h1>
+
+            <p className="hero-sub hide-on-mobile">{subtitle}</p>
+            <p className="hero-sub show-on-mobile">{mobileSubtitle}</p>
+
             <div className="hero-ctas">
               {primaryCta && (
                 <Link href={primaryCta.href} className="btn btn-primary">
@@ -111,38 +123,16 @@ export function Hero({
             </div>
 
             {showTrustStrip && (
-              <ul
-                aria-label="Event types we serve"
-                style={{
-                  margin: '0 0 36px 0',
-                  padding: 0,
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: 8,
-                  listStyle: 'none',
-                }}
-              >
-                {TRUST_STRIP_ITEMS.map((t) => (
-                  <li
-                    key={t}
-                    style={{
-                      fontFamily: 'var(--mono)',
-                      fontSize: 10,
-                      letterSpacing: '.18em',
-                      textTransform: 'uppercase',
-                      color: 'var(--text-dim)',
-                      padding: '6px 12px',
-                      border: '1px solid var(--line)',
-                      borderRadius: 999,
-                    }}
-                  >
+              <ul aria-label="Event types we serve" className="trust-strip">
+                {TRUST_STRIP_ITEMS.map((t, i) => (
+                  <li key={t} className={i < 4 ? 'trust-chip' : 'trust-chip trust-chip-extra'}>
                     {t}
                   </li>
                 ))}
               </ul>
             )}
 
-            <div className="hero-meta">
+            <div className="hero-meta hide-on-mobile">
               <div className="hero-meta-item">
                 <div className="hero-meta-num">12</div>
                 <div className="hero-meta-label">Booth &amp; Add-On Options</div>
@@ -152,13 +142,17 @@ export function Hero({
                 <div className="hero-meta-label">CT Counties Served</div>
               </div>
               <div className="hero-meta-item">
-                <div className="hero-meta-num">169</div>
-                <div className="hero-meta-label">CT Towns</div>
+                <div className="hero-meta-num">CT</div>
+                <div className="hero-meta-label">Statewide Availability</div>
               </div>
+            </div>
+            <div className="hero-meta-mobile show-on-mobile">
+              12 booth &amp; add-on options · 8 CT counties · Statewide availability
             </div>
           </div>
 
-          <div className="hero-stage" ref={stageRef}>
+          {/* Decorative stage — hidden on mobile to remove overlap */}
+          <div className="hero-stage hide-on-mobile" ref={stageRef}>
             <div className="hero-stage-bg" style={{ transform: px(-6) }} />
             <div className="hero-floor" />
 
@@ -197,26 +191,6 @@ export function Hero({
             </div>
           </div>
         </div>
-      </div>
-
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 32,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          fontFamily: 'var(--mono)',
-          fontSize: 10,
-          letterSpacing: '0.3em',
-          color: 'var(--text-muted)',
-          textTransform: 'uppercase',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-        }}
-      >
-        <span className="subtle-pulse">Scroll</span>
-        <span style={{ width: 1, height: 32, background: 'var(--gold)', opacity: 0.5 }} />
       </div>
     </section>
   );

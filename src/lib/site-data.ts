@@ -3,10 +3,11 @@ export const SITE = {
   shortBrand: 'Gold Coast Photo Booth',
   /** Used as `alternateName` in schema and as the small line under the brand mark. */
   seoDescriptor: 'Photo Booth Rental CT',
-  tagline: 'Connecticut Photo Booth Rentals · Fairfield County First',
+  /** Generic statewide tagline. Fairfield County is featured in a dedicated section, not the tagline. */
+  tagline: 'Connecticut Photo Booth Rentals',
   domain: 'https://www.photoboothrentalct.com',
   serviceArea: 'Connecticut',
-  primaryRegion: 'Fairfield County, Connecticut',
+  primaryRegion: 'Connecticut',
   region: 'CT',
   founded: 2026,
 
@@ -30,14 +31,14 @@ export const NAV = {
   cta: { label: 'Check Availability', href: '/check-availability/' },
 };
 
-/** Homepage in-page anchor chips (desktop). */
+/** Homepage in-page anchor chips (desktop) — shorter labels for mobile fit. */
 export const HOMEPAGE_ANCHORS = [
   { label: 'Booths', href: '#experiences' },
+  { label: 'Add-Ons', href: '#addons' },
   { label: 'Weddings', href: '#wedding' },
   { label: 'Corporate', href: '#corporate' },
-  { label: 'Add-Ons', href: '#addons' },
   { label: 'Pricing', href: '#packages' },
-  { label: 'Service Areas', href: '#service-area' },
+  { label: 'Areas', href: '#service-area' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Availability', href: '#cta' },
 ];

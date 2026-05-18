@@ -27,36 +27,19 @@ export function FairfieldSection() {
       <div className="container">
         <div className="section-head">
           <div>
-            <span className="eyebrow">07 — Fairfield County</span>
+            <span className="eyebrow">03 — Featured Region</span>
             <h2 className="display" style={{ marginTop: 24, color: '#1a1410' }}>
-              Built for Fairfield<br />
-              County weddings,<br />
-              <em>galas &amp; private events.</em>
+              Featured Fairfield County<br />
+              <em>event rentals.</em>
             </h2>
           </div>
           <div className="section-head-right">
             <p className="lede">
-              Built for Fairfield County weddings, corporate events, private parties, galas, school
-              events, and milestone celebrations. Fairfield County is our priority service area,
-              with town pages built around the markets where wedding, corporate, school, and
-              private event demand is strongest.
+              Fairfield County is one of our highest-priority service regions, especially for
+              weddings, corporate events, private parties, galas, school events, and milestone
+              celebrations. We also serve events throughout Connecticut, with availability and
+              travel pricing confirmed before booking.
             </p>
-            <div
-              style={{
-                display: 'flex',
-                gap: 24,
-                fontFamily: 'var(--mono)',
-                fontSize: 11,
-                letterSpacing: '.18em',
-                color: '#8b6f3a',
-                textTransform: 'uppercase',
-                marginTop: 8,
-                flexWrap: 'wrap',
-              }}
-            >
-              <span>· Priority booking window</span>
-              <span>· Clear travel pricing</span>
-            </div>
           </div>
         </div>
 
@@ -85,18 +68,18 @@ export function FairfieldSection() {
         <div
           style={{
             marginTop: 48,
-            padding: 32,
+            padding: 28,
             border: '1px solid rgba(139, 111, 58, 0.25)',
             borderRadius: 18,
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            gap: 32,
+            gap: 24,
             flexWrap: 'wrap',
             background: 'rgba(255,255,255,.3)',
           }}
         >
-          <div>
+          <div style={{ maxWidth: '60ch' }}>
             <div
               style={{
                 fontFamily: 'var(--mono)',
@@ -107,14 +90,14 @@ export function FairfieldSection() {
                 marginBottom: 8,
               }}
             >
-              Don't see your town?
+              Coverage statewide
             </div>
-            <div style={{ fontFamily: 'var(--serif)', fontSize: 26, color: '#1a1410', lineHeight: 1.1 }}>
-              Coverage available across <em style={{ color: '#8b6f3a' }}>Connecticut</em> — confirm your date and venue with us.
+            <div style={{ fontFamily: 'var(--serif)', fontSize: 22, color: '#1a1410', lineHeight: 1.2 }}>
+              The site is built for <em style={{ color: '#8b6f3a' }}>Connecticut-wide</em> rentals — explore nearby towns or check availability anywhere in CT.
             </div>
           </div>
           <Link href="/service-areas/" className="btn btn-dark">
-            Check My Town<span className="arrow" />
+            Browse CT towns<span className="arrow" />
           </Link>
         </div>
       </div>

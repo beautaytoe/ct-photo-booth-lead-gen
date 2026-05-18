@@ -7,6 +7,7 @@ const EVENT_TYPES = [
   {
     id: 'wedding',
     label: 'Wedding',
+    shortLabel: 'Wedding',
     icon: <Icons.Heart />,
     headline: 'Romantic, refined, unforgettable.',
     booths: ['Glam Booth', 'Open-Air Booth', 'Audio Guestbook', 'Custom Backdrop', 'Print Package'],
@@ -14,6 +15,7 @@ const EVENT_TYPES = [
   {
     id: 'corporate',
     label: 'Corporate Event',
+    shortLabel: 'Corporate',
     icon: <Icons.Briefcase />,
     headline: 'Brand activation in every frame.',
     booths: ['Corporate Brand Activation Booth', 'Roaming Booth', 'Digital Gallery', 'QR Sharing', 'Lead Capture'],
@@ -21,6 +23,7 @@ const EVENT_TYPES = [
   {
     id: 'sweet16',
     label: 'Sweet 16 / Birthday',
+    shortLabel: 'Birthday',
     icon: <Icons.Cake />,
     headline: 'Maximum energy, maximum shares.',
     booths: ['360 Booth', 'Mirror Booth', 'Selfie Booth', 'Props', 'Custom Overlay'],
@@ -28,6 +31,7 @@ const EVENT_TYPES = [
   {
     id: 'mitzvah',
     label: 'Bar / Bat Mitzvah',
+    shortLabel: 'Mitzvah',
     icon: <Icons.Scroll />,
     headline: 'A celebration worth re-watching.',
     booths: ['360 Booth', 'Open-Air Booth', 'Mirror Booth', 'Custom Designs', 'Digital Sharing'],
@@ -35,6 +39,7 @@ const EVENT_TYPES = [
   {
     id: 'school',
     label: 'School Event',
+    shortLabel: 'School',
     icon: <Icons.School />,
     headline: 'Prom-night memories, polished.',
     booths: ['Selfie Booth', 'Open-Air Booth', 'Digital Gallery', 'Props', 'Print Package'],
@@ -42,6 +47,7 @@ const EVENT_TYPES = [
   {
     id: 'gala',
     label: 'Gala / Fundraiser',
+    shortLabel: 'Gala',
     icon: <Icons.Star />,
     headline: 'Black-tie portraiture for a cause.',
     booths: ['Glam Booth', 'Branded Booth', 'Roaming Booth', 'Custom Backdrop', 'Digital Gallery'],
@@ -49,6 +55,7 @@ const EVENT_TYPES = [
   {
     id: 'brand',
     label: 'Brand Activation',
+    shortLabel: 'Brand',
     icon: <Icons.Spark />,
     headline: 'Make the brand the takeaway.',
     booths: ['Branded Booth', 'Lead Capture', 'QR Sharing', 'Custom Gallery', 'Corporate Overlay'],
@@ -56,6 +63,7 @@ const EVENT_TYPES = [
   {
     id: 'holiday',
     label: 'Holiday Party',
+    shortLabel: 'Holiday',
     icon: <Icons.Diamond />,
     headline: 'Festive, fast, and on-brand.',
     booths: ['Open-Air Booth', 'Roaming Booth', 'Glam Booth', 'Props', 'Digital Gallery'],
@@ -87,21 +95,24 @@ export function EventSelector() {
           </div>
         </div>
 
-        <div className="event-selector" style={{ gridTemplateColumns: 'repeat(8, 1fr)' }}>
+        <div className="event-selector">
           {EVENT_TYPES.map((e, i) => (
             <button
               key={e.id}
               className={`event-chip ${active === e.id ? 'active' : ''}`}
               onClick={() => setActive(e.id)}
               type="button"
+              aria-pressed={active === e.id}
             >
               <span className="event-chip-num">0{i + 1}</span>
-              <span className="event-chip-name">{e.label}</span>
+              <span className="event-chip-name event-chip-name-full">{e.label}</span>
+              <span className="event-chip-name event-chip-name-short">{e.shortLabel}</span>
               <span
                 style={{
                   marginTop: 8,
                   color: active === e.id ? 'var(--gold)' : 'var(--text-muted)',
                 }}
+                aria-hidden="true"
               >
                 {e.icon}
               </span>

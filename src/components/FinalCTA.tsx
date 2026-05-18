@@ -17,6 +17,8 @@ const SERVICE_CHIPS = [
   'Not Sure Yet',
 ];
 
+const MOBILE_VISIBLE = 6;
+
 export function FinalCTA() {
   const [form, setForm] = useState({
     name: '',
@@ -30,6 +32,7 @@ export function FinalCTA() {
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [chipsExpanded, setChipsExpanded] = useState(false);
 
   const toggle = (s: string) => {
     setForm((f) => ({
@@ -70,7 +73,7 @@ export function FinalCTA() {
             </h2>
             <p className="lede" style={{ marginTop: 28 }}>
               Send us your date, venue, and event type and we'll come back with a tailored package
-              recommendation, a clean line-itemed quote, and a soft hold on your date.
+              recommendation, a clean line-itemed quote, and follow up while you decide.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18, marginTop: 40 }}>
@@ -86,8 +89,8 @@ export function FinalCTA() {
               />
               <ValueRow
                 icon={<Icons.Heart size={14} />}
-                title="Fairfield County-first service area"
-                sub="Statewide CT coverage with clear travel pricing."
+                title="Statewide Connecticut coverage"
+                sub="Service available statewide, with travel pricing confirmed before booking."
               />
             </div>
           </div>
@@ -112,8 +115,8 @@ export function FinalCTA() {
                   Got it. <em>We're on it.</em>
                 </h3>
                 <p className="lede" style={{ maxWidth: '44ch' }}>
-                  Expect a tailored proposal and a soft date hold during the next booking-hours
-                  window. We'll match the right booth to your event.
+                  Expect a tailored proposal during the next booking-hours window. We'll match the
+                  right booth to your event.
                 </p>
               </div>
             ) : (
@@ -198,16 +201,32 @@ export function FinalCTA() {
                 <div className="field">
                   <label>Interested Services</label>
                   <div className="chip-group">
-                    {SERVICE_CHIPS.map((s) => (
-                      <button
-                        type="button"
-                        key={s}
-                        className={`chip ${form.services.includes(s) ? 'active' : ''}`}
-                        onClick={() => toggle(s)}
-                      >
-                        {s}
-                      </button>
-                    ))}
+                    {SERVICE_CHIPS.map((s, idx) => {
+                      const beyondMobileLimit = idx >= MOBILE_VISIBLE;
+                      const cls =
+                        'chip' +
+                        (form.services.includes(s) ? ' active' : '') +
+                        (beyondMobileLimit ? ' chip-extra' : '');
+                      // If past the mobile limit and chips are collapsed on mobile, skip rendering on mobile via CSS class
+                      return (
+                        <button
+                          type="button"
+                          key={s}
+                          className={cls + (chipsExpanded ? ' chip-extra-shown' : '')}
+                          onClick={() => toggle(s)}
+                        >
+                          {s}
+                        </button>
+                      );
+                    })}
+                    <button
+                      type="button"
+                      className="chip chip-more"
+                      onClick={() => setChipsExpanded((v) => !v)}
+                      aria-expanded={chipsExpanded}
+                    >
+                      {chipsExpanded ? 'Show fewer' : 'More options'}
+                    </button>
                   </div>
                 </div>
 
@@ -224,7 +243,7 @@ export function FinalCTA() {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  style={{ marginTop: 8, width: '100%', justifyContent: 'center', padding: 20 }}
+                  style={{ marginTop: 8, width: '100%', justifyContent: 'center', padding: 20, minHeight: 56 }}
                   disabled={status === 'submitting'}
                 >
                   {status === 'submitting' ? 'Sending…' : 'Check Availability'}

@@ -12,8 +12,8 @@ const POINTS = [
     icon: <Icons.Camera size={20} />,
   },
   {
-    title: 'Fairfield County-first positioning',
-    body: 'Connecticut statewide coverage with Fairfield County as the priority service area and clear travel pricing.',
+    title: 'Connecticut statewide coverage',
+    body: 'Coverage available across all eight CT counties, with availability and travel pricing confirmed before booking.',
     icon: <Icons.Diamond size={20} />,
   },
   {
@@ -33,7 +33,7 @@ const POINTS = [
   },
   {
     title: 'Simple booking flow',
-    body: 'One form. We confirm date, propose a package, and hold your date while you decide.',
+    body: 'One form. We confirm date, propose a package, and follow up while you decide.',
     icon: <Icons.Check size={20} />,
   },
   {
@@ -71,6 +71,7 @@ export function WhyDifferent() {
         </div>
 
         <ul
+          className="why-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -83,6 +84,7 @@ export function WhyDifferent() {
           {POINTS.map((p) => (
             <li
               key={p.title}
+              className="why-item"
               style={{
                 padding: 24,
                 border: '1px solid var(--line)',
@@ -91,6 +93,7 @@ export function WhyDifferent() {
               }}
             >
               <div
+                className="why-item-icon"
                 style={{
                   width: 40,
                   height: 40,
@@ -106,10 +109,10 @@ export function WhyDifferent() {
               >
                 {p.icon}
               </div>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: 22, color: 'var(--ivory)', lineHeight: 1.1 }}>
+              <div className="why-item-title" style={{ fontFamily: 'var(--serif)', fontSize: 22, color: 'var(--ivory)', lineHeight: 1.1 }}>
                 {p.title}
               </div>
-              <div style={{ marginTop: 8, fontSize: 14, color: 'var(--text-dim)', lineHeight: 1.55 }}>
+              <div className="why-item-body" style={{ marginTop: 8, fontSize: 14, color: 'var(--text-dim)', lineHeight: 1.55 }}>
                 {p.body}
               </div>
             </li>

@@ -77,7 +77,7 @@ export default function ContactPage() {
                     Statewide CT coverage
                   </div>
                   <div style={{ fontSize: 13, color: 'var(--text-dim)' }}>
-                    Fairfield County-first service area with clear travel pricing.
+                    Service available across Connecticut, with travel pricing confirmed before booking.
                   </div>
                 </div>
               </div>
