@@ -11,12 +11,23 @@ interface HeroProps {
   subtitle?: string;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
+  showTrustStrip?: boolean;
 }
 
 const DEFAULT_LINES: [string, string, string] = [
   'Turn your event',
   'into the moment',
   'everyone posts.',
+];
+
+const TRUST_STRIP_ITEMS = [
+  'Weddings',
+  'Corporate Events',
+  'Sweet 16s',
+  'Bar / Bat Mitzvahs',
+  'School Events',
+  'Galas',
+  'Brand Activations',
 ];
 
 interface FloatCardData {
@@ -38,11 +49,12 @@ const CARDS: FloatCardData[] = [
 ];
 
 export function Hero({
-  eyebrow = 'Connecticut · Est. for Fairfield County',
+  eyebrow = 'Connecticut Photo Booth Rentals · Fairfield County First',
   titleLines = DEFAULT_LINES,
-  subtitle = 'Premium photo booth, 360 booth, glam booth, mirror booth, and audio guestbook rentals for weddings, corporate events, private parties, and celebrations across Connecticut.',
+  subtitle = 'Premium photo booth, 360 booth, glam booth, mirror booth, roaming booth, selfie booth, and audio guestbook rentals for weddings, corporate events, private parties, school events, and celebrations across Connecticut.',
   primaryCta = { label: 'Check Availability', href: '/check-availability/' },
-  secondaryCta = { label: 'Explore Booth Experiences', href: '#experiences' },
+  secondaryCta = { label: 'View Booth Experiences', href: '#experiences' },
+  showTrustStrip = true,
 }: HeroProps) {
   const stageRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -97,18 +109,51 @@ export function Hero({
                 </Link>
               )}
             </div>
+
+            {showTrustStrip && (
+              <ul
+                aria-label="Event types we serve"
+                style={{
+                  margin: '0 0 36px 0',
+                  padding: 0,
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 8,
+                  listStyle: 'none',
+                }}
+              >
+                {TRUST_STRIP_ITEMS.map((t) => (
+                  <li
+                    key={t}
+                    style={{
+                      fontFamily: 'var(--mono)',
+                      fontSize: 10,
+                      letterSpacing: '.18em',
+                      textTransform: 'uppercase',
+                      color: 'var(--text-dim)',
+                      padding: '6px 12px',
+                      border: '1px solid var(--line)',
+                      borderRadius: 999,
+                    }}
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            )}
+
             <div className="hero-meta">
               <div className="hero-meta-item">
-                <div className="hero-meta-num">7</div>
-                <div className="hero-meta-label">Booth Experiences</div>
+                <div className="hero-meta-num">12</div>
+                <div className="hero-meta-label">Booth &amp; Add-On Options</div>
               </div>
               <div className="hero-meta-item">
                 <div className="hero-meta-num">8</div>
                 <div className="hero-meta-label">CT Counties Served</div>
               </div>
               <div className="hero-meta-item">
-                <div className="hero-meta-num">∞</div>
-                <div className="hero-meta-label">Prints &amp; Digital Shares</div>
+                <div className="hero-meta-num">169</div>
+                <div className="hero-meta-label">CT Towns Covered</div>
               </div>
             </div>
           </div>

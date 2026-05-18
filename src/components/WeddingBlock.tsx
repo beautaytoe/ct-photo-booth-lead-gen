@@ -2,6 +2,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Icons } from './Icons';
 
+const CHECKLIST = [
+  ['Glam Black & White Portraits', 'Editorial retouching for every guest, Vogue-style.'],
+  ['Audio Guestbook', 'Toasts and voicemails captured for the couple.'],
+  ['Custom Overlay', 'Your monogram, your date, your color story.'],
+  ['Premium Backdrop', 'Velvet, florals, neon, or mirrored options.'],
+  ['Optional Prints', 'Print packages available as an add-on.'],
+  ['Online Gallery', 'Sharable link for guests after the event.'],
+  ['Attendant-Supported Setup', 'A polished crew that knows when to step in.'],
+] as const;
+
 export function WeddingBlock() {
   return (
     <section className="section ivory" id="wedding">
@@ -10,7 +20,7 @@ export function WeddingBlock() {
           <div className="wedding-visual">
             <Image
               src="/assets/ref-gold-arch.png"
-              alt="Champagne gold balloon arch with photo booth in a chandelier ballroom"
+              alt="Champagne gold balloon arch with photo booth setup in a chandelier ballroom"
               width={900}
               height={1125}
               priority={false}
@@ -24,65 +34,38 @@ export function WeddingBlock() {
           </div>
 
           <div>
-            <span className="eyebrow">06 — Wedding Experiences</span>
+            <span className="eyebrow">05 — Wedding Experiences</span>
             <h2 className="display" style={{ marginTop: 24, color: '#1a1410' }}>
               Wedding photo booth<br />
               experiences that <em>match<br />
               the room.</em>
             </h2>
             <p className="lede" style={{ marginTop: 24 }}>
-              We design each setup around your florals, your linens, and your venue. Nothing tacky.
-              No neon. No "props from a bin." Just a booth your guests can't stop sharing.
+              From black-tie receptions to barn weddings, design a booth setup that complements
+              your venue, colors, and guest experience. Pair a glam booth or open-air booth with an
+              audio guestbook, custom backdrop, and optional prints for a polished wedding add-on
+              guests actually use.
+            </p>
+            <p className="lede" style={{ marginTop: 14 }}>
+              Designed to feel polished, not thrown together. Premium backdrops, clean styling,
+              custom overlays, and a setup that complements the room.
             </p>
 
             <ul className="wedding-checklist">
-              <li>
-                <span className="check"><Icons.Check /></span>
-                <span>
-                  <strong>Premium backdrops</strong>
-                  Custom-cut velvet, florals, neon, or mirrored options.
-                </span>
-              </li>
-              <li>
-                <span className="check"><Icons.Check /></span>
-                <span>
-                  <strong>Glam B&amp;W option</strong>
-                  Editorial retouching for every guest, Vogue-style.
-                </span>
-              </li>
-              <li>
-                <span className="check"><Icons.Check /></span>
-                <span>
-                  <strong>Custom overlays</strong>
-                  Your monogram, your date, your color story.
-                </span>
-              </li>
-              <li>
-                <span className="check"><Icons.Check /></span>
-                <span>
-                  <strong>Audio guestbook add-on</strong>
-                  Toasts and voicemails captured for the couple.
-                </span>
-              </li>
-              <li>
-                <span className="check"><Icons.Check /></span>
-                <span>
-                  <strong>Digital gallery</strong>
-                  Sharable link for guests within 24 hours.
-                </span>
-              </li>
-              <li>
-                <span className="check"><Icons.Check /></span>
-                <span>
-                  <strong>Attendant-supported</strong>
-                  A polished crew that knows when to step in — and when to step back.
-                </span>
-              </li>
+              {CHECKLIST.map(([title, body]) => (
+                <li key={title}>
+                  <span className="check"><Icons.Check /></span>
+                  <span>
+                    <strong>{title}</strong>
+                    {body}
+                  </span>
+                </li>
+              ))}
             </ul>
 
             <div style={{ marginTop: 36, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-              <Link href="/wedding-photo-booth-rental-ct/" className="btn btn-dark">
-                See wedding packages<span className="arrow" />
+              <Link href="/check-availability/" className="btn btn-dark">
+                Check Wedding Availability<span className="arrow" />
               </Link>
               <Link href="#experiences" className="btn btn-dark-ghost">
                 Browse booths

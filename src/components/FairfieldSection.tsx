@@ -27,7 +27,7 @@ export function FairfieldSection() {
       <div className="container">
         <div className="section-head">
           <div>
-            <span className="eyebrow">03 — Fairfield County</span>
+            <span className="eyebrow">07 — Fairfield County</span>
             <h2 className="display" style={{ marginTop: 24, color: '#1a1410' }}>
               Built for Fairfield<br />
               County weddings,<br />
@@ -36,8 +36,10 @@ export function FairfieldSection() {
           </div>
           <div className="section-head-right">
             <p className="lede">
-              We live here, we book here, and our team knows the rooms. From a Belle Haven estate to
-              a Westport barn to a Stamford ballroom — we'll match the setup to the venue.
+              Built for Fairfield County weddings, corporate events, private parties, galas, school
+              events, and milestone celebrations. Fairfield County is our priority service area,
+              with town pages built around the markets where wedding, corporate, school, and
+              private event demand is strongest.
             </p>
             <div
               style={{
@@ -53,7 +55,7 @@ export function FairfieldSection() {
               }}
             >
               <span>· Priority booking window</span>
-              <span>· Local team</span>
+              <span>· Clear travel pricing</span>
             </div>
           </div>
         </div>

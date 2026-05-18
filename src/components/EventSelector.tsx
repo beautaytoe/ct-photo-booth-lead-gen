@@ -9,42 +9,56 @@ const EVENT_TYPES = [
     label: 'Wedding',
     icon: <Icons.Heart />,
     headline: 'Romantic, refined, unforgettable.',
-    booths: ['Glam Booth', 'Open-Air Booth', 'Audio Guestbook', '360 Booth'],
+    booths: ['Glam Booth', 'Open-Air Booth', 'Audio Guestbook', 'Custom Backdrop', 'Print Package'],
   },
   {
     id: 'corporate',
     label: 'Corporate Event',
     icon: <Icons.Briefcase />,
     headline: 'Brand activation in every frame.',
-    booths: ['Branded Photo Booth', 'Lead Capture Booth', 'Digital Sharing Booth', '360 Booth'],
+    booths: ['Corporate Brand Activation Booth', 'Roaming Booth', 'Digital Gallery', 'QR Sharing', 'Lead Capture'],
   },
   {
     id: 'sweet16',
     label: 'Sweet 16 / Birthday',
     icon: <Icons.Cake />,
     headline: 'Maximum energy, maximum shares.',
-    booths: ['360 Booth', 'Mirror Booth', 'Selfie Booth'],
+    booths: ['360 Booth', 'Mirror Booth', 'Selfie Booth', 'Props', 'Custom Overlay'],
   },
   {
     id: 'mitzvah',
     label: 'Bar / Bat Mitzvah',
     icon: <Icons.Scroll />,
     headline: 'A celebration worth re-watching.',
-    booths: ['360 Booth', 'Open-Air Booth', 'Glam Booth'],
+    booths: ['360 Booth', 'Open-Air Booth', 'Mirror Booth', 'Custom Designs', 'Digital Sharing'],
   },
   {
     id: 'school',
     label: 'School Event',
     icon: <Icons.School />,
     headline: 'Prom-night memories, polished.',
-    booths: ['Open-Air Booth', 'Selfie Booth', 'Mirror Booth'],
+    booths: ['Selfie Booth', 'Open-Air Booth', 'Digital Gallery', 'Props', 'Print Package'],
   },
   {
     id: 'gala',
     label: 'Gala / Fundraiser',
     icon: <Icons.Star />,
     headline: 'Black-tie portraiture for a cause.',
-    booths: ['Glam Booth', 'Corporate Booth', 'Premium Backdrop', 'Audio Guestbook'],
+    booths: ['Glam Booth', 'Branded Booth', 'Roaming Booth', 'Custom Backdrop', 'Digital Gallery'],
+  },
+  {
+    id: 'brand',
+    label: 'Brand Activation',
+    icon: <Icons.Spark />,
+    headline: 'Make the brand the takeaway.',
+    booths: ['Branded Booth', 'Lead Capture', 'QR Sharing', 'Custom Gallery', 'Corporate Overlay'],
+  },
+  {
+    id: 'holiday',
+    label: 'Holiday Party',
+    icon: <Icons.Diamond />,
+    headline: 'Festive, fast, and on-brand.',
+    booths: ['Open-Air Booth', 'Roaming Booth', 'Glam Booth', 'Props', 'Digital Gallery'],
   },
 ];
 
@@ -67,13 +81,13 @@ export function EventSelector() {
           </div>
           <div className="section-head-right">
             <p className="lede">
-              Every event has a personality. Pick yours and we'll surface the booth experiences our
-              team books most often for that room — and what they pair with.
+              Every event has a personality. Pick yours and we'll surface the booth experiences and
+              add-ons our lineup books most often for that room.
             </p>
           </div>
         </div>
 
-        <div className="event-selector">
+        <div className="event-selector" style={{ gridTemplateColumns: 'repeat(8, 1fr)' }}>
           {EVENT_TYPES.map((e, i) => (
             <button
               key={e.id}

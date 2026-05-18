@@ -518,10 +518,11 @@ h3.display { font-size: clamp(28px, 2.4vw, 40px); line-height: 1.1; }
 /* ---------- Event selector ---------- */
 .event-selector {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   gap: 10px;
   margin-bottom: 56px;
 }
+@media (max-width: 1200px) { .event-selector { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 1000px) { .event-selector { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 600px) { .event-selector { grid-template-columns: repeat(2, 1fr); } }
 
@@ -1341,24 +1342,21 @@ h3.display { font-size: clamp(28px, 2.4vw, 40px); line-height: 1.1; }
 /* ---------- Sticky mobile CTA ---------- */
 .mobile-cta {
   position: fixed;
-  left: 16px; right: 16px;
-  bottom: 16px;
+  left: 12px; right: 12px;
+  bottom: 12px;
   z-index: 99;
-  display: none;
+  display: none !important;
+  gap: 8px;
 }
 .mobile-cta .btn {
-  width: 100%;
-  justify-content: center;
-  padding: 18px;
-  font-size: 13px;
   box-shadow:
     0 20px 50px -10px rgba(0,0,0,.6),
     0 0 0 1px rgba(0,0,0,.4),
-    0 20px 50px -10px rgba(212,184,124,.5);
+    0 20px 50px -10px rgba(212,184,124,.45);
 }
 @media (max-width: 720px) {
-  .mobile-cta { display: block; }
-  body { padding-bottom: 80px; }
+  .mobile-cta { display: flex !important; }
+  body { padding-bottom: 84px; }
 }
 
 .subtle-pulse { animation: subtlePulse 4s ease-in-out infinite; }

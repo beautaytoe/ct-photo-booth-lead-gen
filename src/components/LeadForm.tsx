@@ -3,17 +3,36 @@
 import { useState } from 'react';
 import { Icons } from './Icons';
 
+const SERVICE_CHIPS = [
+  'Open-Air Photo Booth',
+  '360 Booth',
+  'Glam Booth',
+  'Mirror Booth',
+  'Selfie Booth',
+  'Roaming Booth',
+  'Audio Guestbook',
+  'Corporate Activation',
+  'Backdrops / Props',
+  'Print Package',
+  'Not Sure Yet',
+];
+
 /** Compact lead form used in non-homepage contexts. The full editorial form is <FinalCTA />. */
 export function LeadForm() {
+  const [services, setServices] = useState<string[]>(['Open-Air Photo Booth']);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+
+  const toggle = (s: string) => {
+    setServices((cur) => (cur.includes(s) ? cur.filter((x) => x !== s) : [...cur, s]));
+  };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus('submitting');
     setErrorMsg('');
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = { ...Object.fromEntries(new FormData(form).entries()), services };
     try {
       const res = await fetch('/api/lead', {
         method: 'POST',
@@ -49,7 +68,7 @@ export function LeadForm() {
           Got it. <em>We're on it.</em>
         </h3>
         <p className="lede" style={{ maxWidth: '44ch' }}>
-          Expect a tailored proposal and a soft date hold within one business day.
+          Expect a tailored proposal and a soft date hold during the next booking-hours window.
         </p>
       </div>
     );
@@ -59,18 +78,18 @@ export function LeadForm() {
     <form onSubmit={handleSubmit} className="form">
       <div className="form-row">
         <div className="field">
-          <label>Full Name</label>
-          <input required name="name" type="text" placeholder="Olivia Chen" />
+          <label>Name</label>
+          <input required name="name" type="text" placeholder="Your name" />
         </div>
         <div className="field">
-          <label>Email</label>
-          <input required name="email" type="email" placeholder="olivia@example.com" />
+          <label>Phone</label>
+          <input required name="phone" type="tel" placeholder="Best contact number" />
         </div>
       </div>
       <div className="form-row">
         <div className="field">
-          <label>Phone</label>
-          <input required name="phone" type="tel" placeholder="(203) 555 ⋯" />
+          <label>Email</label>
+          <input required name="email" type="email" placeholder="you@example.com" />
         </div>
         <div className="field">
           <label>Event Date</label>
@@ -79,8 +98,8 @@ export function LeadForm() {
       </div>
       <div className="form-row">
         <div className="field">
-          <label>Town / Venue</label>
-          <input name="town" type="text" placeholder="Stamford, Greenwich, Westport…" />
+          <label>Event Town / Venue</label>
+          <input name="town" type="text" placeholder="Stamford ballroom, Greenwich estate…" />
         </div>
         <div className="field">
           <label>Event Type</label>
@@ -91,12 +110,29 @@ export function LeadForm() {
             <option>Bar / Bat Mitzvah</option>
             <option>Gala / Fundraiser</option>
             <option>School Event</option>
+            <option>Brand Activation</option>
+            <option>Holiday Party</option>
             <option>Other</option>
           </select>
         </div>
       </div>
       <div className="field">
-        <label>Message</label>
+        <label>Interested Services</label>
+        <div className="chip-group">
+          {SERVICE_CHIPS.map((s) => (
+            <button
+              type="button"
+              key={s}
+              className={`chip ${services.includes(s) ? 'active' : ''}`}
+              onClick={() => toggle(s)}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="field">
+        <label>Message (optional)</label>
         <textarea name="message" rows={4} placeholder="Tell us about your event…" />
       </div>
       <button
@@ -110,7 +146,7 @@ export function LeadForm() {
       </button>
       {status === 'error' && (
         <div style={{ fontSize: 13, color: '#e8a99c', textAlign: 'center' }}>
-          {errorMsg || 'Please try again or call us.'}
+          {errorMsg || 'Please try again or contact us.'}
         </div>
       )}
       <div
@@ -124,7 +160,7 @@ export function LeadForm() {
           marginTop: 8,
         }}
       >
-        Replies within one business day · No spam · Quote is no obligation
+        Fast replies during booking hours · No obligation · We'll match the right booth to your event.
       </div>
     </form>
   );

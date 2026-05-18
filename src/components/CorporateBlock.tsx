@@ -1,49 +1,60 @@
 import Link from 'next/link';
 import { Icons } from './Icons';
 
+const FEATURES: { icon: React.ReactNode; name: string; desc: string }[] = [
+  { icon: <Icons.Brush />, name: 'Branded Overlays', desc: 'Brand-locked print + digital templates.' },
+  { icon: <Icons.Qr />, name: 'Custom Gallery', desc: 'Branded landing page with your event gallery.' },
+  { icon: <Icons.Share />, name: 'QR + SMS Sharing', desc: 'Guests share to phone, email, or social.' },
+  { icon: <Icons.Lead />, name: 'Optional Lead Capture', desc: 'Forms and opt-ins for marketing teams.' },
+  { icon: <Icons.Camera />, name: 'Roaming Coverage', desc: 'A handheld booth works the room.' },
+  { icon: <Icons.Diamond />, name: 'Sponsor / Step-and-Repeat', desc: 'Branded photo wall for visibility.' },
+  { icon: <Icons.Spark />, name: 'Post-Event Gallery Delivery', desc: 'Branded gallery delivered after the event.' },
+];
+
+const MOCK_TILES = [
+  { label: 'Lead Capture', value: 'Ready' },
+  { label: 'Branded Galleries', value: 'Included' },
+  { label: 'QR + SMS Sharing', value: 'Built-in' },
+  { label: 'Custom Overlays', value: 'Per Event' },
+];
+
 export function CorporateBlock() {
   return (
     <section className="section dark" id="corporate" style={{ borderTop: '1px solid var(--line)' }}>
       <div className="container">
         <div className="corp-grid">
           <div>
-            <span className="eyebrow">05 — Corporate Brand Activation</span>
+            <span className="eyebrow">06 — Corporate Brand Activation</span>
             <h2 className="display" style={{ marginTop: 24 }}>
               More than a photo booth —<br />
               <em>a branded event activation.</em>
             </h2>
             <p className="lede" style={{ marginTop: 24 }}>
-              Treat your booth like a campaign. We build branded environments, capture leads, push
-              to your CRM, and deliver a post-event analytics report alongside the gallery.
+              Create a branded booth experience for launches, conferences, holiday parties,
+              fundraisers, and corporate events. Add custom overlays, branded galleries, QR
+              sharing, digital delivery, and optional lead capture so guests leave with content and
+              your brand stays visible.
             </p>
 
-            <div className="corp-feat">
-              <div className="corp-feat-item">
-                <div className="corp-feat-icon"><Icons.Brush /></div>
-                <div className="corp-feat-name">Custom Overlays</div>
-                <div className="corp-feat-desc">Brand-locked print + GIF templates, designed in-house.</div>
-              </div>
-              <div className="corp-feat-item">
-                <div className="corp-feat-icon"><Icons.Qr /></div>
-                <div className="corp-feat-name">QR + AirDrop Sharing</div>
-                <div className="corp-feat-desc">Guests share directly to phone, social, or email.</div>
-              </div>
-              <div className="corp-feat-item">
-                <div className="corp-feat-icon"><Icons.Lead /></div>
-                <div className="corp-feat-name">Lead Capture</div>
-                <div className="corp-feat-desc">Forms, opt-ins, and CRM pushes for marketing teams.</div>
-              </div>
-              <div className="corp-feat-item">
-                <div className="corp-feat-icon"><Icons.Share /></div>
-                <div className="corp-feat-name">Digital Gallery</div>
-                <div className="corp-feat-desc">Branded landing page with full event gallery + analytics.</div>
-              </div>
+            <div
+              className="corp-feat"
+              style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}
+            >
+              {FEATURES.map((f) => (
+                <div key={f.name} className="corp-feat-item">
+                  <div className="corp-feat-icon">{f.icon}</div>
+                  <div className="corp-feat-name">{f.name}</div>
+                  <div className="corp-feat-desc">{f.desc}</div>
+                </div>
+              ))}
             </div>
 
-            <div style={{ marginTop: 32 }}>
+            <div style={{ marginTop: 32, display: 'flex', flexWrap: 'wrap', gap: 14 }}>
+              <Link href="/check-availability/" className="btn btn-primary">
+                Plan a Corporate Booth<span className="arrow" />
+              </Link>
               <Link href="/corporate-photo-booth-rental-ct/" className="btn btn-ghost">
-                Request a corporate brief
-                <span className="arrow" />
+                View corporate details
               </Link>
             </div>
           </div>
@@ -54,7 +65,7 @@ export function CorporateBlock() {
                 <div className="mock-browser-dot" />
                 <div className="mock-browser-dot" />
                 <div className="mock-browser-dot" />
-                <div className="mock-browser-url">goldcoastevents.co/gallery/q4-launch</div>
+                <div className="mock-browser-url">your-event-gallery.com/custom-brand-gallery</div>
               </div>
               <div className="mock-browser-body">
                 <div className="mock-gallery">
@@ -75,12 +86,30 @@ export function CorporateBlock() {
               </div>
             </div>
             <div className="mock-flash">
-              <span className="mock-flash-dot" /> Live · 47 shares
+              <span className="mock-flash-dot" /> Branded sharing live
             </div>
-            <div className="mock-lead">
-              <div className="mock-lead-label">Leads captured</div>
-              <div className="mock-lead-num">312</div>
-              <div className="mock-lead-sub">+ 86% opt-in rate</div>
+            <div
+              className="mock-lead"
+              style={{ minWidth: 220, padding: 16 }}
+            >
+              <div className="mock-lead-label">Corporate booth ready</div>
+              <ul style={{ marginTop: 10, padding: 0, listStyle: 'none', display: 'grid', gap: 6 }}>
+                {MOCK_TILES.map((t) => (
+                  <li
+                    key={t.label}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      fontSize: 11,
+                      fontFamily: 'var(--mono)',
+                      letterSpacing: '.1em',
+                    }}
+                  >
+                    <span style={{ color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t.label}</span>
+                    <span style={{ color: 'var(--gold-bright)' }}>{t.value}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

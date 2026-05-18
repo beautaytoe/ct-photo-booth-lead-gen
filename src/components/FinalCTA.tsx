@@ -4,13 +4,17 @@ import { useState } from 'react';
 import { Icons } from './Icons';
 
 const SERVICE_CHIPS = [
-  'Open-Air',
+  'Open-Air Photo Booth',
   '360 Booth',
   'Glam Booth',
   'Mirror Booth',
   'Selfie Booth',
+  'Roaming Booth',
   'Audio Guestbook',
   'Corporate Activation',
+  'Backdrops / Props',
+  'Print Package',
+  'Not Sure Yet',
 ];
 
 export function FinalCTA() {
@@ -22,7 +26,7 @@ export function FinalCTA() {
     venue: '',
     type: 'Wedding',
     message: '',
-    services: ['Open-Air', '360 Booth'] as string[],
+    services: ['Open-Air Photo Booth', '360 Booth'] as string[],
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
@@ -57,7 +61,7 @@ export function FinalCTA() {
       <div className="container">
         <div className="cta-grid">
           <div>
-            <span className="eyebrow">09 — Let's Talk</span>
+            <span className="eyebrow">11 — Let's Talk</span>
             <h2 className="display" style={{ marginTop: 24 }}>
               Tell us your date —<br />
               we'll help match<br />
@@ -65,14 +69,26 @@ export function FinalCTA() {
               <em>to your event.</em>
             </h2>
             <p className="lede" style={{ marginTop: 28 }}>
-              Most inquiries get a tailored proposal within one business day, including booth
-              recommendations, package pricing, and a hold on your date.
+              Send us your date, venue, and event type and we'll come back with a tailored package
+              recommendation, a clean line-itemed quote, and a soft hold on your date.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18, marginTop: 40 }}>
-              <ValueRow icon={<Icons.Spark size={14} />} title="One-business-day reply" sub="Tailored proposal, not a generic catalog." />
-              <ValueRow icon={<Icons.Diamond size={14} />} title="Soft hold on your date" sub="We'll reserve a 7-day window while you decide." />
-              <ValueRow icon={<Icons.Heart size={14} />} title="Local team, local rates" sub="Fairfield County warehouse — no out-of-state travel fees." />
+              <ValueRow
+                icon={<Icons.Spark size={14} />}
+                title="Fast replies during booking hours"
+                sub="Tailored proposal, not a generic catalog."
+              />
+              <ValueRow
+                icon={<Icons.Diamond size={14} />}
+                title="Soft hold on your date"
+                sub="We'll reserve a 7-day window while you decide."
+              />
+              <ValueRow
+                icon={<Icons.Heart size={14} />}
+                title="Fairfield County-first service area"
+                sub="Statewide CT coverage with clear travel pricing."
+              />
             </div>
           </div>
 
@@ -96,46 +112,46 @@ export function FinalCTA() {
                   Got it. <em>We're on it.</em>
                 </h3>
                 <p className="lede" style={{ maxWidth: '44ch' }}>
-                  Expect a tailored proposal and a soft date hold within one business day. We'll
-                  reply from a Fairfield County number — keep an eye out.
+                  Expect a tailored proposal and a soft date hold during the next booking-hours
+                  window. We'll match the right booth to your event.
                 </p>
               </div>
             ) : (
               <>
                 <div className="form-row">
                   <div className="field">
-                    <label>Full Name</label>
+                    <label>Name</label>
                     <input
                       required
                       type="text"
                       name="name"
-                      placeholder="Olivia Chen"
+                      placeholder="Your name"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                     />
                   </div>
+                  <div className="field">
+                    <label>Phone</label>
+                    <input
+                      required
+                      type="tel"
+                      name="phone"
+                      placeholder="Best contact number"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    />
+                  </div>
+                </div>
+                <div className="form-row">
                   <div className="field">
                     <label>Email</label>
                     <input
                       required
                       type="email"
                       name="email"
-                      placeholder="olivia@example.com"
+                      placeholder="you@example.com"
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="field">
-                    <label>Phone</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      placeholder="(203) 555 ⋯"
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     />
                   </div>
                   <div className="field">
@@ -150,11 +166,11 @@ export function FinalCTA() {
                 </div>
                 <div className="form-row">
                   <div className="field">
-                    <label>Town / Venue</label>
+                    <label>Event Town / Venue</label>
                     <input
                       type="text"
                       name="town"
-                      placeholder="Belle Haven Club, Greenwich"
+                      placeholder="Stamford ballroom, Greenwich estate…"
                       value={form.venue}
                       onChange={(e) => setForm({ ...form, venue: e.target.value })}
                     />
@@ -172,6 +188,8 @@ export function FinalCTA() {
                       <option>Bar / Bat Mitzvah</option>
                       <option>Gala / Fundraiser</option>
                       <option>School Event</option>
+                      <option>Brand Activation</option>
+                      <option>Holiday Party</option>
                       <option>Other</option>
                     </select>
                   </div>
@@ -194,7 +212,7 @@ export function FinalCTA() {
                 </div>
 
                 <div className="field">
-                  <label>Message</label>
+                  <label>Message (optional)</label>
                   <textarea
                     name="message"
                     placeholder="Tell us about your event, your vision, what you've seen and loved..."
@@ -215,7 +233,7 @@ export function FinalCTA() {
 
                 {status === 'error' && (
                   <div style={{ fontSize: 13, color: '#e8a99c', textAlign: 'center' }}>
-                    {errorMsg || 'Please try again or call us.'}
+                    {errorMsg || 'Please try again or contact us.'}
                   </div>
                 )}
 
@@ -230,7 +248,7 @@ export function FinalCTA() {
                     marginTop: 8,
                   }}
                 >
-                  Replies sent within one business day · No spam · Quote is no obligation
+                  Fast replies during booking hours · No obligation · We'll help match the right booth to your event.
                 </div>
               </>
             )}

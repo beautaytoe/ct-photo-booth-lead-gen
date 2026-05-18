@@ -5,13 +5,13 @@ const PACKAGES = [
     name: 'Social Booth',
     em: 'Package',
     tag: 'Essential',
-    price: '1,495',
+    price: '595',
     suffix: '/event',
     features: [
       'Choice of Open-Air or Selfie Booth',
       '3-hour event coverage',
       'Custom 2x6 strip overlay',
-      'Unlimited prints on site',
+      'Optional print package',
       'Instant SMS + email delivery',
       'On-site attendant',
       'Premium backdrop selection',
@@ -27,7 +27,7 @@ const PACKAGES = [
     tag: 'Most Booked',
     badge: 'Most Booked',
     featured: true,
-    price: '2,495',
+    price: '895',
     suffix: '/event',
     features: [
       'Choice of 2 booths — pair Open-Air + 360 or Glam',
@@ -54,8 +54,8 @@ const PACKAGES = [
       'Glam editorial retouching included',
       'Audio guestbook add-on',
       'Custom-branded environment & signage',
-      'Dedicated lead producer + crew of 3',
-      'Same-night highlight reel delivery',
+      'Dedicated lead producer + crew',
+      'Same-night highlight reel option',
     ],
     cta: 'Request consultation',
     featured: false,
@@ -69,7 +69,7 @@ export function PackageCards() {
       <div className="container">
         <div className="section-head">
           <div>
-            <span className="eyebrow">04 — Packages</span>
+            <span className="eyebrow">10 — Packages</span>
             <h2 className="display" style={{ marginTop: 24 }}>
               Three ways to<br />
               <em>book the night.</em>
@@ -78,7 +78,8 @@ export function PackageCards() {
           <div className="section-head-right">
             <p className="lede">
               Every quote is custom — these are the most-booked starting points. Each tier includes
-              an attendant, unlimited prints, and a digital gallery for your guests.
+              an attendant, digital sharing, and a clear setup plan. Print packages are an optional
+              add-on across all tiers.
             </p>
           </div>
         </div>
@@ -126,7 +127,7 @@ export function PackageCards() {
             textTransform: 'uppercase',
           }}
         >
-          Add-ons available · Audio Guestbook · Glam Editorial · Extra Hours · Custom Backdrop
+          Add-ons available · Audio Guestbook · Glam Editorial · Roaming Booth · Custom Backdrop · Print Packages
         </div>
       </div>
     </section>

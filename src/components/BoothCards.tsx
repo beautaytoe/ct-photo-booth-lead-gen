@@ -1,7 +1,19 @@
 import Link from 'next/link';
 import { Icons } from './Icons';
 
-type Visual = 'openair' | 'threesixty' | 'glam' | 'mirror' | 'selfie' | 'audio' | 'corporate';
+type Visual =
+  | 'openair'
+  | 'threesixty'
+  | 'glam'
+  | 'mirror'
+  | 'roaming'
+  | 'selfie'
+  | 'audio'
+  | 'corporate'
+  | 'backdrop'
+  | 'props'
+  | 'prints'
+  | 'gallery';
 
 const BOOTHS: {
   n: string;
@@ -16,17 +28,17 @@ const BOOTHS: {
   {
     n: '01',
     name: 'Open-Air Photo Booth',
-    desc: 'The crowd-pleaser. Wide backdrop, premium DSLR, custom-printed strips in 8 seconds, and digital sharing on tap.',
+    desc: 'Classic, high-volume photo booth setup with premium lighting, custom overlays, digital sharing, and optional prints.',
     tags: ['Wedding', 'Corporate', 'Galas', 'Sweet 16'],
     span: 'bc-span-6',
     visual: 'openair',
-    ideal: 'Up to 200 guests',
+    ideal: 'Most flexible booth',
     href: '/open-air-photo-booth-rental-ct/',
   },
   {
     n: '02',
     name: '360 Photo Booth',
-    desc: 'An LED platform, a slow-mo rig, and a cinematic vertical loop your guests will repost before they sit back down.',
+    desc: 'High-energy video booth experience built for reels, TikTok-style clips, entrances, birthdays, Sweet 16s, mitzvahs, and brand events.',
     tags: ['Sweet 16', 'Mitzvah', 'Brand', 'Wedding'],
     span: 'bc-span-6',
     visual: 'threesixty',
@@ -35,8 +47,8 @@ const BOOTHS: {
   },
   {
     n: '03',
-    name: 'Glam Photo Booth',
-    desc: 'Black & white editorial portraits with soft skin retouching, inspired by the magazine. Every guest looks like the cover.',
+    name: 'Glam Booth',
+    desc: 'Black-and-white editorial-style portraits with flattering lighting and a refined luxury event feel.',
     tags: ['Wedding', 'Gala', 'Brand', 'Sweet 16'],
     span: 'bc-span-4',
     visual: 'glam',
@@ -45,8 +57,8 @@ const BOOTHS: {
   },
   {
     n: '04',
-    name: 'Mirror Photo Booth',
-    desc: 'A full-length magic mirror with on-screen prompts, animated signatures, and instant printing. Theatrical in the best way.',
+    name: 'Mirror Booth',
+    desc: 'Interactive full-length mirror booth with guided prompts, animations, and a polished guest experience.',
     tags: ['Wedding', 'Sweet 16', 'Gala'],
     span: 'bc-span-4',
     visual: 'mirror',
@@ -55,8 +67,18 @@ const BOOTHS: {
   },
   {
     n: '05',
+    name: 'Roaming Photo Booth',
+    desc: 'A mobile booth experience that moves through cocktail hours, receptions, trade shows, and crowded events.',
+    tags: ['Cocktail', 'Trade Show', 'Reception'],
+    span: 'bc-span-4',
+    visual: 'roaming',
+    ideal: 'Crowd coverage',
+    href: '/roaming-photo-booth-rental-ct/',
+  },
+  {
+    n: '06',
     name: 'Selfie Booth',
-    desc: 'Sleek standing iPad station with custom overlays and direct-to-phone delivery. Low footprint, high volume, zero attendant friction.',
+    desc: 'Compact digital booth for parties, schools, bars, pop-ups, and high-traffic event spaces.',
     tags: ['School', 'Brand', 'Cocktail Hour'],
     span: 'bc-span-4',
     visual: 'selfie',
@@ -64,24 +86,64 @@ const BOOTHS: {
     href: '/selfie-booth-rental-ct/',
   },
   {
-    n: '06',
+    n: '07',
     name: 'Audio Guestbook',
-    desc: 'A vintage rotary phone. Guests leave a voicemail for the couple — toast, story, or roast. You get the audio reel.',
+    desc: 'A vintage rotary phone where guests leave voice messages, stories, toasts, and memories you can keep forever.',
     tags: ['Wedding', 'Anniversary', 'Retirement'],
-    span: 'bc-span-6',
+    span: 'bc-span-4',
     visual: 'audio',
-    ideal: 'Sentimental favourite',
+    ideal: 'Wedding favourite',
     href: '/audio-guestbook-rental-ct/',
   },
   {
-    n: '07',
+    n: '08',
     name: 'Corporate Brand Activation',
-    desc: 'Branded booth, custom overlays, lead capture form, digital gallery, and a post-event analytics report. Treated like a campaign.',
-    tags: ['Trade Show', 'Conference', 'Launch', 'Pop-Up'],
-    span: 'bc-span-6',
+    desc: 'Custom branded booth experience with overlays, digital sharing, QR delivery, galleries, and optional lead capture.',
+    tags: ['Trade Show', 'Conference', 'Launch'],
+    span: 'bc-span-4',
     visual: 'corporate',
-    ideal: 'Marketing-team approved',
+    ideal: 'Brand-team approved',
     href: '/corporate-photo-booth-rental-ct/',
+  },
+  {
+    n: '09',
+    name: 'Custom Backdrops',
+    desc: 'Premium backdrop options for weddings, corporate activations, birthdays, galas, and step-and-repeat style photos.',
+    tags: ['Add-on', 'Branding', 'Wedding'],
+    span: 'bc-span-4',
+    visual: 'backdrop',
+    ideal: 'Add-on',
+    href: '/check-availability/',
+  },
+  {
+    n: '10',
+    name: 'Props & Styling',
+    desc: 'Curated props, signage, themed styling, and event-specific design details that match the room.',
+    tags: ['Add-on', 'Styling', 'Theme'],
+    span: 'bc-span-4',
+    visual: 'props',
+    ideal: 'Add-on',
+    href: '/check-availability/',
+  },
+  {
+    n: '11',
+    name: 'Print Packages',
+    desc: 'Optional print packages for guests who want a physical keepsake — strips, 4x6 prints, and custom layouts.',
+    tags: ['Add-on', 'Wedding', 'Sweet 16'],
+    span: 'bc-span-4',
+    visual: 'prints',
+    ideal: 'Add-on',
+    href: '/check-availability/',
+  },
+  {
+    n: '12',
+    name: 'Digital Gallery',
+    desc: 'Post-event gallery delivery for easy sharing and download — branded with your event details.',
+    tags: ['Add-on', 'Corporate', 'Wedding'],
+    span: 'bc-span-4',
+    visual: 'gallery',
+    ideal: 'Standard',
+    href: '/check-availability/',
   },
 ];
 
@@ -144,6 +206,25 @@ function BoothVisual({ kind }: { kind: Visual }) {
       </div>
     );
   }
+  if (kind === 'roaming') {
+    return (
+      <div className="bc-visual" style={{ background: 'linear-gradient(160deg, #0a0908, #1a1410)' }}>
+        <div style={{ position: 'absolute', top: '20%', left: '20%', color: 'var(--gold-bright)', opacity: 0.9 }}>
+          <Icons.Camera size={24} />
+        </div>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: 'var(--gold-bright)' }}>
+          <Icons.Camera size={36} />
+        </div>
+        <div style={{ position: 'absolute', bottom: '20%', right: '20%', color: 'var(--gold)', opacity: 0.6 }}>
+          <Icons.Camera size={20} />
+        </div>
+        {/* movement dashes */}
+        <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} viewBox="0 0 200 140" preserveAspectRatio="none">
+          <path d="M30 30 Q 100 60 170 110" stroke="var(--gold)" strokeWidth="1" fill="none" strokeDasharray="3 5" opacity="0.5" />
+        </svg>
+      </div>
+    );
+  }
   if (kind === 'selfie') {
     return (
       <div className="bc-visual" style={{ background: '#0a0908' }}>
@@ -170,17 +251,100 @@ function BoothVisual({ kind }: { kind: Visual }) {
       </div>
     );
   }
-  return (
-    <div className="bc-visual" style={{ background: 'linear-gradient(160deg, #0a0908, #1a1410)' }}>
-      <div style={{ position: 'absolute', inset: '15% 15%', background: 'var(--bg-elev)', border: '1px solid var(--line)', borderRadius: 6, padding: 8 }}>
-        <div style={{ height: 4, width: '30%', background: 'var(--gold)', borderRadius: 2, marginBottom: 6 }} />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 }}>
-          <div style={{ aspectRatio: '1', background: 'rgba(216,168,160,.2)', borderRadius: 3 }} />
-          <div style={{ aspectRatio: '1', background: 'rgba(212,184,124,.2)', borderRadius: 3 }} />
+  if (kind === 'corporate') {
+    return (
+      <div className="bc-visual" style={{ background: 'linear-gradient(160deg, #0a0908, #1a1410)' }}>
+        <div style={{ position: 'absolute', inset: '15% 15%', background: 'var(--bg-elev)', border: '1px solid var(--line)', borderRadius: 6, padding: 8 }}>
+          <div style={{ height: 4, width: '30%', background: 'var(--gold)', borderRadius: 2, marginBottom: 6 }} />
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 }}>
+            <div style={{ aspectRatio: '1', background: 'rgba(216,168,160,.2)', borderRadius: 3 }} />
+            <div style={{ aspectRatio: '1', background: 'rgba(212,184,124,.2)', borderRadius: 3 }} />
+          </div>
+        </div>
+        <div style={{ position: 'absolute', bottom: 12, right: 12, color: 'var(--gold-bright)' }}>
+          <Icons.Qr size={28} />
         </div>
       </div>
-      <div style={{ position: 'absolute', bottom: 12, right: 12, color: 'var(--gold-bright)' }}>
-        <Icons.Qr size={28} />
+    );
+  }
+  if (kind === 'backdrop') {
+    return (
+      <div className="bc-visual" style={{ background: 'linear-gradient(160deg, #0a0908, #1a1410)' }}>
+        <div style={{ position: 'absolute', inset: '12% 18%', border: '1px solid var(--gold)', borderRadius: 4, background: 'linear-gradient(180deg, rgba(216,168,160,.2), rgba(212,184,124,.05))' }}>
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              style={{
+                position: 'absolute',
+                top: '20%',
+                left: `${15 + i * 22}%`,
+                width: 6,
+                height: '50%',
+                background: 'rgba(236,212,154,.25)',
+                borderLeft: '1px solid rgba(236,212,154,.4)',
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (kind === 'props') {
+    return (
+      <div className="bc-visual" style={{ background: 'linear-gradient(160deg, #1a1410, #0a0908)' }}>
+        <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', color: 'var(--gold-bright)' }}>
+          <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+            <Icons.Star size={28} />
+            <Icons.Heart size={26} />
+            <Icons.Diamond size={28} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (kind === 'prints') {
+    return (
+      <div className="bc-visual" style={{ background: 'linear-gradient(160deg, #0a0908, #1a1410)' }}>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-4deg)', display: 'flex', gap: 6 }}>
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              style={{
+                width: 28,
+                height: 70,
+                background: i === 1 ? 'rgba(216,168,160,.35)' : 'rgba(212,184,124,.3)',
+                border: '1px solid rgba(212,184,124,.5)',
+                borderRadius: 3,
+                transform: `rotate(${(i - 1) * 6}deg)`,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+  // gallery
+  return (
+    <div className="bc-visual" style={{ background: 'linear-gradient(160deg, #1a1410, #0a0908)' }}>
+      <div
+        style={{
+          position: 'absolute',
+          inset: '15% 15%',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 4,
+        }}
+      >
+        {Array.from({ length: 9 }).map((_, i) => (
+          <div
+            key={i}
+            style={{
+              background: i % 4 === 0 ? 'rgba(216,168,160,.3)' : 'rgba(212,184,124,.2)',
+              border: '1px solid rgba(212,184,124,.3)',
+              borderRadius: 2,
+            }}
+          />
+        ))}
       </div>
     </div>
   );
@@ -192,16 +356,17 @@ export function BoothCards() {
       <div className="container">
         <div className="section-head">
           <div>
-            <span className="eyebrow">02 — The Lineup</span>
+            <span className="eyebrow">02 — Event Experience Lineup</span>
             <h2 className="display" style={{ marginTop: 24 }}>
-              Choose your<br />
-              <em>booth experience.</em>
+              Twelve ways to make<br />
+              <em>the moment count.</em>
             </h2>
           </div>
           <div className="section-head-right">
             <p className="lede">
-              Seven configurations — from the classic open-air strip to a 360 platform and the audio
-              guestbook brides text us about for months. Mix and match.
+              From the classic open-air strip to a 360 video booth, a roaming booth that follows the
+              cocktail hour, and the audio guestbook brides write us about for months. Mix and
+              match across booths and add-ons.
             </p>
           </div>
         </div>

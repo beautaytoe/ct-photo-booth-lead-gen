@@ -1,22 +1,26 @@
 export const SITE = {
   brand: 'Gold Coast Photo Booth Co.',
   shortBrand: 'Gold Coast Photo Booth',
-  tagline: 'Premium photo booth rentals across Connecticut.',
+  tagline: 'Connecticut Photo Booth Rentals · Fairfield County First',
   domain: 'https://goldcoastphotoboothco.com',
-  email: 'hello@goldcoastphotoboothco.com',
-  phone: '(203) 555-0188',
-  // Until a real phone is wired we use a clean placeholder. Replace before launch.
-  phoneHref: 'tel:+12035550188',
   serviceArea: 'Connecticut',
   primaryRegion: 'Fairfield County, Connecticut',
   region: 'CT',
   founded: 2026,
+
+  // Contact channel: form-only until a verified phone/email is wired.
+  // Set these in code when real values are confirmed; UI reads only the
+  // boolean flags below to decide whether to render anything publicly.
+  _placeholderPhone: '',
+  _placeholderEmail: '',
+  showPhonePublicly: false,
+  showEmailPublicly: false,
 };
 
 export const NAV = {
   main: [
-    { label: 'Photo Booths', href: '/photo-booth-rental-ct/' },
-    { label: '360 Booths', href: '/360-photo-booth-rental-ct/' },
+    { label: 'Booths', href: '/photo-booth-rental-ct/' },
+    { label: '360 Booth', href: '/360-photo-booth-rental-ct/' },
     { label: 'Weddings', href: '/wedding-photo-booth-rental-ct/' },
     { label: 'Corporate', href: '/corporate-photo-booth-rental-ct/' },
     { label: 'Pricing', href: '/photo-booth-rental-prices-ct/' },
@@ -25,3 +29,15 @@ export const NAV = {
   ],
   cta: { label: 'Check Availability', href: '/check-availability/' },
 };
+
+/** Homepage in-page anchor chips (desktop). */
+export const HOMEPAGE_ANCHORS = [
+  { label: 'Booths', href: '#experiences' },
+  { label: 'Weddings', href: '#wedding' },
+  { label: 'Corporate', href: '#corporate' },
+  { label: 'Add-Ons', href: '#addons' },
+  { label: 'Pricing', href: '#packages' },
+  { label: 'Service Areas', href: '#service-area' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Availability', href: '#cta' },
+];

@@ -11,13 +11,11 @@
 import { SITE } from './site-data';
 
 export function organizationSchema() {
-  return {
+  const out: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE.brand,
     url: SITE.domain,
-    email: SITE.email,
-    telephone: SITE.phone,
     areaServed: { '@type': 'State', name: 'Connecticut' },
     knowsAbout: [
       'Photo Booth Rental',
@@ -25,8 +23,14 @@ export function organizationSchema() {
       'Wedding Photo Booth',
       'Corporate Photo Booth',
       'Audio Guestbook',
+      'Mirror Photo Booth',
+      'Glam Photo Booth',
+      'Roaming Photo Booth',
     ],
   };
+  if (SITE.showEmailPublicly && SITE._placeholderEmail) out.email = SITE._placeholderEmail;
+  if (SITE.showPhonePublicly && SITE._placeholderPhone) out.telephone = SITE._placeholderPhone;
+  return out;
 }
 
 export function websiteSchema() {

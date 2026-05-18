@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { NAV, SITE } from '@/lib/site-data';
+import { NAV } from '@/lib/site-data';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,7 +24,7 @@ export function Header() {
               <div className="brand-name">
                 Gold Coast<span style={{ fontStyle: 'italic', color: 'var(--gold-bright)' }}> Photo Booth Co.</span>
               </div>
-              <div className="brand-sub">CT · Fairfield County</div>
+              <div className="brand-sub">CT · Fairfield County First</div>
             </div>
           </Link>
 
@@ -37,9 +37,6 @@ export function Header() {
           </ul>
 
           <div className="nav-cta">
-            <a className="nav-phone" href={SITE.phoneHref}>
-              {SITE.phone}
-            </a>
             <Link href={NAV.cta.href} className="btn btn-primary">
               {NAV.cta.label}
             </Link>

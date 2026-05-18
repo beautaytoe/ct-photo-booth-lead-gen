@@ -24,22 +24,31 @@ export function Footer() {
               <div className="brand-mark">G</div>
               <div>
                 <div className="brand-name">Gold Coast Photo Booth Co.</div>
-                <div className="brand-sub">Connecticut · Est. for Fairfield</div>
+                <div className="brand-sub">{SITE.tagline}</div>
               </div>
             </Link>
             <p style={{ color: 'var(--text-dim)', maxWidth: '38ch', fontSize: 14, lineHeight: 1.6, marginTop: 24 }}>
-              Premium photo booth, 360, glam, mirror and audio guestbook rentals for Connecticut
-              weddings, corporate events, and private celebrations. Serving all {TOWNS.length} CT towns.
+              Premium photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for
+              Connecticut weddings, corporate events, and private celebrations. Serving all{' '}
+              {TOWNS.length} CT towns with Fairfield County as the priority service area.
             </p>
+            <div style={{ marginTop: 24 }}>
+              <Link href="/check-availability/" className="btn btn-primary">
+                Check Availability →
+              </Link>
+            </div>
           </div>
           <div>
-            <h5>Experiences</h5>
+            <h5>Booths &amp; Add-Ons</h5>
             <ul>
-              {SERVICES.slice(0, 7).map((s) => (
+              {SERVICES.slice(0, 8).map((s) => (
                 <li key={s.slug}>
                   <Link href={`/${s.slug}/`}>{s.name}</Link>
                 </li>
               ))}
+              <li>
+                <Link href="/photo-booth-rental-ct/">All booth experiences →</Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -61,7 +70,7 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <Link href="/service-areas/">All CT towns →</Link>
+                <Link href="/service-areas/">All {TOWNS.length} CT towns →</Link>
               </li>
             </ul>
           </div>
@@ -69,9 +78,13 @@ export function Footer() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} {SITE.brand} · Connecticut</span>
           <span>
-            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            <Link href="/check-availability/" style={{ color: 'var(--gold-bright)' }}>
+              Check Availability
+            </Link>
             {'  ·  '}
-            <a href={SITE.phoneHref}>{SITE.phone}</a>
+            <Link href="/contact/">Contact</Link>
+            {'  ·  '}
+            <Link href="/privacy/">Privacy</Link>
           </span>
         </div>
       </div>
