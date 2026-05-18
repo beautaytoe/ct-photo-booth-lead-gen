@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { Hero } from '@/components/Hero';
+import { InnerHero } from '@/components/Hero';
 import { FAQ } from '@/components/FAQ';
 import { CTASection } from '@/components/CTASection';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ServiceCard } from '@/components/ServiceCard';
+import { Icons } from '@/components/Icons';
 import {
   type County,
   getCountyInfo,
@@ -18,7 +19,7 @@ export function CountyHubPage({
   pathPrefix,
 }: {
   county: County;
-  pathPrefix: string; // '/photo-booth-rental-fairfield-county-ct' or '/service-areas/fairfield-county-ct'
+  pathPrefix: string;
 }) {
   const info = getCountyInfo(county);
   const towns = getTownsByCounty(county).sort(
@@ -29,52 +30,66 @@ export function CountyHubPage({
 
   return (
     <>
-      <Hero
+      <InnerHero
         eyebrow={`Connecticut · ${info.name}`}
         title={`Photo Booth Rental in ${info.name}, CT`}
         subtitle={info.description}
         primaryCta={{ label: 'Check Availability', href: '/check-availability/' }}
         secondaryCta={{ label: 'View Photo Booths', href: '/photo-booth-rental-ct/' }}
+        crumbs={
+          <Breadcrumbs
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Service Areas', href: '/service-areas/' },
+              { name: info.name, href: `${pathPrefix}/` },
+            ]}
+          />
+        }
       />
 
-      <section className="container-page mt-6">
-        <Breadcrumbs
-          items={[
-            { name: 'Home', href: '/' },
-            { name: 'Service Areas', href: '/service-areas/' },
-            { name: info.name, href: `${pathPrefix}/` },
-          ]}
-        />
-      </section>
-
-      <section className="section">
-        <div className="container-page">
-          <div className="eyebrow">Featured Towns</div>
-          <h2 className="mt-2 text-3xl md:text-4xl font-semibold">
-            Top {info.name} towns we serve
-          </h2>
-          <p className="mt-3 max-w-2xl text-[color:var(--color-ink-soft)]/80">
-            Click any town for local context, popular booth styles, and nearby service areas. We
-            also serve every smaller community in {info.name}.
-          </p>
-          <ul className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <section className="section dark">
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">Featured Towns</span>
+              <h2 className="display" style={{ marginTop: 24 }}>
+                Top {info.name}<br />
+                <em>towns we serve.</em>
+              </h2>
+            </div>
+            <div className="section-head-right">
+              <p className="lede">
+                Click any town for local context, popular booth styles, and nearby service areas. We
+                also serve every smaller community in {info.name}.
+              </p>
+            </div>
+          </div>
+          <ul className="tile-grid" style={{ listStyle: 'none', padding: 0 }}>
             {indexableTowns.map((t) => (
               <li key={t.slug}>
-                <Link
-                  href={`/service-areas/${t.slug}/`}
-                  className="block rounded-xl border border-[color:var(--color-blush)] bg-white px-4 py-3 hover:border-[color:var(--color-rose)] transition-colors"
-                >
-                  <span className="font-medium text-[color:var(--color-ink)]">{t.name}, CT</span>
+                <Link href={`/service-areas/${t.slug}/`} className="tile">
+                  <span className="tile-meta">Tier {t.tier} · {info.name}</span>
+                  <span className="tile-name">{t.name}, CT</span>
                 </Link>
               </li>
             ))}
           </ul>
           {otherTowns.length > 0 && (
-            <p className="mt-6 text-sm text-[color:var(--color-ink-soft)]/70">
+            <p
+              style={{
+                marginTop: 24,
+                fontSize: 13,
+                color: 'var(--text-muted)',
+                lineHeight: 1.7,
+              }}
+            >
               We also serve smaller {info.name} communities including{' '}
               {otherTowns.map((t, i) => (
                 <span key={t.slug}>
-                  <Link href={`/service-areas/${t.slug}/`} className="underline hover:text-[color:var(--color-ink)]">
+                  <Link
+                    href={`/service-areas/${t.slug}/`}
+                    style={{ color: 'var(--text-dim)', textDecoration: 'underline' }}
+                  >
                     {t.name}
                   </Link>
                   {i < otherTowns.length - 1 ? ', ' : ''}
@@ -86,25 +101,45 @@ export function CountyHubPage({
         </div>
       </section>
 
-      <section className="section bg-white border-y border-[color:var(--color-blush)]">
-        <div className="container-page">
-          <div className="eyebrow">Photo Booth Experiences</div>
-          <h2 className="mt-2 text-3xl md:text-4xl font-semibold">
-            Photo booth styles popular in {info.name}
-          </h2>
-          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">Photo Booth Experiences</span>
+              <h2 className="display" style={{ marginTop: 24 }}>
+                Booth styles popular<br />
+                in <em>{info.name}.</em>
+              </h2>
+            </div>
+            <div className="section-head-right">
+              <p className="lede">
+                Mix and match booth styles for your {info.name} event — pair our 360 booth with an
+                audio guestbook, or run a glam booth alongside the open-air for full coverage.
+              </p>
+            </div>
+          </div>
+          <div className="booth-grid">
             {SERVICES.slice(0, 6).map((s) => (
               <ServiceCard key={s.slug} service={s} />
             ))}
           </div>
+          <div style={{ marginTop: 24 }}>
+            <Link href="/photo-booth-rental-ct/" className="btn btn-ghost">
+              <Icons.Spark size={14} /> All booth styles
+            </Link>
+          </div>
         </div>
       </section>
 
-      <FAQ items={FAQ_GENERAL.slice(0, 6)} />
+      <FAQ items={FAQ_GENERAL.slice(0, 6)} eyebrow={`${info.name} · FAQ`} />
 
       <CTASection
-        title={`Book a CT photo booth in ${info.name}`}
-        subtitle="Tell us your date, venue, and event type and we will confirm availability for your event."
+        title={
+          <>
+            Book a CT photo booth<br />in <em>{info.name}.</em>
+          </>
+        }
+        subtitle={`Tell us your date, venue, and event type and we will confirm availability for your ${info.name} event.`}
       />
 
       <script

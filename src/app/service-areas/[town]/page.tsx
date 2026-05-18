@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Hero } from '@/components/Hero';
+import { InnerHero } from '@/components/Hero';
 import { FAQ } from '@/components/FAQ';
 import { CTASection } from '@/components/CTASection';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ServiceCard } from '@/components/ServiceCard';
+import { Icons } from '@/components/Icons';
 import {
   TOWNS,
   getTownBySlug,
@@ -22,7 +23,6 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  // Generate routes for every town in CT (all 169) — quality / index controlled per-town below.
   return TOWNS.map((t) => ({ town: t.slug }));
 }
 
@@ -58,93 +58,87 @@ export default async function TownPage({ params }: PageProps) {
 
   return (
     <>
-      <Hero
+      <InnerHero
         eyebrow={`${countyInfo.name} · Connecticut`}
         title={`Photo Booth Rental in ${town.name}, CT`}
         subtitle={`360, glam, mirror, open-air, and audio guestbook experiences for weddings, corporate events, and private parties in ${town.name} and surrounding ${countyInfo.name} towns.`}
         primaryCta={{ label: 'Check Availability', href: '/check-availability/' }}
         secondaryCta={{ label: 'View Photo Booths', href: '/photo-booth-rental-ct/' }}
+        crumbs={
+          <Breadcrumbs
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Service Areas', href: '/service-areas/' },
+              { name: countyInfo.name, href: `/photo-booth-rental-${town.county}-county-ct/` },
+              { name: town.name, href: `/service-areas/${town.slug}/` },
+            ]}
+          />
+        }
       />
 
-      <section className="container-page mt-6">
-        <Breadcrumbs
-          items={[
-            { name: 'Home', href: '/' },
-            { name: 'Service Areas', href: '/service-areas/' },
-            {
-              name: countyInfo.name,
-              href: `/photo-booth-rental-${town.county}-county-ct/`,
-            },
-            { name: town.name, href: `/service-areas/${town.slug}/` },
-          ]}
-        />
-      </section>
-
-      <section className="section">
-        <div className="container-page grid md:grid-cols-3 gap-10">
-          <div className="md:col-span-2">
-            <div className="eyebrow">About this market</div>
-            <h2 className="mt-2 text-3xl md:text-4xl font-semibold">
-              Photo booth rental in {town.name}, CT
-            </h2>
-            <p className="mt-4 text-[color:var(--color-ink-soft)]/85 leading-relaxed">
-              {localIntro}
-            </p>
-            <p className="mt-4 text-[color:var(--color-ink-soft)]/85 leading-relaxed">
-              Every {town.name} booking includes a professional on-site attendant, unlimited photo
-              sessions, instant text / email sharing, and high-resolution prints. We coordinate
-              load-in directly with your venue, carry event liability insurance, and design a
-              print template + digital overlay around your event branding.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/check-availability/" className="btn-primary">
-                Check {town.name} availability
-              </Link>
-              <Link
-                href={`/photo-booth-rental-${town.county}-county-ct/`}
-                className="btn-secondary"
-              >
-                {countyInfo.name} hub →
-              </Link>
+      <section className="section dark">
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 60, alignItems: 'start' }} className="md:grid-cols-1">
+            <div>
+              <span className="eyebrow">About this market</span>
+              <h2 className="display" style={{ marginTop: 24 }}>
+                Photo booth rental<br />
+                in <em>{town.name}, CT.</em>
+              </h2>
+              <p className="lede" style={{ marginTop: 24 }}>
+                {localIntro}
+              </p>
+              <p className="lede" style={{ marginTop: 16 }}>
+                Every {town.name} booking includes a professional on-site attendant, unlimited photo
+                sessions, instant text / email sharing, and high-resolution prints. We coordinate
+                load-in directly with your venue, carry event liability insurance, and design a
+                print template + digital overlay around your event branding.
+              </p>
+              <div style={{ marginTop: 28, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                <Link href="/check-availability/" className="btn btn-primary">
+                  Check {town.name} availability<span className="arrow" />
+                </Link>
+                <Link href={`/photo-booth-rental-${town.county}-county-ct/`} className="btn btn-ghost">
+                  {countyInfo.name} hub →
+                </Link>
+              </div>
             </div>
-          </div>
 
-          <aside className="rounded-2xl border border-[color:var(--color-blush)] bg-white p-6">
-            <h3 className="font-semibold">Quick facts — {town.name}</h3>
-            <dl className="mt-3 grid gap-2 text-sm">
-              <div className="flex justify-between gap-3 border-b border-[color:var(--color-blush)] pb-2">
-                <dt className="text-[color:var(--color-ink-soft)]/70">County</dt>
-                <dd className="font-medium text-right">{countyInfo.name}</dd>
-              </div>
-              <div className="flex justify-between gap-3 border-b border-[color:var(--color-blush)] pb-2">
-                <dt className="text-[color:var(--color-ink-soft)]/70">Service area</dt>
-                <dd className="font-medium text-right">Statewide CT</dd>
-              </div>
-              <div className="flex justify-between gap-3 border-b border-[color:var(--color-blush)] pb-2">
-                <dt className="text-[color:var(--color-ink-soft)]/70">On-site attendant</dt>
-                <dd className="font-medium text-right">Included</dd>
-              </div>
-              <div className="flex justify-between gap-3 border-b border-[color:var(--color-blush)] pb-2">
-                <dt className="text-[color:var(--color-ink-soft)]/70">Booth styles</dt>
-                <dd className="font-medium text-right">360, glam, mirror, open-air</dd>
-              </div>
-              <div className="flex justify-between gap-3">
-                <dt className="text-[color:var(--color-ink-soft)]/70">Insurance</dt>
-                <dd className="font-medium text-right">COI on request</dd>
-              </div>
-            </dl>
-          </aside>
+            <aside className="pkg" style={{ minHeight: 'auto' }}>
+              <div className="pkg-tag">{town.name} Quick Facts</div>
+              <h3 className="pkg-name" style={{ marginTop: 6, fontSize: 28 }}>
+                Booking <em>essentials.</em>
+              </h3>
+              <ul className="pkg-list" style={{ marginTop: 24 }}>
+                <li><strong style={{ color: 'var(--ivory)' }}>County:</strong> {countyInfo.name}</li>
+                <li><strong style={{ color: 'var(--ivory)' }}>Service area:</strong> Statewide CT</li>
+                <li><strong style={{ color: 'var(--ivory)' }}>Attendant:</strong> Included on every booking</li>
+                <li><strong style={{ color: 'var(--ivory)' }}>Booth styles:</strong> 360, glam, mirror, open-air, selfie, audio guestbook</li>
+                <li><strong style={{ color: 'var(--ivory)' }}>Insurance:</strong> COI on request</li>
+              </ul>
+            </aside>
+          </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="section bg-white border-y border-[color:var(--color-blush)]">
-        <div className="container-page">
-          <div className="eyebrow">Booth Styles</div>
-          <h2 className="mt-2 text-3xl md:text-4xl font-semibold">
-            Most-requested booths for {town.name} events
-          </h2>
-          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">Booth Styles</span>
+              <h2 className="display" style={{ marginTop: 24 }}>
+                Most-requested booths<br />
+                for <em>{town.name}.</em>
+              </h2>
+            </div>
+            <div className="section-head-right">
+              <p className="lede">
+                From the editorial glam booth to the 360 video booth, our {town.name} clients book a
+                mix of experiences to cover the dance floor, the bar, and the audio guestbook.
+              </p>
+            </div>
+          </div>
+          <div className="booth-grid">
             {SERVICES.slice(0, 6).map((s) => (
               <ServiceCard key={s.slug} service={s} />
             ))}
@@ -152,44 +146,52 @@ export default async function TownPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Nearby */}
-      <section className="section">
-        <div className="container-page">
-          <div className="eyebrow">Nearby Service Areas</div>
-          <h2 className="mt-2 text-3xl md:text-4xl font-semibold">
-            Also serving near {town.name}
-          </h2>
-          <ul className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">Nearby Service Areas</span>
+              <h2 className="display" style={{ marginTop: 24 }}>
+                Also serving<br />
+                <em>near {town.name}.</em>
+              </h2>
+            </div>
+            <div className="section-head-right">
+              <p className="lede">
+                We work the {countyInfo.name} corridor every weekend in peak season. Tap any nearby
+                town for local context.
+              </p>
+            </div>
+          </div>
+          <ul className="tile-grid" style={{ listStyle: 'none', padding: 0 }}>
             {nearby.map((n) => (
               <li key={n.slug}>
-                <Link
-                  href={`/service-areas/${n.slug}/`}
-                  className="block rounded-xl border border-[color:var(--color-blush)] bg-white px-4 py-3 hover:border-[color:var(--color-rose)] text-sm font-medium"
-                >
-                  {n.name}, CT
+                <Link href={`/service-areas/${n.slug}/`} className="tile">
+                  <span className="tile-meta">{countyInfo.name}</span>
+                  <span className="tile-name">{n.name}, CT</span>
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex flex-wrap gap-3 text-sm">
-            <Link href="/service-areas/" className="underline">
-              All CT towns
+          <div style={{ marginTop: 24, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+            <Link href="/service-areas/" className="btn btn-ghost">
+              <Icons.Spark size={14} /> All CT towns
             </Link>
-            <span className="text-[color:var(--color-ink-soft)]/50">|</span>
-            <Link
-              href={`/photo-booth-rental-${town.county}-county-ct/`}
-              className="underline"
-            >
+            <Link href={`/photo-booth-rental-${town.county}-county-ct/`} className="btn btn-ghost">
               {countyInfo.name} hub
             </Link>
           </div>
         </div>
       </section>
 
-      <FAQ items={FAQ_GENERAL.slice(0, 6)} />
+      <FAQ items={FAQ_GENERAL.slice(0, 6)} eyebrow={`${town.name} · FAQ`} />
 
       <CTASection
-        title={`Book your ${town.name}, CT photo booth`}
+        title={
+          <>
+            Book your <em>{town.name}, CT</em><br />photo booth.
+          </>
+        }
         subtitle={`Tell us your date and venue in ${town.name} — we will confirm availability within one business day.`}
       />
 

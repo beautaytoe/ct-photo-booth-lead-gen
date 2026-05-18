@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Hero } from '@/components/Hero';
+import { InnerHero } from '@/components/Hero';
 import { CTASection } from '@/components/CTASection';
 import { FAQ } from '@/components/FAQ';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { PackageCards } from '@/components/PackageCards';
+import { Icons } from '@/components/Icons';
 import { SERVICES } from '@/lib/services-data';
 
 export const metadata: Metadata = {
@@ -13,167 +15,109 @@ export const metadata: Metadata = {
   alternates: { canonical: '/photo-booth-rental-prices-ct/' },
 };
 
-const tiers = [
-  {
-    name: 'Essential',
-    headline: 'Open-Air or Mirror Booth · 3 hours',
-    audience: 'Small private parties, birthdays, school events',
-    bullets: [
-      'Open-air or mirror photo booth',
-      'On-site attendant',
-      'Unlimited prints',
-      'Instant digital sharing',
-      'Custom print template',
-      'Online gallery delivered after the event',
-    ],
-    range: 'Most events land in the low-to-mid three figures.',
-    cta: 'Check Essential availability',
-  },
-  {
-    name: 'Signature',
-    headline: 'Open-Air or Glam Booth · 4 hours · Premium Backdrop',
-    audience: 'Weddings, corporate events, Sweet 16s',
-    bullets: [
-      'Open-air or glam photo booth',
-      'Premium backdrop',
-      'Custom print template + digital overlay',
-      'On-site attendant',
-      'Unlimited prints + digital share',
-      'Online gallery + GIF export',
-    ],
-    range: 'Most events land in the mid-three to high-three figures.',
-    highlight: true,
-    cta: 'Check Signature availability',
-  },
-  {
-    name: '360 + Audio Guestbook',
-    headline: '4K 360 Booth · 4 hours · Audio Guestbook',
-    audience: 'Modern weddings, brand activations, Sweet 16s',
-    bullets: [
-      '4K stabilized 360 booth',
-      'Custom intro / outro + music sync',
-      'Vintage telephone audio guestbook',
-      'On-site attendant',
-      'Branded landing page (corporate)',
-      'Online gallery + post-event reel',
-    ],
-    range: 'Most events land in the low-to-mid four figures.',
-    cta: 'Check 360 availability',
-  },
-];
-
 export default function PricingPage() {
   return (
     <>
-      <Hero
-        eyebrow="Pricing"
+      <InnerHero
+        eyebrow="Pricing · 2026"
         title="Photo Booth Rental Prices in Connecticut"
         subtitle="Every event is custom-quoted, but here is what most CT bookings look like at three common levels. Final pricing depends on booth style, hours, branding, and add-ons."
         primaryCta={{ label: 'Get Your Tailored Quote', href: '/check-availability/' }}
+        crumbs={
+          <Breadcrumbs
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Pricing', href: '/photo-booth-rental-prices-ct/' },
+            ]}
+          />
+        }
       />
 
-      <section className="container-page mt-6">
-        <Breadcrumbs
-          items={[
-            { name: 'Home', href: '/' },
-            { name: 'Pricing', href: '/photo-booth-rental-prices-ct/' },
-          ]}
-        />
-      </section>
+      <PackageCards />
 
-      <section className="section">
-        <div className="container-page grid md:grid-cols-3 gap-6">
-          {tiers.map((t) => (
-            <div
-              key={t.name}
-              className={`rounded-2xl border bg-white p-6 flex flex-col ${
-                t.highlight
-                  ? 'border-[color:var(--color-rose)] shadow-md'
-                  : 'border-[color:var(--color-blush)]'
-              }`}
-            >
-              {t.highlight && (
-                <div className="text-xs uppercase tracking-wider font-semibold text-[color:var(--color-rose-dark)] mb-2">
-                  Most popular
-                </div>
-              )}
-              <h2 className="text-2xl font-[var(--font-display)] font-semibold">{t.name}</h2>
-              <div className="mt-1 text-sm text-[color:var(--color-ink-soft)]/70">{t.headline}</div>
-              <div className="mt-3 text-xs uppercase tracking-wider text-[color:var(--color-rose-dark)]">
-                Best for
-              </div>
-              <div className="text-sm">{t.audience}</div>
-              <ul className="mt-4 space-y-2 text-sm">
-                {t.bullets.map((b) => (
-                  <li key={b} className="flex gap-2">
-                    <span className="text-[color:var(--color-rose-dark)]">✓</span>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-5 text-sm italic text-[color:var(--color-ink-soft)]/70">{t.range}</p>
-              <Link href="/check-availability/" className="btn-primary mt-5 text-sm">
-                {t.cta}
-              </Link>
+      <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">What Drives Price</span>
+              <h2 className="display" style={{ marginTop: 24 }}>
+                What changes the price<br />
+                of a <em>CT photo booth.</em>
+              </h2>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section bg-white border-y border-[color:var(--color-blush)]">
-        <div className="container-page max-w-3xl">
-          <div className="eyebrow">What Drives Price</div>
-          <h2 className="mt-2 text-3xl md:text-4xl font-semibold">
-            What changes the price of a CT photo booth
-          </h2>
-          <ul className="mt-6 grid gap-3 text-[color:var(--color-ink-soft)]/85 leading-relaxed">
-            <li>
-              <strong>Booth style.</strong> 360 booths and glam booths cost more than open-air
-              booths because of the rig, lighting, and editing workflow.
-            </li>
-            <li>
-              <strong>Event hours.</strong> The longer the event, the higher the booking. Setup
-              and breakdown are not counted against your event hours.
-            </li>
-            <li>
-              <strong>Custom branding.</strong> Custom print templates, on-screen overlays, 360
-              intro/outro, and branded landing pages take design time.
-            </li>
-            <li>
-              <strong>Backdrop type.</strong> A standard backdrop is included; premium step-and-repeat
-              and custom-built backdrops are an add-on.
-            </li>
-            <li>
-              <strong>Travel.</strong> Most of CT is included; remote shoreline and Litchfield
-              Hills venues may carry a travel adjustment.
-            </li>
-            <li>
-              <strong>Day of week / season.</strong> Saturday weddings in peak season book first
-              and price firmest.
-            </li>
+            <div className="section-head-right">
+              <p className="lede">
+                Six variables drive almost every price difference between bookings. Knowing these
+                helps you build the right package for your event.
+              </p>
+            </div>
+          </div>
+          <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+            {[
+              ['Booth style', '360 booths and glam booths cost more than open-air booths because of the rig, lighting, and editing workflow.'],
+              ['Event hours', 'The longer the event, the higher the booking. Setup and breakdown are not counted against your event hours.'],
+              ['Custom branding', 'Custom print templates, on-screen overlays, 360 intro/outro, and branded landing pages take design time.'],
+              ['Backdrop type', 'A standard backdrop is included; premium step-and-repeat and custom-built backdrops are an add-on.'],
+              ['Travel', 'Most of CT is included; remote shoreline and Litchfield Hills venues may carry a travel adjustment.'],
+              ['Day of week / season', 'Saturday weddings in peak season book first and price firmest.'],
+            ].map(([title, body]) => (
+              <li
+                key={title}
+                style={{
+                  padding: 24,
+                  border: '1px solid var(--line)',
+                  borderRadius: 18,
+                  background: 'var(--bg-soft)',
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: 'var(--serif)',
+                    fontSize: 22,
+                    color: 'var(--gold-bright)',
+                    marginBottom: 8,
+                  }}
+                >
+                  {title}
+                </div>
+                <div style={{ fontSize: 14, color: 'var(--text-dim)', lineHeight: 1.6 }}>{body}</div>
+              </li>
+            ))}
           </ul>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-page">
-          <div className="eyebrow">Browse</div>
-          <h2 className="mt-2 text-3xl md:text-4xl font-semibold">Browse photo booth styles</h2>
-          <div className="mt-6 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {SERVICES.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/${s.slug}/`}
-                className="block rounded-xl border border-[color:var(--color-blush)] bg-white px-4 py-3 hover:border-[color:var(--color-rose)] text-sm font-medium"
-              >
-                {s.name}
-              </Link>
-            ))}
+      <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">Browse</span>
+              <h2 className="display" style={{ marginTop: 24 }}>
+                Browse <em>booth styles.</em>
+              </h2>
+            </div>
+            <div className="section-head-right">
+              <p className="lede">
+                Tap any booth style for in-depth pricing context, included features, and the events
+                we book it for most often.
+              </p>
+            </div>
           </div>
+          <ul className="tile-grid" style={{ listStyle: 'none', padding: 0 }}>
+            {SERVICES.map((s) => (
+              <li key={s.slug}>
+                <Link href={`/${s.slug}/`} className="tile">
+                  <span className="tile-meta">{s.shortName}</span>
+                  <span className="tile-name">{s.name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       <FAQ
+        eyebrow="Pricing FAQ"
         items={[
           {
             q: 'Do you have packages or is everything custom?',
@@ -195,7 +139,11 @@ export default function PricingPage() {
       />
 
       <CTASection
-        title="Want a real quote in writing?"
+        title={
+          <>
+            Want a <em>real quote</em><br />in writing?
+          </>
+        }
         subtitle="Send us your date, town, and event type — we will reply with a tailored, line-itemed quote within one business day."
       />
     </>

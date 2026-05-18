@@ -2,19 +2,21 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <section className="section">
-      <div className="container-page text-center max-w-xl mx-auto">
-        <div className="eyebrow">404</div>
-        <h1 className="mt-2 text-4xl md:text-5xl font-semibold">Page not found</h1>
-        <p className="mt-4 text-[color:var(--color-ink-soft)]/80">
-          The page you were looking for is not here. Try the homepage or check availability for
-          your event.
+    <section className="section dark" style={{ minHeight: '70vh', display: 'grid', placeItems: 'center' }}>
+      <div className="container" style={{ textAlign: 'center', maxWidth: 640 }}>
+        <span className="eyebrow">404</span>
+        <h1 className="display" style={{ marginTop: 24, fontSize: 'clamp(48px, 8vw, 96px)' }}>
+          Page <em>not found.</em>
+        </h1>
+        <p className="lede" style={{ marginTop: 16, marginInline: 'auto' }}>
+          The page you were looking for is not here. Try the homepage or check availability for your
+          event.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link href="/" className="btn-primary">
+        <div style={{ marginTop: 28, display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link href="/" className="btn btn-primary">
             Home
           </Link>
-          <Link href="/check-availability/" className="btn-secondary">
+          <Link href="/check-availability/" className="btn btn-ghost">
             Check Availability
           </Link>
         </div>

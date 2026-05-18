@@ -1,28 +1,61 @@
+'use client';
+
+import { useState } from 'react';
+
 interface FAQProps {
   title?: string;
+  eyebrow?: string;
   items: { q: string; a: string }[];
+  headline?: React.ReactNode;
+  lede?: string;
 }
 
-export function FAQ({ title = 'Frequently Asked Questions', items }: FAQProps) {
+export function FAQ({
+  title,
+  eyebrow = '08 — Frequently Asked',
+  items,
+  headline,
+  lede = 'Still curious? Reach out anytime — our team responds to most inquiries within one business day.',
+}: FAQProps) {
+  const [open, setOpen] = useState(0);
+
   return (
-    <section className="section">
-      <div className="container-page">
-        <div className="eyebrow">Answers</div>
-        <h2 className="mt-2 text-3xl md:text-4xl font-semibold">{title}</h2>
-        <div className="mt-8 grid gap-4">
-          {items.map((item) => (
-            <details
-              key={item.q}
-              className="group rounded-2xl border border-[color:var(--color-blush)] bg-white p-5 open:shadow-sm"
-            >
-              <summary className="cursor-pointer list-none flex items-center justify-between gap-4">
-                <span className="font-semibold text-[color:var(--color-ink)]">{item.q}</span>
-                <span className="text-[color:var(--color-rose-dark)] transition-transform group-open:rotate-45">+</span>
-              </summary>
-              <p className="mt-3 text-[color:var(--color-ink-soft)]/85 leading-relaxed whitespace-pre-line">
-                {item.a}
-              </p>
-            </details>
+    <section className="section dark" id="faq">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <span className="eyebrow">{eyebrow}</span>
+            <h2 className="display" style={{ marginTop: 24 }}>
+              {headline ?? (
+                <>
+                  The questions<br />
+                  <em>we love to answer.</em>
+                </>
+              )}
+            </h2>
+            {title && <div className="sr-only">{title}</div>}
+          </div>
+          <div className="section-head-right">
+            <p className="lede">{lede}</p>
+          </div>
+        </div>
+
+        <div className="faq">
+          {items.map((f, i) => (
+            <div key={i} className={`faq-item ${open === i ? 'open' : ''}`}>
+              <button
+                className="faq-q"
+                onClick={() => setOpen(open === i ? -1 : i)}
+                type="button"
+                aria-expanded={open === i}
+              >
+                <span>{f.q}</span>
+                <span className="faq-q-plus" />
+              </button>
+              <div className="faq-a">
+                <div className="faq-a-inner">{f.a}</div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

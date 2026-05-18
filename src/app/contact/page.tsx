@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { Hero } from '@/components/Hero';
+import { InnerHero } from '@/components/Hero';
 import { LeadForm } from '@/components/LeadForm';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Icons } from '@/components/Icons';
 import { SITE } from '@/lib/site-data';
 
 export const metadata: Metadata = {
@@ -14,28 +15,61 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <Hero eyebrow="Contact" title="Get in touch" subtitle="We reply to inquiries within one business day." />
-      <section className="container-page mt-6">
-        <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Contact', href: '/contact/' }]} />
-      </section>
-      <section className="section">
-        <div className="container-page grid md:grid-cols-2 gap-10">
+      <InnerHero
+        eyebrow="Contact"
+        title="Get in touch."
+        subtitle="We reply to inquiries within one business day."
+        crumbs={
+          <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Contact', href: '/contact/' }]} />
+        }
+      />
+      <section className="section dark">
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 60 }}>
           <div>
-            <h2 className="text-2xl font-semibold font-[var(--font-display)]">By phone or email</h2>
-            <ul className="mt-4 space-y-2 text-lg">
-              <li>
-                <a href={SITE.phoneHref} className="underline">
+            <span className="eyebrow">Direct lines</span>
+            <h2 className="display" style={{ marginTop: 24 }}>
+              By phone <em>or email.</em>
+            </h2>
+            <ul style={{ marginTop: 28, listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <li style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <span
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '50%',
+                    border: '1px solid var(--gold)',
+                    display: 'grid',
+                    placeItems: 'center',
+                    color: 'var(--gold)',
+                  }}
+                >
+                  <Icons.Phone size={16} />
+                </span>
+                <a href={SITE.phoneHref} style={{ color: 'var(--ivory)', fontFamily: 'var(--serif)', fontSize: 22, textDecoration: 'none' }}>
                   {SITE.phone}
                 </a>
               </li>
-              <li>
-                <a href={`mailto:${SITE.email}`} className="underline">
+              <li style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <span
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '50%',
+                    border: '1px solid var(--gold)',
+                    display: 'grid',
+                    placeItems: 'center',
+                    color: 'var(--gold)',
+                  }}
+                >
+                  <Icons.Spark size={14} />
+                </span>
+                <a href={`mailto:${SITE.email}`} style={{ color: 'var(--ivory)', fontFamily: 'var(--serif)', fontSize: 22, textDecoration: 'none' }}>
                   {SITE.email}
                 </a>
               </li>
             </ul>
-            <p className="mt-4 text-sm text-[color:var(--color-ink-soft)]/70">
-              Service area: Statewide Connecticut. We are based in Fairfield County.
+            <p className="lede" style={{ marginTop: 28 }}>
+              Service area: Statewide Connecticut. Warehouse-local to Fairfield County.
             </p>
           </div>
           <div>

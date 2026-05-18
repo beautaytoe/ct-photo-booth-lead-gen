@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Hero } from '@/components/Hero';
+import { InnerHero } from '@/components/Hero';
 import { CTASection } from '@/components/CTASection';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { POSTS, getPost } from '@/lib/blog-data';
@@ -53,35 +53,41 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      <Hero eyebrow="Blog" title={post.title} subtitle={post.excerpt} />
+      <InnerHero
+        eyebrow={`Blog · ${post.readMinutes} min read`}
+        title={post.title}
+        subtitle={post.excerpt}
+        crumbs={
+          <Breadcrumbs
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Blog', href: '/blog/' },
+              { name: post.title, href: `/blog/${post.slug}/` },
+            ]}
+          />
+        }
+      />
 
-      <section className="container-page mt-6">
-        <Breadcrumbs
-          items={[
-            { name: 'Home', href: '/' },
-            { name: 'Blog', href: '/blog/' },
-            { name: post.title, href: `/blog/${post.slug}/` },
-          ]}
-        />
-      </section>
-
-      <article className="section">
-        <div className="container-page max-w-3xl">
-          <div className="text-sm text-[color:var(--color-ink-soft)]/60">
-            {new Date(post.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}{' '}
-            · {post.readMinutes} min read
+      <article className="section dark">
+        <div className="container" style={{ maxWidth: 820 }}>
+          <div style={{ fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '.2em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+            {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </div>
-          <div className="mt-8 grid gap-10">
+          <div style={{ marginTop: 32, display: 'grid', gap: 36 }}>
             {post.sections.map((s, i) => (
               <section key={i}>
-                <h2 className="text-2xl md:text-3xl font-[var(--font-display)] font-semibold">
+                <h2 className="display" style={{ fontSize: 'clamp(28px, 3vw, 44px)' }}>
                   {s.heading}
                 </h2>
-                <div className="mt-3 text-[color:var(--color-ink-soft)]/90 leading-relaxed whitespace-pre-line">
+                <div
+                  style={{
+                    marginTop: 14,
+                    fontSize: 17,
+                    lineHeight: 1.7,
+                    color: 'var(--text-dim)',
+                    whiteSpace: 'pre-line',
+                  }}
+                >
                   {s.body}
                 </div>
               </section>
@@ -89,15 +95,20 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
 
           {related.length > 0 && (
-            <div className="mt-12 rounded-2xl bg-[color:var(--color-blush)]/60 p-6">
-              <div className="eyebrow">Related</div>
-              <ul className="mt-3 flex flex-wrap gap-2">
+            <div
+              style={{
+                marginTop: 56,
+                padding: 28,
+                border: '1px solid var(--line)',
+                borderRadius: 18,
+                background: 'var(--bg-soft)',
+              }}
+            >
+              <span className="eyebrow">Related</span>
+              <ul style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap', gap: 8, listStyle: 'none', padding: 0 }}>
                 {related.map((r) => (
                   <li key={r.href}>
-                    <Link
-                      href={r.href}
-                      className="inline-block rounded-full bg-white px-4 py-1.5 text-sm font-medium border border-[color:var(--color-blush)] hover:border-[color:var(--color-rose)]"
-                    >
+                    <Link href={r.href} className="chip" style={{ color: 'var(--ivory)' }}>
                       {r.name}
                     </Link>
                   </li>

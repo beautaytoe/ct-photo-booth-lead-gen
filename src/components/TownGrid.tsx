@@ -5,25 +5,36 @@ export function TownGrid({
   towns,
   title,
   subtitle,
+  eyebrow,
 }: {
   towns: Town[];
   title?: string;
   subtitle?: string;
+  eyebrow?: string;
 }) {
   return (
-    <section className="section">
-      <div className="container-page">
-        {title && <div className="eyebrow">Service Areas</div>}
-        {title && <h2 className="mt-2 text-3xl md:text-4xl font-semibold">{title}</h2>}
-        {subtitle && <p className="mt-3 max-w-2xl text-[color:var(--color-ink-soft)]/80">{subtitle}</p>}
-        <ul className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+    <section className="section dark">
+      <div className="container">
+        {eyebrow && <span className="eyebrow">{eyebrow}</span>}
+        {title && (
+          <h2 className="display" style={{ marginTop: eyebrow ? 24 : 0 }}>
+            {title}
+          </h2>
+        )}
+        {subtitle && (
+          <p className="lede" style={{ marginTop: 16, maxWidth: '60ch' }}>
+            {subtitle}
+          </p>
+        )}
+        <ul
+          className="tile-grid"
+          style={{ marginTop: 40, listStyle: 'none', padding: 0 }}
+        >
           {towns.map((t) => (
             <li key={t.slug}>
-              <Link
-                href={`/service-areas/${t.slug}/`}
-                className="block rounded-xl border border-[color:var(--color-blush)] bg-white px-4 py-3 hover:border-[color:var(--color-rose)] transition-colors"
-              >
-                <span className="font-medium text-[color:var(--color-ink)]">{t.name}, CT</span>
+              <Link href={`/service-areas/${t.slug}/`} className="tile">
+                <span className="tile-meta">CT · Tier {t.tier}</span>
+                <span className="tile-name">{t.name}</span>
               </Link>
             </li>
           ))}

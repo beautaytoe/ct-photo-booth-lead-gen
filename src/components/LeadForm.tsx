@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { Icons } from './Icons';
 
+/** Compact lead form used in non-homepage contexts. The full editorial form is <FinalCTA />. */
 export function LeadForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
@@ -29,80 +31,101 @@ export function LeadForm() {
 
   if (status === 'success') {
     return (
-      <div className="rounded-2xl border border-[color:var(--color-rose)] bg-white p-8 text-center">
-        <div className="text-3xl mb-2">✓</div>
-        <h3 className="font-[var(--font-display)] text-2xl font-semibold">Got it!</h3>
-        <p className="mt-2 text-[color:var(--color-ink-soft)]/80">
-          We will check availability and reply within one business day. For urgent requests, give us a call.
+      <div className="form" style={{ alignItems: 'center', textAlign: 'center', padding: 56 }}>
+        <div
+          style={{
+            width: 72,
+            height: 72,
+            borderRadius: '50%',
+            background: 'linear-gradient(180deg, #e6cf94, #c9a865)',
+            display: 'grid',
+            placeItems: 'center',
+            color: '#1a1410',
+          }}
+        >
+          <Icons.Check size={28} />
+        </div>
+        <h3 className="display" style={{ fontSize: 36, margin: '16px 0 8px' }}>
+          Got it. <em>We're on it.</em>
+        </h3>
+        <p className="lede" style={{ maxWidth: '44ch' }}>
+          Expect a tailored proposal and a soft date hold within one business day.
         </p>
       </div>
     );
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="rounded-2xl border border-[color:var(--color-blush)] bg-white p-6 md:p-8 grid gap-4"
-    >
-      <div className="grid sm:grid-cols-2 gap-4">
-        <Field label="Your name" name="name" required />
-        <Field label="Email" name="email" type="email" required />
+    <form onSubmit={handleSubmit} className="form">
+      <div className="form-row">
+        <div className="field">
+          <label>Full Name</label>
+          <input required name="name" type="text" placeholder="Olivia Chen" />
+        </div>
+        <div className="field">
+          <label>Email</label>
+          <input required name="email" type="email" placeholder="olivia@example.com" />
+        </div>
       </div>
-      <div className="grid sm:grid-cols-2 gap-4">
-        <Field label="Phone" name="phone" type="tel" required />
-        <Field label="Event date" name="event_date" type="date" />
+      <div className="form-row">
+        <div className="field">
+          <label>Phone</label>
+          <input required name="phone" type="tel" placeholder="(203) 555 ⋯" />
+        </div>
+        <div className="field">
+          <label>Event Date</label>
+          <input name="event_date" type="date" />
+        </div>
       </div>
-      <div className="grid sm:grid-cols-2 gap-4">
-        <Field label="Event type" name="event_type" placeholder="Wedding, corporate, Sweet 16…" />
-        <Field label="Town / venue (CT)" name="town" placeholder="Stamford, Greenwich, Westport…" />
+      <div className="form-row">
+        <div className="field">
+          <label>Town / Venue</label>
+          <input name="town" type="text" placeholder="Stamford, Greenwich, Westport…" />
+        </div>
+        <div className="field">
+          <label>Event Type</label>
+          <select name="event_type" defaultValue="Wedding">
+            <option>Wedding</option>
+            <option>Corporate Event</option>
+            <option>Sweet 16 / Birthday</option>
+            <option>Bar / Bat Mitzvah</option>
+            <option>Gala / Fundraiser</option>
+            <option>School Event</option>
+            <option>Other</option>
+          </select>
+        </div>
       </div>
-      <label className="grid gap-1.5">
-        <span className="text-sm font-medium text-[color:var(--color-ink-soft)]">Tell us about your event</span>
-        <textarea
-          name="message"
-          rows={4}
-          className="rounded-xl border border-[color:var(--color-blush)] bg-[color:var(--color-cream)]/60 px-3.5 py-2.5 outline-none focus:border-[color:var(--color-rose)] focus:ring-2 focus:ring-[color:var(--color-rose)]/20 transition"
-        />
-      </label>
-      <button type="submit" className="btn-gold" disabled={status === 'submitting'}>
+      <div className="field">
+        <label>Message</label>
+        <textarea name="message" rows={4} placeholder="Tell us about your event…" />
+      </div>
+      <button
+        type="submit"
+        className="btn btn-primary"
+        style={{ width: '100%', justifyContent: 'center', padding: 20 }}
+        disabled={status === 'submitting'}
+      >
         {status === 'submitting' ? 'Sending…' : 'Check Availability'}
+        <span className="arrow" />
       </button>
       {status === 'error' && (
-        <div className="text-sm text-red-700">{errorMsg || 'Please try again or call us.'}</div>
+        <div style={{ fontSize: 13, color: '#e8a99c', textAlign: 'center' }}>
+          {errorMsg || 'Please try again or call us.'}
+        </div>
       )}
-      <p className="text-xs text-[color:var(--color-ink-soft)]/60">
-        By submitting, you agree to be contacted by {`Gold Coast Photo Booth Co.`} regarding your event inquiry.
-      </p>
+      <div
+        style={{
+          fontFamily: 'var(--mono)',
+          fontSize: 10,
+          letterSpacing: '.2em',
+          color: 'var(--text-muted)',
+          textTransform: 'uppercase',
+          textAlign: 'center',
+          marginTop: 8,
+        }}
+      >
+        Replies within one business day · No spam · Quote is no obligation
+      </div>
     </form>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type = 'text',
-  required,
-  placeholder,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-  placeholder?: string;
-}) {
-  return (
-    <label className="grid gap-1.5">
-      <span className="text-sm font-medium text-[color:var(--color-ink-soft)]">
-        {label}
-        {required && <span className="text-[color:var(--color-rose-dark)]"> *</span>}
-      </span>
-      <input
-        type={type}
-        name={name}
-        required={required}
-        placeholder={placeholder}
-        className="rounded-xl border border-[color:var(--color-blush)] bg-[color:var(--color-cream)]/60 px-3.5 py-2.5 outline-none focus:border-[color:var(--color-rose)] focus:ring-2 focus:ring-[color:var(--color-rose)]/20 transition"
-      />
-    </label>
   );
 }

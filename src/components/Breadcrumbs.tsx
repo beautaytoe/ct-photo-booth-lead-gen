@@ -18,21 +18,17 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema(schemaItems)) }}
       />
-      <nav aria-label="Breadcrumb" className="text-sm text-[color:var(--color-ink-soft)]/70">
-        <ol className="flex flex-wrap items-center gap-1.5">
-          {items.map((item, i) => (
-            <li key={i} className="flex items-center gap-1.5">
-              {item.href ? (
-                <Link href={item.href} className="hover:text-[color:var(--color-ink)]">
-                  {item.name}
-                </Link>
-              ) : (
-                <span className="text-[color:var(--color-ink)] font-medium">{item.name}</span>
-              )}
-              {i < items.length - 1 && <span className="text-[color:var(--color-ink-soft)]/40">/</span>}
-            </li>
-          ))}
-        </ol>
+      <nav aria-label="Breadcrumb" className="crumbs">
+        {items.map((item, i) => (
+          <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+            {item.href && i < items.length - 1 ? (
+              <Link href={item.href}>{item.name}</Link>
+            ) : (
+              <span className="here">{item.name}</span>
+            )}
+            {i < items.length - 1 && <span className="sep">/</span>}
+          </span>
+        ))}
       </nav>
     </>
   );
