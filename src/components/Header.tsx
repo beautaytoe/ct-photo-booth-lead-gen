@@ -24,7 +24,7 @@ export function Header() {
               <div className="brand-name">
                 Gold Coast<span style={{ fontStyle: 'italic', color: 'var(--gold-bright)' }}> Photo Booth Co.</span>
               </div>
-              <div className="brand-sub">CT · Fairfield County First</div>
+              <div className="brand-sub">Photo Booth Rental CT</div>
             </div>
           </Link>
 

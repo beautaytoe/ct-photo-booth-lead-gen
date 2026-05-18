@@ -110,7 +110,7 @@ export function FairfieldSection() {
               Don't see your town?
             </div>
             <div style={{ fontFamily: 'var(--serif)', fontSize: 26, color: '#1a1410', lineHeight: 1.1 }}>
-              We service all of <em style={{ color: '#8b6f3a' }}>Connecticut</em> — 169 towns and counting.
+              Coverage available across <em style={{ color: '#8b6f3a' }}>Connecticut</em> — confirm your date and venue with us.
             </div>
           </div>
           <Link href="/service-areas/" className="btn btn-dark">

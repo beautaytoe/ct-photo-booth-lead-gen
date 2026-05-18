@@ -15,6 +15,7 @@ export function organizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE.brand,
+    alternateName: SITE.seoDescriptor,
     url: SITE.domain,
     areaServed: { '@type': 'State', name: 'Connecticut' },
     knowsAbout: [
@@ -38,6 +39,7 @@ export function websiteSchema() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE.brand,
+    alternateName: SITE.seoDescriptor,
     url: SITE.domain,
   };
 }

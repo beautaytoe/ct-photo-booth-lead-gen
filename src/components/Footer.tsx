@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { SITE } from '@/lib/site-data';
 import { SERVICES } from '@/lib/services-data';
-import { COUNTIES, TOWNS, getTownBySlug } from '@/lib/towns-data';
+import { COUNTIES, getTownBySlug } from '@/lib/towns-data';
 
 export function Footer() {
   const featuredTowns = [
@@ -28,9 +28,9 @@ export function Footer() {
               </div>
             </Link>
             <p style={{ color: 'var(--text-dim)', maxWidth: '38ch', fontSize: 14, lineHeight: 1.6, marginTop: 24 }}>
-              Premium photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for
-              Connecticut weddings, corporate events, and private celebrations. Serving all{' '}
-              {TOWNS.length} CT towns with Fairfield County as the priority service area.
+              Photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for Connecticut
+              weddings, corporate events, and private celebrations. Coverage available statewide
+              with Fairfield County as the first-priority service area.
             </p>
             <div style={{ marginTop: 24 }}>
               <Link href="/check-availability/" className="btn btn-primary">
@@ -70,7 +70,7 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <Link href="/service-areas/">All {TOWNS.length} CT towns →</Link>
+                <Link href="/service-areas/">All CT service areas →</Link>
               </li>
             </ul>
           </div>

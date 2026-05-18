@@ -85,8 +85,9 @@ export function ServiceMap() {
           </div>
           <div className="section-head-right">
             <p className="lede">
-              We're booked across every Connecticut county. Fairfield is our priority market —
-              expect faster lead times, dedicated producers, and warehouse-local delivery.
+              We serve events across Connecticut, with Fairfield County as our first-priority
+              market. Availability, travel pricing, and setup requirements are confirmed before
+              each booking.
             </p>
           </div>
         </div>

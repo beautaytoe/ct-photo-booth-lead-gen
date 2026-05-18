@@ -81,8 +81,8 @@ export function FinalCTA() {
               />
               <ValueRow
                 icon={<Icons.Diamond size={14} />}
-                title="Soft hold on your date"
-                sub="We'll reserve a 7-day window while you decide."
+                title="Date check before quote"
+                sub="We confirm whether your date is open before sending pricing."
               />
               <ValueRow
                 icon={<Icons.Heart size={14} />}

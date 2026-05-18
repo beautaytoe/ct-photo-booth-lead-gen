@@ -1,16 +1,16 @@
 export const SITE = {
   brand: 'Gold Coast Photo Booth Co.',
   shortBrand: 'Gold Coast Photo Booth',
+  /** Used as `alternateName` in schema and as the small line under the brand mark. */
+  seoDescriptor: 'Photo Booth Rental CT',
   tagline: 'Connecticut Photo Booth Rentals · Fairfield County First',
-  domain: 'https://goldcoastphotoboothco.com',
+  domain: 'https://www.photoboothrentalct.com',
   serviceArea: 'Connecticut',
   primaryRegion: 'Fairfield County, Connecticut',
   region: 'CT',
   founded: 2026,
 
   // Contact channel: form-only until a verified phone/email is wired.
-  // Set these in code when real values are confirmed; UI reads only the
-  // boolean flags below to decide whether to render anything publicly.
   _placeholderPhone: '',
   _placeholderEmail: '',
   showPhonePublicly: false,

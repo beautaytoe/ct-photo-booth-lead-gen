@@ -35,7 +35,7 @@ export function CountyHubPage({
         title={`Photo Booth Rental in ${info.name}, CT`}
         subtitle={info.description}
         primaryCta={{ label: 'Check Availability', href: '/check-availability/' }}
-        secondaryCta={{ label: 'View Photo Booths', href: '/photo-booth-rental-ct/' }}
+        secondaryCta={{ label: 'View Booth Experiences', href: '/photo-booth-rental-ct/' }}
         crumbs={
           <Breadcrumbs
             items={[
@@ -51,25 +51,34 @@ export function CountyHubPage({
         <div className="container">
           <div className="section-head">
             <div>
-              <span className="eyebrow">Featured Towns</span>
+              <span className="eyebrow">Featured towns</span>
               <h2 className="display" style={{ marginTop: 24 }}>
-                Top {info.name}<br />
-                <em>towns we serve.</em>
+                Towns we cover<br />
+                in <em>{info.name}.</em>
               </h2>
             </div>
             <div className="section-head-right">
               <p className="lede">
-                Click any town for local context, popular booth styles, and nearby service areas. We
-                also serve every smaller community in {info.name}.
+                Tap any town for local context and the booth styles that fit best. Smaller
+                communities in the area are also supported — we confirm coverage during booking.
               </p>
             </div>
           </div>
-          <ul className="tile-grid" style={{ listStyle: 'none', padding: 0 }}>
+          <ul
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+              gap: 10,
+              listStyle: 'none',
+              margin: 0,
+              padding: 0,
+            }}
+          >
             {indexableTowns.map((t) => (
               <li key={t.slug}>
                 <Link href={`/service-areas/${t.slug}/`} className="tile">
-                  <span className="tile-meta">Tier {t.tier} · {info.name}</span>
-                  <span className="tile-name">{t.name}, CT</span>
+                  <span className="tile-meta">{info.name}</span>
+                  <span className="tile-name" style={{ fontSize: 19 }}>{t.name}</span>
                 </Link>
               </li>
             ))}
@@ -83,7 +92,7 @@ export function CountyHubPage({
                 lineHeight: 1.7,
               }}
             >
-              We also serve smaller {info.name} communities including{' '}
+              Smaller communities in the area also supported, including{' '}
               {otherTowns.map((t, i) => (
                 <span key={t.slug}>
                   <Link
@@ -105,16 +114,17 @@ export function CountyHubPage({
         <div className="container">
           <div className="section-head">
             <div>
-              <span className="eyebrow">Photo Booth Experiences</span>
+              <span className="eyebrow">Booth styles</span>
               <h2 className="display" style={{ marginTop: 24 }}>
-                Booth styles popular<br />
-                in <em>{info.name}.</em>
+                Booth experiences for<br />
+                <em>{info.name} events.</em>
               </h2>
             </div>
             <div className="section-head-right">
               <p className="lede">
-                Mix and match booth styles for your {info.name} event — pair our 360 booth with an
-                audio guestbook, or run a glam booth alongside the open-air for full coverage.
+                Mix and match booth styles for your event. Pair our 360 booth with an audio
+                guestbook, or run a glam booth alongside the open-air for full coverage of the
+                room.
               </p>
             </div>
           </div>
@@ -136,10 +146,11 @@ export function CountyHubPage({
       <CTASection
         title={
           <>
-            Book a CT photo booth<br />in <em>{info.name}.</em>
+            Check availability in<br />
+            <em>{info.name}.</em>
           </>
         }
-        subtitle={`Tell us your date, venue, and event type and we will confirm availability for your ${info.name} event.`}
+        subtitle={`Send us your date, venue, and event type and we'll come back with a tailored package recommendation.`}
       />
 
       <script
@@ -148,7 +159,7 @@ export function CountyHubPage({
           __html: JSON.stringify(
             serviceSchema({
               name: `Photo Booth Rental in ${info.name}, Connecticut`,
-              description: `Premium photo booth rentals in ${info.name}, CT for weddings, corporate events, and private parties.`,
+              description: `Booth rental for weddings, corporate events, and private gatherings in ${info.name}, CT.`,
               url: `${SITE.domain}${pathPrefix}/`,
               areaServed: info.name,
             })
@@ -167,8 +178,8 @@ export function CountyHubPage({
 
 export function buildCountyMetadata(county: County, pathPrefix: string) {
   const info = getCountyInfo(county);
-  const title = `Photo Booth Rental ${info.name} CT | Premium Event Booths`;
-  const description = `Premium photo booth rentals in ${info.name}, Connecticut for weddings, corporate events, private parties, galas, and celebrations. 360, glam, mirror, and open-air booths.`;
+  const title = `Photo Booth Rental in ${info.name}, CT | Wedding, Corporate & Event Booths`;
+  const description = `Booth rental for weddings, corporate events, galas, private parties, and school events in ${info.name}, Connecticut. Open-air, 360, glam, mirror, roaming, and audio guestbook options.`;
   return {
     title,
     description,

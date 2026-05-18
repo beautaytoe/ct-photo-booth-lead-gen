@@ -13,6 +13,9 @@ import {
   getCountyInfo,
   getNearbyTowns,
   isIndexable,
+  defaultIntroFor,
+  titleSuffixForVibe,
+  metaDescriptionFor,
 } from '@/lib/towns-data';
 import { SERVICES, FAQ_GENERAL } from '@/lib/services-data';
 import { faqSchema, serviceSchema } from '@/lib/schema';
@@ -31,10 +34,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const town = getTownBySlug(slug);
   if (!town) return {};
   const indexable = isIndexable(town);
-  const title = `Photo Booth Rental ${town.name} CT | 360, Glam & Wedding Booths`;
+  const title = `Photo Booth Rental in ${town.name}, CT | ${titleSuffixForVibe(town.vibe)}`;
   const description = indexable
-    ? `Looking for photo booth rental in ${town.name}, CT? Book 360 booths, glam booths, open-air booths, and wedding photo booth experiences for local events.`
-    : `Photo booth rental serving ${town.name}, CT. Coverage available — request a quote for your local event.`;
+    ? metaDescriptionFor(town)
+    : `Photo booth rental available for ${town.name}, CT events. Request a quote to confirm coverage and pricing.`;
   return {
     title,
     description,
@@ -44,6 +47,28 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const EVENT_TYPES = [
+  'Weddings',
+  'Corporate Events',
+  'Sweet 16s',
+  'Bar / Bat Mitzvahs',
+  'School Events',
+  'Galas & Fundraisers',
+  'Brand Activations',
+  'Holiday Parties',
+];
+
+const INCLUDED = [
+  'Professional setup and breakdown',
+  'On-site booth attendant',
+  'Custom photo overlay',
+  'Premium lighting',
+  'Digital sharing by QR, text, or email',
+  'Online gallery',
+  'Backdrop options',
+  'Optional print packages',
+];
+
 export default async function TownPage({ params }: PageProps) {
   const { town: slug } = await params;
   const town = getTownBySlug(slug);
@@ -51,19 +76,30 @@ export default async function TownPage({ params }: PageProps) {
   const countyInfo = getCountyInfo(town.county);
   const nearby = getNearbyTowns(town, 6);
   const indexable = isIndexable(town);
+  const localIntro = town.intro ?? defaultIntroFor(town);
 
-  const localIntro =
-    town.intro ??
-    `${town.name}, Connecticut is part of ${countyInfo.name}. Gold Coast Photo Booth Co. provides full-service photo booth rentals for ${town.name} weddings, corporate events, Sweet 16s, school events, fundraisers, and private parties. We work nearby venues across ${countyInfo.name} and travel statewide.`;
+  // Town-specific FAQ — keeps an exact-match keyword phrase in one place
+  // without scattering it through H2s.
+  const townFaqs = [
+    {
+      q: `What does photo booth rental in ${town.name}, CT typically include?`,
+      a: 'Packages can include an attendant-supported setup, a custom photo overlay, premium lighting, digital sharing by QR/text/email, an online gallery, backdrop options, and optional print packages. Final scope depends on the booth style selected and the event timing.',
+    },
+    {
+      q: `Which booths fit ${town.name} weddings best?`,
+      a: 'Most receptions land on an open-air booth or a glam booth for portraits, with a 360 booth for social-ready video clips or an audio guestbook for voice messages. Mirror booths and roaming booths are also popular pairings depending on the venue.',
+    },
+    ...FAQ_GENERAL.slice(0, 5),
+  ];
 
   return (
     <>
       <InnerHero
         eyebrow={`${countyInfo.name} · Connecticut`}
         title={`Photo Booth Rental in ${town.name}, CT`}
-        subtitle={`360, glam, mirror, open-air, and audio guestbook experiences for weddings, corporate events, and private parties in ${town.name} and surrounding ${countyInfo.name} towns.`}
+        subtitle={`Open-air, 360, glam, mirror, roaming, and audio guestbook options for weddings, corporate events, and private gatherings in the area.`}
         primaryCta={{ label: 'Check Availability', href: '/check-availability/' }}
-        secondaryCta={{ label: 'View Photo Booths', href: '/photo-booth-rental-ct/' }}
+        secondaryCta={{ label: 'View Booth Experiences', href: '/photo-booth-rental-ct/' }}
         crumbs={
           <Breadcrumbs
             items={[
@@ -76,65 +112,73 @@ export default async function TownPage({ params }: PageProps) {
         }
       />
 
+      {/* Section 1: polished booth experience */}
       <section className="section dark">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 60, alignItems: 'start' }} className="md:grid-cols-1">
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)', gap: 60, alignItems: 'start' }} className="md:grid-cols-1">
             <div>
               <span className="eyebrow">About this market</span>
               <h2 className="display" style={{ marginTop: 24 }}>
-                Photo booth rental<br />
-                in <em>{town.name}, CT.</em>
+                A polished booth experience<br />
+                for <em>{town.name} events.</em>
               </h2>
-              <p className="lede" style={{ marginTop: 24 }}>
-                {localIntro}
-              </p>
+              <p className="lede" style={{ marginTop: 24 }}>{localIntro}</p>
               <p className="lede" style={{ marginTop: 16 }}>
-                Every {town.name} booking includes a professional on-site attendant, unlimited photo
-                sessions, instant text / email sharing, and high-resolution prints. We coordinate
-                load-in directly with your venue, carry event liability insurance, and design a
-                print template + digital overlay around your event branding.
+                Popular settings include private residences, clubs, hotels, waterfront venues,
+                school events, fundraisers, and corporate gatherings. Each booth style fits a
+                slightly different room, guest count, and vibe — we help match the right setup to
+                your event.
               </p>
               <div style={{ marginTop: 28, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
                 <Link href="/check-availability/" className="btn btn-primary">
-                  Check {town.name} availability<span className="arrow" />
+                  Check availability<span className="arrow" />
                 </Link>
                 <Link href={`/photo-booth-rental-${town.county}-county-ct/`} className="btn btn-ghost">
-                  {countyInfo.name} hub →
+                  {countyInfo.name} overview →
                 </Link>
               </div>
             </div>
 
             <aside className="pkg" style={{ minHeight: 'auto' }}>
-              <div className="pkg-tag">{town.name} Quick Facts</div>
+              <div className="pkg-tag">At a glance</div>
               <h3 className="pkg-name" style={{ marginTop: 6, fontSize: 28 }}>
                 Booking <em>essentials.</em>
               </h3>
               <ul className="pkg-list" style={{ marginTop: 24 }}>
-                <li><strong style={{ color: 'var(--ivory)' }}>County:</strong> {countyInfo.name}</li>
-                <li><strong style={{ color: 'var(--ivory)' }}>Service area:</strong> Statewide CT</li>
-                <li><strong style={{ color: 'var(--ivory)' }}>Attendant:</strong> Included on every booking</li>
-                <li><strong style={{ color: 'var(--ivory)' }}>Booth styles:</strong> 360, glam, mirror, open-air, selfie, audio guestbook</li>
-                <li><strong style={{ color: 'var(--ivory)' }}>Insurance:</strong> COI on request</li>
+                <li>
+                  <strong style={{ color: 'var(--ivory)' }}>County:</strong> {countyInfo.name}
+                </li>
+                <li>
+                  <strong style={{ color: 'var(--ivory)' }}>Coverage:</strong> Connecticut statewide, Fairfield County first
+                </li>
+                <li>
+                  <strong style={{ color: 'var(--ivory)' }}>Booth styles:</strong> open-air, 360, glam, mirror, roaming, selfie, audio guestbook
+                </li>
+                <li>
+                  <strong style={{ color: 'var(--ivory)' }}>Setup details:</strong> timing, access, power, and venue documents confirmed during booking
+                </li>
               </ul>
             </aside>
           </div>
         </div>
       </section>
 
+      {/* Section 2: booth styles */}
       <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
         <div className="container">
           <div className="section-head">
             <div>
-              <span className="eyebrow">Booth Styles</span>
+              <span className="eyebrow">Booth styles</span>
               <h2 className="display" style={{ marginTop: 24 }}>
-                Most-requested booths<br />
-                for <em>{town.name}.</em>
+                Booth styles that fit<br />
+                <em>weddings, parties &amp; corporate gatherings.</em>
               </h2>
             </div>
             <div className="section-head-right">
               <p className="lede">
-                From the editorial glam booth to the 360 video booth, our {town.name} clients book a
-                mix of experiences to cover the dance floor, the bar, and the audio guestbook.
+                Mix and match booth styles for your event. Most bookings pair a stationary booth
+                with one or two add-ons — for example, an open-air booth plus an audio guestbook,
+                or a 360 booth plus a custom backdrop.
               </p>
             </div>
           </div>
@@ -146,29 +190,155 @@ export default async function TownPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* Section 3: What's included */}
       <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
         <div className="container">
           <div className="section-head">
             <div>
-              <span className="eyebrow">Nearby Service Areas</span>
+              <span className="eyebrow">Included</span>
               <h2 className="display" style={{ marginTop: 24 }}>
-                Also serving<br />
-                <em>near {town.name}.</em>
+                What's included with<br />
+                your <em>event booth setup.</em>
               </h2>
             </div>
             <div className="section-head-right">
               <p className="lede">
-                We work the {countyInfo.name} corridor every weekend in peak season. Tap any nearby
-                town for local context.
+                Standard inclusions across most booth styles. Final scope is confirmed before the
+                event so the venue, timing, and floor plan all line up.
               </p>
             </div>
           </div>
-          <ul className="tile-grid" style={{ listStyle: 'none', padding: 0 }}>
+          <ul
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: 12,
+              listStyle: 'none',
+              margin: 0,
+              padding: 0,
+            }}
+          >
+            {INCLUDED.map((item) => (
+              <li
+                key={item}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  padding: '14px 16px',
+                  background: 'var(--bg-soft)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 12,
+                }}
+              >
+                <span
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: '50%',
+                    background: 'linear-gradient(180deg, #e6cf94, #c9a865)',
+                    display: 'grid',
+                    placeItems: 'center',
+                    color: '#1a1410',
+                    flexShrink: 0,
+                  }}
+                >
+                  <Icons.Check size={12} />
+                </span>
+                <span style={{ fontSize: 13.5, color: 'var(--ivory)', lineHeight: 1.4 }}>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Section 4: Event types */}
+      <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">Event types</span>
+              <h2 className="display" style={{ marginTop: 24 }}>
+                {town.name} event types<br />
+                <em>we can support.</em>
+              </h2>
+            </div>
+            <div className="section-head-right">
+              <p className="lede">
+                The booth lineup is built to work across the most common event types in the area.
+                Tell us which fits your date and we'll send a tailored package recommendation.
+              </p>
+            </div>
+          </div>
+          <ul
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+              gap: 10,
+              listStyle: 'none',
+              margin: 0,
+              padding: 0,
+            }}
+          >
+            {EVENT_TYPES.map((e) => (
+              <li
+                key={e}
+                style={{
+                  padding: '14px 16px',
+                  background: 'var(--bg-soft)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 12,
+                  fontFamily: 'var(--serif)',
+                  fontSize: 18,
+                  color: 'var(--ivory)',
+                }}
+              >
+                {e}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Section 5: Nearby */}
+      <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">Nearby</span>
+              <h2 className="display" style={{ marginTop: 24 }}>
+                Nearby {countyInfo.name}<br />
+                <em>service areas.</em>
+              </h2>
+            </div>
+            <div className="section-head-right">
+              <p className="lede">
+                We cover the surrounding {countyInfo.name} corridor as well as the rest of
+                Connecticut. Browse a nearby area below for local context.
+              </p>
+            </div>
+          </div>
+          <ul
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+              gap: 10,
+              listStyle: 'none',
+              margin: 0,
+              padding: 0,
+            }}
+          >
             {nearby.map((n) => (
               <li key={n.slug}>
-                <Link href={`/service-areas/${n.slug}/`} className="tile">
+                <Link
+                  href={`/service-areas/${n.slug}/`}
+                  className="tile"
+                  style={{ padding: '14px 16px' }}
+                >
                   <span className="tile-meta">{countyInfo.name}</span>
-                  <span className="tile-name">{n.name}, CT</span>
+                  <span className="tile-name" style={{ fontSize: 18 }}>
+                    {n.name}
+                  </span>
                 </Link>
               </li>
             ))}
@@ -178,21 +348,33 @@ export default async function TownPage({ params }: PageProps) {
               <Icons.Spark size={14} /> All CT towns
             </Link>
             <Link href={`/photo-booth-rental-${town.county}-county-ct/`} className="btn btn-ghost">
-              {countyInfo.name} hub
+              {countyInfo.name} overview
             </Link>
           </div>
         </div>
       </section>
 
-      <FAQ items={FAQ_GENERAL.slice(0, 6)} eyebrow={`${town.name} · FAQ`} />
+      {/* Section 6: FAQ */}
+      <FAQ
+        items={townFaqs}
+        eyebrow={`${town.name} · FAQ`}
+        headline={
+          <>
+            {town.name} photo booth<br />
+            <em>rental FAQs.</em>
+          </>
+        }
+      />
 
+      {/* Section 7: Final CTA */}
       <CTASection
         title={
           <>
-            Book your <em>{town.name}, CT</em><br />photo booth.
+            Check availability for<br />
+            your <em>event date.</em>
           </>
         }
-        subtitle={`Tell us your date and venue in ${town.name} — we will confirm availability within one business day.`}
+        subtitle={`Send your date, venue, and event type — we'll come back with a tailored package recommendation for your ${town.name} event.`}
       />
 
       {indexable && (
@@ -203,7 +385,7 @@ export default async function TownPage({ params }: PageProps) {
               __html: JSON.stringify(
                 serviceSchema({
                   name: `Photo Booth Rental in ${town.name}, Connecticut`,
-                  description: `Premium photo booth rentals serving ${town.name}, CT for weddings, corporate events, and private parties.`,
+                  description: `Booth rental for weddings, corporate events, and private gatherings in ${town.name}, CT.`,
                   url: `${SITE.domain}/service-areas/${town.slug}/`,
                   areaServed: town.name,
                 })
@@ -213,7 +395,7 @@ export default async function TownPage({ params }: PageProps) {
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify(faqSchema(FAQ_GENERAL.slice(0, 6))),
+              __html: JSON.stringify(faqSchema(townFaqs.slice(0, 5))),
             }}
           />
         </>

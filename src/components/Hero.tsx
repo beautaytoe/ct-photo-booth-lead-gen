@@ -153,7 +153,7 @@ export function Hero({
               </div>
               <div className="hero-meta-item">
                 <div className="hero-meta-num">169</div>
-                <div className="hero-meta-label">CT Towns Covered</div>
+                <div className="hero-meta-label">CT Towns</div>
               </div>
             </div>
           </div>

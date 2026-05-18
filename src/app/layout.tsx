@@ -9,11 +9,11 @@ import { SITE } from '@/lib/site-data';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.domain),
   title: {
-    default: `${SITE.brand} | Premium Photo Booth Rentals Across Connecticut`,
+    default: `${SITE.seoDescriptor} | ${SITE.brand}`,
     template: `%s | ${SITE.brand}`,
   },
   description:
-    'Premium photo booth, 360 booth, glam booth, mirror booth, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations. Built for Fairfield County.',
+    'Photo booth, 360 booth, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations. Fairfield County first.',
   applicationName: SITE.brand,
   authors: [{ name: SITE.brand }],
   generator: 'Next.js',
@@ -23,15 +23,15 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: SITE.domain,
     siteName: SITE.brand,
-    title: `${SITE.brand} | Premium Photo Booth Rentals Across Connecticut`,
+    title: `${SITE.seoDescriptor} | ${SITE.brand}`,
     description:
-      'Premium photo booth, 360 booth, glam booth, mirror booth, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
+      'Photo booth, 360 booth, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE.brand} | Premium Photo Booth Rentals Across Connecticut`,
+    title: `${SITE.seoDescriptor} | ${SITE.brand}`,
     description:
-      'Premium photo booth, 360 booth, glam booth, mirror booth, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
+      'Photo booth, 360 booth, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
   },
   robots: { index: true, follow: true },
 };
