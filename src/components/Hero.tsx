@@ -247,20 +247,25 @@ export function Hero({
               ))}
             </motion.h1>
 
-            {/* Mobile H1 — single line, keyword-targeted, word stagger */}
+            {/* Mobile H1 — single line, keyword-targeted, word stagger.
+                Spaces are real whitespace characters (not CSS margin) so the
+                rendered text reads "Premium Photo Booth Rentals Across
+                Connecticut" with spaces in the DOM — important for SEO and
+                screen readers. */}
             <motion.h1
               className="display hero-headline-mobile show-on-mobile"
               variants={headlineContainer}
               initial="hidden"
               animate="visible"
             >
-              {mobileTitle.split(' ').map((word, i) => (
+              {mobileTitle.split(' ').map((word, i, arr) => (
                 <motion.span
                   key={i}
                   variants={headlineWord}
-                  style={{ display: 'inline-block', marginRight: '0.25em' }}
+                  style={{ display: 'inline-block' }}
                 >
                   {word}
+                  {i < arr.length - 1 ? ' ' : ''}
                 </motion.span>
               ))}
             </motion.h1>
