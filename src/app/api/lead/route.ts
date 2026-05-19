@@ -1,8 +1,20 @@
 import { NextResponse } from 'next/server';
 import { notifyLead, validateLead, isHoneypotTriggered, type LeadData } from '@/lib/lead-notifier';
+import { createOrUpsertContact } from '@/lib/ghl';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs'; // Resend needs Node runtime, not Edge
+
+/** Split a "first last" name into firstName/lastName. Last word is the
+ *  surname; everything before is the given/middle name. Single-token names
+ *  go to firstName only. */
+function splitName(full: string): { firstName?: string; lastName?: string } {
+  const trimmed = (full ?? '').trim();
+  if (!trimmed) return {};
+  const parts = trimmed.split(/\s+/);
+  if (parts.length === 1) return { firstName: parts[0] };
+  return { firstName: parts.slice(0, -1).join(' '), lastName: parts[parts.length - 1] };
+}
 
 export async function POST(request: Request) {
   let body: LeadData;
@@ -40,6 +52,39 @@ export async function POST(request: Request) {
 
   try {
     const result = await notifyLead(enriched);
+
+    // GHL upsert runs AFTER Resend so a slow/down GHL doesn't delay the
+    // operator email. Failure here is logged but never bubbles — the user
+    // still gets ok:true because their lead is already preserved in Resend +
+    // Vercel Function Logs.
+    const formLocation = enriched.form_location ?? 'lead_form';
+    const { firstName, lastName } = splitName(enriched.name);
+    const services = Array.isArray(enriched.services)
+      ? enriched.services
+      : enriched.services
+      ? [enriched.services]
+      : undefined;
+    const ghlResult = await createOrUpsertContact({
+      firstName,
+      lastName,
+      email: enriched.email,
+      phone: enriched.phone,
+      services,
+      event_type: enriched.event_type,
+      event_date: enriched.event_date,
+      notes: enriched.message,
+      form_location: formLocation,
+      source: 'website',
+      tags: ['website-lead', `form:${formLocation}`],
+    });
+    if ('error' in ghlResult) {
+      // eslint-disable-next-line no-console
+      console.error('[ghl] contact upsert failed:', ghlResult.error);
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('[ghl] contact upserted:', ghlResult.id, 'existing:', ghlResult.existing);
+    }
+
     // If Resend / Slack / etc. are not configured, result.configured === 0.
     // We still return ok:true so the user sees the success state — the
     // submission is preserved in Vercel Function Logs (console.log) until

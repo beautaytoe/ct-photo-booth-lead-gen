@@ -40,7 +40,11 @@ export function LeadForm() {
     const form = e.currentTarget;
     // FormData picks up the honeypot 'website' field automatically — the
     // server silently drops submissions where it's filled.
-    const data = { ...Object.fromEntries(new FormData(form).entries()), services };
+    const data = {
+      ...Object.fromEntries(new FormData(form).entries()),
+      services,
+      form_location: 'lead_form' as const,
+    };
     try {
       const res = await fetch('/api/lead', {
         method: 'POST',

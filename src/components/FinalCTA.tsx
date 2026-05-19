@@ -59,6 +59,7 @@ export function FinalCTA() {
       town: form.venue,
       event_type: form.type,
       website: honeypot,
+      form_location: 'final_cta' as const,
     };
     try {
       const res = await fetch('/api/lead', {

@@ -38,6 +38,8 @@ export interface LeadData {
   event_type?: string;
   message?: string;
   services?: string[] | string;
+  /** Which form the submission came from — for funnel segmentation in CRM. */
+  form_location?: 'lead_form' | 'final_cta';
   /** Hidden honeypot field — humans never fill this. If filled, drop silently. */
   website?: string;
   /** Submission metadata (filled server-side). */
