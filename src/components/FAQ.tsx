@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { SITE } from '@/lib/site-data';
 
 interface FAQProps {
   title?: string;
@@ -15,7 +16,7 @@ export function FAQ({
   eyebrow = '08 — Frequently Asked',
   items,
   headline,
-  lede = 'Still curious? Reach out anytime — our team responds to most inquiries within one business day.',
+  lede = `Still curious? Reach out anytime — ${SITE.responseTime.toLowerCase()}.`,
 }: FAQProps) {
   const [open, setOpen] = useState(0);
 

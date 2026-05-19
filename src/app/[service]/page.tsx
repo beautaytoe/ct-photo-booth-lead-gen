@@ -213,7 +213,7 @@ export default async function ServicePage({ params }: PageProps) {
             Ready to book the <em>{service.name.toLowerCase()}?</em>
           </>
         }
-        subtitle="Send us your date, town, and event type — we will confirm availability within one business day."
+        subtitle="Send us your date, town, and event type — we will confirm availability and send a tailored proposal."
       />
 
       <script

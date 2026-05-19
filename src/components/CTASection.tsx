@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Icons } from './Icons';
+import { SITE } from '@/lib/site-data';
 
 /**
  * Compact CTA section used on internal pages.
@@ -30,7 +31,7 @@ export function CTASection({
           </h2>
           <p className="lede" style={{ marginTop: 24 }}>
             {subtitle ??
-              'Tell us your date, venue, and event type — we will check availability and send a tailored package within one business day.'}
+              `Tell us your date, venue, and event type — we will check availability and send a tailored package. ${SITE.responseTime}.`}
           </p>
           <div style={{ marginTop: 28, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
             <Link href={primaryHref} className="btn btn-primary">

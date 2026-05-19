@@ -144,7 +144,7 @@ export default function PricingPage() {
             Want a <em>real quote</em><br />in writing?
           </>
         }
-        subtitle="Send us your date, town, and event type — we will reply with a tailored, line-itemed quote within one business day."
+        subtitle="Send us your date, town, and event type — we will reply with a tailored, line-itemed quote. Fast replies during booking hours."
       />
     </>
   );

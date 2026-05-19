@@ -5,7 +5,7 @@ import { FinalCTA } from '@/components/FinalCTA';
 export const metadata: Metadata = {
   title: 'Check Availability | Gold Coast Photo Booth Co.',
   description:
-    'Check CT photo booth rental availability for your wedding, corporate event, or private party. We reply within one business day.',
+    'Check CT photo booth rental availability for your wedding, corporate event, or private party. Fast replies during booking hours.',
   alternates: { canonical: '/check-availability/' },
 };
 

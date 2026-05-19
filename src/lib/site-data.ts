@@ -16,6 +16,11 @@ export const SITE = {
   _placeholderEmail: '',
   showPhonePublicly: false,
   showEmailPublicly: false,
+
+  // Canonical response-time phrasing. Soft/vague today (defensible while
+  // operator-side Resend isn't wired). Upgrade to a specific SLA only after
+  // Resend env vars are set in Vercel AND daily inbox-check is operational.
+  responseTime: 'Fast replies during booking hours',
 };
 
 export const NAV = {
