@@ -42,7 +42,7 @@ export const POSTS: BlogPost[] = [
       {
         heading: 'What to expect on a quote',
         body:
-          'A real quote should list the booth style, event hours, on-site attendant (yes, included), prints (yes, unlimited), digital sharing, backdrop type, custom design work, travel, and add-ons line by line. If you receive a one-line price with no detail, ask for the breakdown before signing.',
+          'A real quote should list the booth style, event hours, on-site attendant (yes, included), prints (optional add-on across our packages), digital sharing, backdrop type, custom design work, travel, and add-ons line by line. If you receive a one-line price with no detail, ask for the breakdown before signing.',
       },
     ],
     related: ['photo-booth-rental-ct', '360-photo-booth-rental-ct', 'wedding-photo-booth-rental-ct'],
