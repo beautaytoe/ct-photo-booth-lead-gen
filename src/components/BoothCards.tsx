@@ -365,8 +365,8 @@ export function BoothCards() {
           <div className="section-head-right">
             <p className="lede">
               From the classic open-air strip to a 360 video booth, a roaming booth that follows the
-              cocktail hour, and the audio guestbook brides write us about for months. Mix and
-              match across booths and add-ons.
+              cocktail hour, and the audio guestbook that pairs with almost every wedding reception.
+              Mix and match across booths and add-ons.
             </p>
           </div>
         </div>

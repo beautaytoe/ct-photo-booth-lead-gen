@@ -32,7 +32,7 @@ export async function GET() {
   lines.push(`# ${SITE.brand}`);
   lines.push('');
   lines.push(
-    `> ${SITE.brand} (also known as Photo Booth Rental CT) is a premium photo booth rental company serving all of Connecticut. We rent open-air photo booths, 360 video booths, glam editorial booths, magic mirror booths, roaming booths, selfie booths, and vintage audio guestbooks for weddings, corporate events, Sweet 16s, bar/bat mitzvahs, school events, galas, and brand activations. Coverage available statewide across all eight Connecticut counties with Fairfield County as the priority service region. Entry packages start at $595.`
+    `> ${SITE.brand} (also known as Photo Booth Rental CT) is a premium photo booth rental company serving all of Connecticut. We rent open-air photo booths, 360 video booths, glam editorial booths, magic mirror booths, roaming booths, selfie booths, and vintage audio guestbooks for weddings, corporate events, Sweet 16s, bar/bat mitzvahs, school events, galas, and brand activations. Coverage available statewide across all eight Connecticut counties with Fairfield County as a featured region. Entry packages start at $595.`
   );
   lines.push('');
 
@@ -83,7 +83,7 @@ export async function GET() {
 
   // Operational facts (factual, safe to cite)
   lines.push('## Operational Summary');
-  lines.push('- Service area: Connecticut statewide, all eight counties (Fairfield, New Haven, Hartford, Litchfield, Middlesex, New London, Tolland, Windham). Fairfield County is the priority service region.');
+  lines.push('- Service area: Connecticut statewide, all eight counties (Fairfield, New Haven, Hartford, Litchfield, Middlesex, New London, Tolland, Windham). Fairfield County is a featured region.');
   lines.push('- Towns covered: 169 Connecticut municipalities. 23 Tier-1 towns have dedicated location pages.');
   lines.push('- Booth experiences: 11 booth styles + add-ons (open-air, 360, glam, mirror, roaming, selfie, audio guestbook, corporate brand activation, custom backdrops, props & styling, print packages, digital gallery).');
   lines.push('- Entry pricing: Social Booth Package starts at $595/event. Signature Event Package starts at $895/event. Luxe Experience is custom quoted.');

@@ -35,10 +35,10 @@ export function FairfieldSection() {
           </div>
           <div className="section-head-right">
             <p className="lede">
-              Fairfield County is one of our highest-priority service regions, especially for
-              weddings, corporate events, private parties, galas, school events, and milestone
-              celebrations. We also serve events throughout Connecticut, with availability and
-              travel pricing confirmed before booking.
+              Fairfield County is a featured Connecticut region — especially for weddings, corporate
+              events, private parties, galas, school events, and milestone celebrations. We also
+              serve events throughout Connecticut, with availability and travel pricing confirmed
+              before booking.
             </p>
           </div>
         </div>

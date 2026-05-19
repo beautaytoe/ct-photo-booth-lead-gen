@@ -32,7 +32,7 @@ export default function ContactPage() {
             </h2>
             <p className="lede" style={{ marginTop: 28 }}>
               Send us your date, venue, and event type and we'll come back with a tailored package
-              recommendation and a soft date hold. The booking form goes straight to our team.
+              recommendation. The booking form goes straight to our team.
             </p>
             <div style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>

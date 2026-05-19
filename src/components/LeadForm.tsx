@@ -71,7 +71,7 @@ export function LeadForm() {
           Got it. <em>We're on it.</em>
         </h3>
         <p className="lede" style={{ maxWidth: '44ch' }}>
-          Expect a tailored proposal and a soft date hold during the next booking-hours window.
+          Expect a tailored proposal during the next booking-hours window.
         </p>
       </div>
     );

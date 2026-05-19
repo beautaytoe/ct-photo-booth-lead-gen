@@ -52,7 +52,7 @@ export const COUNTIES: CountyInfo[] = [
     slug: 'fairfield',
     name: 'Fairfield County',
     description:
-      "Connecticut's Gold Coast — including Stamford, Greenwich, Westport, Darien, New Canaan, Fairfield, and Norwalk. Our first-priority service region for weddings, corporate events, and private celebrations.",
+      "Connecticut's Gold Coast — including Stamford, Greenwich, Westport, Darien, New Canaan, Fairfield, and Norwalk. A featured Connecticut region for weddings, corporate events, and private celebrations.",
     featuredTowns: [
       'stamford-ct',
       'greenwich-ct',

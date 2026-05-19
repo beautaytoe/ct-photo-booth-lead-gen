@@ -373,7 +373,7 @@ export const FAQ_HOMEPAGE = [
   },
   {
     q: 'Do you serve all of Connecticut?',
-    a: 'Yes — we serve Connecticut statewide, with Fairfield County as our priority service area. Travel pricing is clearly disclosed for longer-distance bookings.',
+    a: 'Yes — we serve Connecticut statewide, with Fairfield County as a featured region. Travel pricing is clearly disclosed for longer-distance bookings.',
   },
   {
     q: 'How much does photo booth rental cost in CT?',

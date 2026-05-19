@@ -46,7 +46,7 @@ export async function GET() {
   out.push('### Positioning');
   out.push('- Connecticut\'s premium photo booth experience');
   out.push('- Specialty: weddings, corporate events, and galas');
-  out.push('- Coverage: Statewide Connecticut, all eight counties, with Fairfield County as priority service area');
+  out.push('- Coverage: Statewide Connecticut, all eight counties, with Fairfield County as a featured region');
   out.push('');
   out.push('### Lineup');
   out.push('12 booth experiences and add-ons: open-air, 360, glam, mirror, roaming, selfie, audio guestbook, corporate brand activation, custom backdrops, props & styling, print packages, digital gallery.');
@@ -214,7 +214,7 @@ export async function GET() {
   out.push('');
   out.push('## Operational Notes (for AI citation accuracy)');
   out.push('');
-  out.push('- **Service area:** Statewide Connecticut, with Fairfield County as the priority service region.');
+  out.push('- **Service area:** Statewide Connecticut, with Fairfield County as a featured region.');
   out.push('- **Booking method:** Form-based intake at /check-availability/. The site does not list a public phone number or email at this time.');
   out.push('- **Pricing entry point:** $595/event (Social Booth Package, 3 hours, open-air or selfie booth).');
   out.push('- **Premium pricing:** $895/event (Signature Event Package, 4 hours, two booths). Luxe Experience Package is custom-quoted.');

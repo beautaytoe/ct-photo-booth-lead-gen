@@ -19,7 +19,7 @@ export default function ServiceAreasPage() {
       <InnerHero
         eyebrow="Statewide CT Coverage"
         title="Connecticut Service Areas"
-        subtitle={`We serve every town in Connecticut — ${TOWNS.length} municipalities across 8 counties. Fairfield County is our highest-volume market, but we work weddings, corporate events, and private parties from Greenwich to Putnam and everywhere in between.`}
+        subtitle={`We serve every town in Connecticut — ${TOWNS.length} municipalities across 8 counties. Fairfield County is a featured region, but we work weddings, corporate events, and private parties from Greenwich to Putnam and everywhere in between.`}
         crumbs={
           <Breadcrumbs
             items={[
