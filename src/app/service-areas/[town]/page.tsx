@@ -100,7 +100,7 @@ export default async function TownPage({ params }: PageProps) {
     },
     {
       q: `Which booths fit ${town.name} weddings best?`,
-      a: 'Most receptions land on an open-air booth or a glam booth for portraits, with a 360 booth for social-ready video clips or an audio guestbook for voice messages. Mirror booths and roaming booths are also popular pairings depending on the venue.',
+      a: 'A common pairing for receptions is an open-air booth or a glam booth for portraits, with a 360 booth for social-ready video clips or an audio guestbook for voice messages. Mirror booths and roaming booths are also strong pairings depending on the venue.',
     },
     ...FAQ_GENERAL.slice(0, 5),
   ];
@@ -194,7 +194,7 @@ export default async function TownPage({ params }: PageProps) {
             </div>
             <div className="section-head-right">
               <p className="lede">
-                Mix and match booth styles for your event. Most bookings pair a stationary booth
+                Mix and match booth styles for your event. A common pairing is a stationary booth
                 with one or two add-ons — for example, an open-air booth plus an audio guestbook,
                 or a 360 booth plus a custom backdrop.
               </p>

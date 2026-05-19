@@ -24,8 +24,8 @@ const PACKAGES = [
   {
     name: 'Signature Event',
     em: 'Package',
-    tag: 'Most Booked',
-    badge: 'Most Booked',
+    tag: 'Recommended',
+    badge: 'Recommended',
     featured: true,
     price: '895',
     suffix: '/event',
@@ -77,7 +77,7 @@ export function PackageCards() {
           </div>
           <div className="section-head-right">
             <p className="lede">
-              Every quote is custom — these are the most-booked starting points. Each tier includes
+              Every quote is custom — these are three common starting points. Each tier includes
               an attendant, digital sharing, and a clear setup plan. Print packages are an optional
               add-on across all tiers.
             </p>

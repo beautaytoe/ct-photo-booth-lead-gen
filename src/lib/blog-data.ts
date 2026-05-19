@@ -37,7 +37,7 @@ export const POSTS: BlogPost[] = [
       {
         heading: 'Region matters in Connecticut',
         body:
-          "Fairfield County — Greenwich, Westport, Darien, New Canaan, and Stamford — typically sees higher pricing than central or eastern CT because of venue requirements, parking, and the premium booth styles that get booked there. New Haven and Hartford counties tend to land squarely in the mid-range.",
+          "Fairfield County — Greenwich, Westport, Darien, New Canaan, and Stamford — typically sees higher pricing than central or eastern CT because of venue requirements, parking, and the premium booth styles that fit there. New Haven and Hartford counties tend to land squarely in the mid-range.",
       },
       {
         heading: 'What to expect on a quote',
@@ -93,7 +93,7 @@ export const POSTS: BlogPost[] = [
       {
         heading: 'Pair an audio guestbook with the booth',
         body:
-          'A vintage telephone audio guestbook is one of our most-requested CT wedding add-ons. Guests pick up the receiver and leave a voice message, and we deliver a curated audio reel after the event. Pair it with a glam or open-air booth and you cover both visual and audio memories.',
+          'A vintage telephone audio guestbook pairs naturally with almost every CT wedding setup. Guests pick up the receiver and leave a voice message, and we deliver a curated audio reel after the event. Pair it with a glam or open-air booth and you cover both visual and audio memories.',
       },
       {
         heading: 'Design the print template like a wedding invitation',

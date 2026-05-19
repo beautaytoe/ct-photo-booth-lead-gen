@@ -21,7 +21,7 @@ export default function PricingPage() {
       <InnerHero
         eyebrow="Pricing · 2026"
         title="Photo Booth Rental Prices in Connecticut"
-        subtitle="Every event is custom-quoted, but here is what most CT bookings look like at three common levels. Final pricing depends on booth style, hours, branding, and add-ons."
+        subtitle="Every event is custom-quoted, but here are three common starting points for CT events. Final pricing depends on booth style, hours, branding, and add-ons."
         primaryCta={{ label: 'Get Your Tailored Quote', href: '/check-availability/' }}
         crumbs={
           <Breadcrumbs

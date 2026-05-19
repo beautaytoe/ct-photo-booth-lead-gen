@@ -53,8 +53,8 @@ export async function GET() {
   out.push('');
   out.push('### Packages');
   out.push('- **Social Booth Package** — Essential. Starting at $595/event. 3-hour open-air or selfie booth coverage.');
-  out.push('- **Signature Event Package** — Most booked. Starting at $895/event. 4 hours, two booths, custom overlays.');
-  out.push('- **Luxe Experience Package** — Custom quote. 3+ booth experiences, up to 8 hours, glam retouching, audio guestbook add-on, dedicated lead producer + crew.');
+  out.push('- **Signature Event Package** — Recommended tier. Starting at $895/event. 4 hours, two booths, custom overlays.');
+  out.push('- **Luxe Experience Package** — Custom quote. 3+ booth experiences, up to 8 hours, glam retouching, audio guestbook add-on, lead producer + crew.');
   out.push('');
   out.push('### What\'s included on most bookings');
   out.push('- Professional setup and breakdown');

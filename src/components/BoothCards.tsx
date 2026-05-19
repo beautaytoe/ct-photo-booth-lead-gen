@@ -92,7 +92,7 @@ const BOOTHS: {
     tags: ['Wedding', 'Anniversary', 'Retirement'],
     span: 'bc-span-4',
     visual: 'audio',
-    ideal: 'Wedding favourite',
+    ideal: 'Wedding pairing',
     href: '/audio-guestbook-rental-ct/',
   },
   {

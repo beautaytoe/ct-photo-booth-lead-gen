@@ -151,13 +151,13 @@ export default async function ServicePage({ params }: PageProps) {
             <div>
               <span className="eyebrow">Service Areas</span>
               <h2 className="display" style={{ marginTop: 24 }}>
-                CT towns where we<br />
-                <em>book this most.</em>
+                CT towns where this<br />
+                <em>booth fits best.</em>
               </h2>
             </div>
             <div className="section-head-right">
               <p className="lede">
-                These are the priority CT markets where this booth style is most-requested. We serve
+                These are the priority CT markets where this booth style is the strongest fit. We serve
                 every town in Connecticut — see the full list.
               </p>
             </div>

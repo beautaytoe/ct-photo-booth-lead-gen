@@ -28,7 +28,7 @@ export function PopularCTRentals() {
           <div className="section-head-right">
             <p className="lede">
               Quick jump-off points for the rental categories Connecticut couples, planners, and
-              marketing teams ask us about most.
+              marketing teams search for most often.
             </p>
           </div>
         </div>

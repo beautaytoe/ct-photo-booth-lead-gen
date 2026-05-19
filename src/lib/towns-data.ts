@@ -133,7 +133,7 @@ export const COUNTIES: CountyInfo[] = [
     slug: 'middlesex',
     name: 'Middlesex County',
     description:
-      'The lower Connecticut River Valley and shoreline — including Middletown, Old Saybrook, Essex, Durham, and Killingworth. A favourite for shoreline weddings and riverfront corporate events.',
+      'The lower Connecticut River Valley and shoreline — including Middletown, Old Saybrook, Essex, Durham, and Killingworth. A natural fit for shoreline weddings and riverfront corporate events.',
     featuredTowns: [
       'durham-ct',
       'middletown-ct',
