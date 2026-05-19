@@ -32,6 +32,8 @@ export function LeadForm() {
     setStatus('submitting');
     setErrorMsg('');
     const form = e.currentTarget;
+    // FormData picks up the honeypot 'website' field automatically — the
+    // server silently drops submissions where it's filled.
     const data = { ...Object.fromEntries(new FormData(form).entries()), services };
     try {
       const res = await fetch('/api/lead', {
@@ -39,7 +41,8 @@ export function LeadForm() {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error('Failed to submit');
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(body?.error || 'Failed to submit');
       setStatus('success');
       form.reset();
     } catch (err) {
@@ -76,6 +79,13 @@ export function LeadForm() {
 
   return (
     <form onSubmit={handleSubmit} className="form">
+      {/* Honeypot: hidden from humans, bots fill it and get silently dropped server-side */}
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
+        <label>
+          Website
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" defaultValue="" />
+        </label>
+      </div>
       <div className="form-row">
         <div className="field">
           <label>Name</label>

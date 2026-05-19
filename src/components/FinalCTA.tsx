@@ -41,17 +41,28 @@ export function FinalCTA() {
     }));
   };
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('submitting');
     setErrorMsg('');
+    // Read the hidden honeypot field straight from the form DOM
+    const formEl = e.currentTarget;
+    const honeypot = (formEl.elements.namedItem('website') as HTMLInputElement | null)?.value ?? '';
+    const payload = {
+      ...form,
+      event_date: form.date,
+      town: form.venue,
+      event_type: form.type,
+      website: honeypot,
+    };
     try {
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error('Failed to submit');
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error || 'Failed to submit');
       setStatus('success');
     } catch (err) {
       setStatus('error');
@@ -96,6 +107,19 @@ export function FinalCTA() {
           </div>
 
           <form className="form" onSubmit={submit}>
+            {/* Honeypot: hidden from humans, bots fill it and get silently dropped server-side */}
+            <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
+              <label>
+                Website
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  defaultValue=""
+                />
+              </label>
+            </div>
             {status === 'success' ? (
               <div style={{ padding: '60px 20px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
                 <div
