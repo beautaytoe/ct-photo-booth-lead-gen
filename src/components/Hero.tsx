@@ -242,43 +242,48 @@ export function Hero({
               {eyebrow}
             </motion.span>
 
-            {/* Desktop H1 — word-by-word stagger reveal */}
-            <motion.h1
-              className="display hero-headline hide-on-mobile"
-              variants={headlineContainer}
-              initial="hidden"
-              animate="visible"
-            >
-              {titleLines.map((line, lineIdx) => (
-                <span key={lineIdx} className="hero-line">
-                  {line.split(' ').map((word, wIdx) => (
-                    <motion.span
-                      key={wIdx}
-                      variants={headlineWord}
-                      style={
-                        lineIdx === 2
-                          ? { fontStyle: 'italic', color: 'var(--gold-bright)' }
-                          : undefined
-                      }
-                    >
-                      {word}{' '}
-                    </motion.span>
-                  ))}
-                </span>
-              ))}
-            </motion.h1>
+            {/* Single H1 with desktop + mobile variants as child <motion.span>s.
+                Each variant has its own staggerChildren so the word-by-word
+                reveal runs independently — only the visible one animates
+                visibly (the other is display:none via .hide-on-mobile /
+                .show-on-mobile). Source DOM has exactly one heading. */}
+            <h1 className="display hero-headline">
+              <motion.span
+                className="hero-headline-desktop hide-on-mobile"
+                variants={headlineContainer}
+                initial="hidden"
+                animate="visible"
+              >
+                {titleLines.map((line, lineIdx) => (
+                  <span key={lineIdx} className="hero-line">
+                    {line.split(' ').map((word, wIdx) => (
+                      <motion.span
+                        key={wIdx}
+                        variants={headlineWord}
+                        style={
+                          lineIdx === 2
+                            ? { fontStyle: 'italic', color: 'var(--gold-bright)' }
+                            : undefined
+                        }
+                      >
+                        {word}{' '}
+                      </motion.span>
+                    ))}
+                  </span>
+                ))}
+              </motion.span>
 
             {/* Mobile H1 — single line, keyword-targeted, word stagger.
                 Spaces are real whitespace characters (not CSS margin) so the
                 rendered text reads "Premium Photo Booth Rentals Across
                 Connecticut" with spaces in the DOM — important for SEO and
                 screen readers. */}
-            <motion.h1
-              className="display hero-headline-mobile show-on-mobile"
-              variants={headlineContainer}
-              initial="hidden"
-              animate="visible"
-            >
+              <motion.span
+                className="hero-headline-mobile show-on-mobile"
+                variants={headlineContainer}
+                initial="hidden"
+                animate="visible"
+              >
               {mobileTitle.split(' ').map((word, i, arr) => (
                 <motion.span
                   key={i}
@@ -289,7 +294,8 @@ export function Hero({
                   {i < arr.length - 1 ? ' ' : ''}
                 </motion.span>
               ))}
-            </motion.h1>
+              </motion.span>
+            </h1>
 
             {/* Subtitle — cross-fades when an event pill is active. The
                 wrapper has a min-height to prevent layout shift on swap. */}

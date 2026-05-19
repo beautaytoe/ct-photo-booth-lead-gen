@@ -40,7 +40,7 @@ export function Footer() {
 
           <details className="footer-col">
             <summary>
-              <h5 style={{ margin: 0 }}>Booths &amp; Add-Ons</h5>
+              <span className="footer-col-label">Booths &amp; Add-Ons</span>
             </summary>
             <ul>
               {SERVICES.slice(0, 8).map((s) => (
@@ -56,7 +56,7 @@ export function Footer() {
 
           <details className="footer-col">
             <summary>
-              <h5 style={{ margin: 0 }}>Counties</h5>
+              <span className="footer-col-label">Counties</span>
             </summary>
             <ul>
               {COUNTIES.map((c) => (
@@ -69,7 +69,7 @@ export function Footer() {
 
           <details className="footer-col">
             <summary>
-              <h5 style={{ margin: 0 }}>Featured CT Towns</h5>
+              <span className="footer-col-label">Featured CT Towns</span>
             </summary>
             <ul>
               {featuredTowns.map((t) => (
