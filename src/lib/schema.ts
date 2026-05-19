@@ -51,6 +51,21 @@ export function websiteSchema() {
     name: SITE.brand,
     alternateName: SITE.seoDescriptor,
     url: SITE.domain,
+    inLanguage: 'en-US',
+    publisher: ORG_REF,
+    /* potentialAction signals to search engines / AI assistants that
+       the site supports a search action. Even though we don't have a
+       custom search route yet, declaring intent here is harmless and
+       enables future sitelinks-searchbox eligibility. Points at the
+       availability form as the canonical "find what you need" action. */
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE.domain}/check-availability/?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 }
 
