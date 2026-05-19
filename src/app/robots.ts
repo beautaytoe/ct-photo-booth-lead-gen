@@ -59,7 +59,7 @@ export default function robots(): MetadataRoute.Robots {
   const baseRule = {
     userAgent: '*',
     allow: '/',
-    disallow: ['/api/', '/privacy/'],
+    disallow: ['/api/', '/privacy/', '/terms/'],
   };
 
   // Explicit per-bot rules so AI bots see their name in robots.txt.
@@ -69,7 +69,7 @@ export default function robots(): MetadataRoute.Robots {
   const aiRules = AI_BOTS.map((userAgent) => ({
     userAgent,
     allow: '/',
-    disallow: ['/api/', '/privacy/'],
+    disallow: ['/api/', '/privacy/', '/terms/'],
   }));
 
   return {

@@ -122,6 +122,8 @@ export function Footer() {
             <Link href="/contact/">Contact</Link>
             {'  ·  '}
             <Link href="/privacy/">Privacy</Link>
+            {'  ·  '}
+            <Link href="/terms/">Terms</Link>
           </span>
         </div>
       </div>
