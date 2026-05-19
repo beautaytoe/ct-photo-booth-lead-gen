@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.brand}`,
   },
   description:
-    'Photo booth, 360 booth, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations. Fairfield County first.',
+    'Photo booth, 360 booth, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
   applicationName: SITE.brand,
   authors: [{ name: SITE.brand }],
   generator: 'Next.js',

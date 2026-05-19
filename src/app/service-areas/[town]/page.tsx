@@ -162,7 +162,7 @@ export default async function TownPage({ params }: PageProps) {
                   <strong style={{ color: 'var(--ivory)' }}>County:</strong> {countyInfo.name}
                 </li>
                 <li>
-                  <strong style={{ color: 'var(--ivory)' }}>Coverage:</strong> Connecticut statewide, Fairfield County first
+                  <strong style={{ color: 'var(--ivory)' }}>Coverage:</strong> Statewide across Connecticut
                 </li>
                 <li>
                   <strong style={{ color: 'var(--ivory)' }}>Booth styles:</strong> open-air, 360, glam, mirror, roaming, selfie, audio guestbook
