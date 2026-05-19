@@ -191,22 +191,20 @@ export function Hero({
 
   return (
     <section className="hero" id="hero">
-      {/* Background layer 1: radial gradient pools (champagne / blush /
-          emerald / deep gold). When you want to swap in a real photo or
-          looping video, set background-image on .hero-bg in globals.css —
-          comment block is in place. */}
+      {/* Layer 1 (deepest): Hero photo — gold confetti / champagne light.
+          Has its own ::after dark overlay for text readability. */}
+      <div className="hero-photo" aria-hidden="true" />
+      {/* Layer 2: Radial gradient pools (champagne / blush / emerald)
+          tint the photo with warm light. */}
       <div className="hero-bg" />
-      {/* Background layer 2: slow-drifting "aurora" of gold mist. Adds
-          gentle motion across the bg without needing video. */}
+      {/* Layer 3: slow-drifting aurora of gold mist for gentle motion. */}
       <div className="hero-aurora" aria-hidden="true" />
-      {/* Background layer 3: SVG film grain. Reads as premium texture
-          instead of flat CSS gradients. */}
+      {/* Layer 4: SVG film grain — premium texture. */}
       <div className="hero-grain" aria-hidden="true" />
-      {/* Background layer 4: darkening edge vignette. */}
+      {/* Layer 5: darkening edge vignette. */}
       <div className="hero-vignette" />
 
-      {/* Background layer 5: six floating gold sparkle particles.
-          Disabled by globals.css when prefers-reduced-motion is set. */}
+      {/* Layer 6: six floating gold sparkle particles. */}
       <div className="hero-particles" aria-hidden="true">
         {Array.from({ length: 6 }).map((_, i) => (
           <span key={i} className={`hero-particle hero-particle-${i + 1}`} />
