@@ -93,6 +93,10 @@ export async function POST(request: Request) {
       ok: true,
       delivered: result.delivered,
       configured: result.configured,
+      // TODO(claude): remove _ghl debug field once GHL push is verified working
+      _ghl: 'error' in ghlResult
+        ? { ok: false, error: ghlResult.error }
+        : { ok: true, id: ghlResult.id, existing: ghlResult.existing },
     });
   } catch (err) {
     // eslint-disable-next-line no-console
