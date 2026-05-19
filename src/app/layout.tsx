@@ -14,11 +14,14 @@ const GA4_MEASUREMENT_ID = 'G-11QWB77VXP';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.domain),
   title: {
-    default: `${SITE.seoDescriptor} | ${SITE.brand}`,
-    template: `%s | ${SITE.brand}`,
+    // Default homepage title. Page-level titles use the template below; the
+    // shortened "Gold Coast" suffix keeps total length under Google's ~60
+    // char SERP truncation on most pages.
+    default: `${SITE.seoDescriptor} | ${SITE.shortBrand}`,
+    template: `%s | ${SITE.shortBrand}`,
   },
   description:
-    'Photo booth, 360 booth, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
+    'Premium photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
   applicationName: SITE.brand,
   authors: [{ name: SITE.brand }],
   generator: 'Next.js',
@@ -30,13 +33,23 @@ export const metadata: Metadata = {
     siteName: SITE.brand,
     title: `${SITE.seoDescriptor} | ${SITE.brand}`,
     description:
-      'Photo booth, 360 booth, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
+      'Premium photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
+    // TODO: when /og-default.png is created (1200x630 branded image), this
+    // wiring sends it to every page that doesn't override openGraph.images.
+    images: [
+      {
+        url: '/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: 'Gold Coast Photo Booth Co. — Premium CT Photo Booth Rentals',
+      },
+    ],
   },
+  // Twitter intentionally omits `title` + `description` so Next.js auto-mirrors
+  // from openGraph at each page. Setting them at layout level would override
+  // page-specific og values and show the homepage strings on every page.
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE.seoDescriptor} | ${SITE.brand}`,
-    description:
-      'Photo booth, 360 booth, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
   },
   robots: { index: true, follow: true },
 };
@@ -49,7 +62,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-US">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

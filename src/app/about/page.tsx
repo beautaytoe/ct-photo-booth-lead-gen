@@ -8,7 +8,7 @@ import { SITE } from '@/lib/site-data';
 export const metadata: Metadata = {
   title: 'About Us — Premium CT Photo Booth Rentals',
   description:
-    "Gold Coast Photo Booth Co. provides premium photo booth and event-booth rentals across Connecticut — 360 booths, glam booths, wedding photo booths, and corporate event activations.",
+    'Gold Coast Photo Booth Co. — premium photo booth, 360, glam, wedding, and corporate event-booth rentals across Connecticut.',
   alternates: { canonical: '/about/' },
 };
 

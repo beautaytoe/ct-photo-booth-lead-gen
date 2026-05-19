@@ -14,7 +14,6 @@ import {
   getNearbyTowns,
   isIndexable,
   defaultIntroFor,
-  titleSuffixForVibe,
   metaDescriptionFor,
 } from '@/lib/towns-data';
 import { SERVICES, FAQ_GENERAL } from '@/lib/services-data';
@@ -36,7 +35,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const town = getTownBySlug(slug);
   if (!town) return {};
   const indexable = isIndexable(town);
-  const title = `Photo Booth Rental in ${town.name}, CT | ${titleSuffixForVibe(town.vibe)}`;
+  // Title stays short so the layout template's "| Gold Coast" suffix fits
+  // under Google's ~60-char SERP truncation. Vibe-based suffix (e.g. "360,
+  // Glam & Wedding Booths") used to live here but pushed every town title
+  // over 70 chars. Removed; the vibe still varies the meta description.
+  const title = `Photo Booth Rental in ${town.name}, CT`;
   const description = indexable
     ? metaDescriptionFor(town)
     : `Photo booth rental available for ${town.name}, CT events. Request a quote to confirm coverage and pricing.`;

@@ -7,9 +7,9 @@ import { Icons } from '@/components/Icons';
 import { COUNTIES, TOWNS, getTownsByCounty, isIndexable } from '@/lib/towns-data';
 
 export const metadata: Metadata = {
-  title: 'CT Photo Booth Service Areas | All Connecticut Towns',
+  title: 'CT Photo Booth Service Areas',
   description:
-    'Service areas for Gold Coast Photo Booth Co. across Connecticut — Fairfield, New Haven, Hartford, Litchfield, Middlesex, New London, Tolland, and Windham counties. All 169 CT towns.',
+    'Connecticut photo booth rental service areas — Fairfield, New Haven, Hartford, Litchfield, Middlesex, New London, Tolland, Windham counties. All 169 CT towns.',
   alternates: { canonical: '/service-areas/' },
 };
 

@@ -7,9 +7,9 @@ import { Icons } from '@/components/Icons';
 import { POSTS } from '@/lib/blog-data';
 
 export const metadata: Metadata = {
-  title: 'CT Photo Booth Rental Blog — Pricing, Ideas & Guides',
+  title: 'CT Photo Booth Blog — Pricing, Ideas & Guides',
   description:
-    'Pricing guides, comparisons, ideas, and checklists for CT photo booth rentals — from 360 booths and glam booths to wedding planning and corporate activations.',
+    'Pricing guides, comparisons, ideas, and checklists for CT photo booth rentals — 360 booths, glam booths, wedding planning, and corporate activations.',
   alternates: { canonical: '/blog/' },
 };
 

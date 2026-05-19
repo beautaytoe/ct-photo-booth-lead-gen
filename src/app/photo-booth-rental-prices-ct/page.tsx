@@ -9,9 +9,9 @@ import { Icons } from '@/components/Icons';
 import { SERVICES } from '@/lib/services-data';
 
 export const metadata: Metadata = {
-  title: 'Photo Booth Rental Prices CT | 2026 Pricing Guide',
+  title: 'Photo Booth Rental Prices CT | 2026',
   description:
-    'Photo booth rental pricing in Connecticut for 2026 — open-air booths, 360 booths, glam booths, mirror booths, and corporate activations. What drives cost and what to expect.',
+    'Photo booth rental pricing in Connecticut for 2026 — open-air, 360, glam, mirror, and corporate booth activations. What drives cost and what to expect.',
   alternates: { canonical: '/photo-booth-rental-prices-ct/' },
 };
 

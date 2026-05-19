@@ -691,38 +691,22 @@ export function defaultIntroFor(town: Town): string {
   );
 }
 
-/** Title suffix that varies by vibe so indexable town titles aren't identical. */
-export function titleSuffixForVibe(vibe: Vibe = 'family'): string {
-  switch (vibe) {
-    case 'luxury':
-      return '360, Glam & Wedding Booths';
-    case 'corporate':
-      return 'Brand Activations & Corporate Booths';
-    case 'shoreline':
-      return 'Coastal Weddings & Event Booths';
-    case 'family':
-      return 'Sweet 16, Wedding & Party Booths';
-    case 'rural':
-      return 'Barn Weddings & Event Booths';
-  }
-}
-
-/** Meta description that varies by vibe + town. */
+/** Meta description that varies by vibe + town. Target 150–160 chars. */
 export function metaDescriptionFor(town: Town): string {
   const v = town.vibe ?? 'family';
   const t = town.name;
   switch (v) {
     case 'luxury':
-      return `Photo booth rental in ${t}, CT for weddings, galas, and private events. Open-air, 360, glam, mirror, and audio guestbook options designed for refined ${t} settings.`;
+      return `Photo booth rental in ${t}, CT for weddings, galas, and private events. Open-air, 360, glam, mirror, and audio guestbook options.`;
     case 'corporate':
-      return `Photo booth rental in ${t}, CT for corporate events, brand activations, conferences, and private gatherings. Branded overlays, custom galleries, and QR sharing options.`;
+      return `Photo booth rental in ${t}, CT for corporate events, brand activations, conferences, and private gatherings. Branded overlays + QR sharing.`;
     case 'shoreline':
-      return `Photo booth rental in ${t}, CT for waterfront weddings, summer celebrations, and family events along the shoreline. Open-air, 360, mirror, and audio guestbook options.`;
+      return `Photo booth rental in ${t}, CT for waterfront weddings, summer celebrations, and shoreline events. Open-air, 360, mirror, and audio guestbook.`;
     case 'rural':
-      return `Photo booth rental in ${t}, CT for barn and farm weddings, milestone celebrations, and private gatherings. Booth setups designed to fit rural venues.`;
+      return `Photo booth rental in ${t}, CT for barn and farm weddings, milestone celebrations, and private gatherings. Booth setups built for rural venues.`;
     case 'family':
     default:
-      return `Photo booth rental in ${t}, CT for weddings, Sweet 16s, school events, milestone birthdays, and family celebrations. Open-air, 360, mirror, and audio guestbook options.`;
+      return `Photo booth rental in ${t}, CT for weddings, Sweet 16s, school events, and family celebrations. Open-air, 360, mirror, and audio guestbook options.`;
   }
 }
 

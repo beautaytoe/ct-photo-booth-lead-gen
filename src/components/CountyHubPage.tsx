@@ -180,8 +180,8 @@ export function CountyHubPage({
 
 export function buildCountyMetadata(county: County, pathPrefix: string) {
   const info = getCountyInfo(county);
-  const title = `Photo Booth Rental in ${info.name}, CT | Wedding, Corporate & Event Booths`;
-  const description = `Booth rental for weddings, corporate events, galas, private parties, and school events in ${info.name}, Connecticut. Open-air, 360, glam, mirror, roaming, and audio guestbook options.`;
+  const title = `Photo Booth Rental in ${info.name}, CT`;
+  const description = `Photo booth rental for weddings, corporate events, galas, and private parties in ${info.name}, Connecticut. Open-air, 360, glam, mirror, and roaming booths.`;
   return {
     title,
     description,

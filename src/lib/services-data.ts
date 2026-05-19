@@ -23,9 +23,9 @@ export const SERVICES: Service[] = [
     name: 'Photo Booth Rental',
     ctName: 'Photo Booth Rental in Connecticut',
     h1: 'Photo Booth Rental in Connecticut',
-    title: 'Photo Booth Rental CT | 360, Glam, Mirror, Roaming & More',
+    title: 'Photo Booth Rental CT | All Booths & Add-Ons',
     description:
-      'Premium photo booth rentals across Connecticut for weddings, corporate events, parties, school events, and private celebrations. Open-air, 360, glam, mirror, roaming, selfie, and audio guestbook rentals.',
+      'Premium photo booth rentals across Connecticut. Open-air, 360, glam, mirror, roaming, selfie, and audio guestbook booths for weddings and corporate events.',
     hero:
       "Connecticut's premium photo booth experience for weddings, corporate events, and private parties — 360, glam, mirror, roaming, open-air, selfie, and audio guestbook rentals.",
     about:
@@ -49,9 +49,9 @@ export const SERVICES: Service[] = [
     name: '360 Photo Booth',
     ctName: '360 Photo Booth Rental in Connecticut',
     h1: '360 Photo Booth Rental in Connecticut',
-    title: '360 Photo Booth Rental CT | Slow-Motion Video Booth',
+    title: '360 Photo Booth Rental CT | Slow-Mo Video',
     description:
-      'Premium 360 photo booth rental in Connecticut. Slow-motion video, custom overlays, instant sharing, and an on-site attendant. Built for Sweet 16s, weddings, brand activations, and mitzvahs.',
+      'Premium 360 photo booth rental in Connecticut. Slow-motion video, custom overlays, instant sharing, on-site attendant. Sweet 16s, weddings, brand events.',
     hero:
       'High-energy video booth experience built for reels, TikTok-style clips, entrances, birthdays, Sweet 16s, mitzvahs, and brand events.',
     about:
@@ -76,9 +76,9 @@ export const SERVICES: Service[] = [
     name: 'Wedding Photo Booth',
     ctName: 'Wedding Photo Booth Rental in Connecticut',
     h1: 'Wedding Photo Booth Rental in Connecticut',
-    title: 'Wedding Photo Booth Rental CT | Glam, 360, Mirror, Open-Air',
+    title: 'Wedding Photo Booth Rental CT | Glam & 360',
     description:
-      'Premium wedding photo booth rental in Connecticut — glam booths, 360 booths, open-air booths, mirror booths, and audio guestbook add-ons. Designed to match your venue, colors, and reception flow.',
+      'Premium wedding photo booth rental in Connecticut. Glam, 360, open-air, mirror booths and audio guestbook add-ons matched to your venue, colors, and flow.',
     hero:
       "Wedding photo booth experiences that match the room — designed to feel like part of your reception, not a kid's party.",
     about:
@@ -102,9 +102,9 @@ export const SERVICES: Service[] = [
     name: 'Corporate Photo Booth',
     ctName: 'Corporate Photo Booth Rental in Connecticut',
     h1: 'Corporate Photo Booth Rental in Connecticut',
-    title: 'Corporate Photo Booth Rental CT | Brand Activations & Events',
+    title: 'Corporate Photo Booth Rental CT | Brand Booth',
     description:
-      'Branded photo booth experiences for launches, conferences, holiday parties, fundraisers, and corporate events across Connecticut. Custom overlays, branded galleries, QR sharing, and optional lead capture.',
+      'Branded photo booths for Connecticut launches, conferences, holiday parties, fundraisers, and corporate events. Custom overlays, galleries, QR sharing.',
     hero:
       'A branded event activation — not a generic photo booth — for launches, conferences, holiday parties, and corporate events.',
     about:
@@ -128,9 +128,9 @@ export const SERVICES: Service[] = [
     name: 'Party Photo Booth',
     ctName: 'Party Photo Booth Rental in Connecticut',
     h1: 'Party Photo Booth Rental in Connecticut',
-    title: 'Party Photo Booth Rental CT | Sweet 16, Birthday, Private Parties',
+    title: 'Party Photo Booth Rental CT | Sweet 16 Booth',
     description:
-      'Photo booth rental for parties, birthdays, Sweet 16s, quinceañeras, and private celebrations across Connecticut. 360 booths, mirror booths, selfie booths, and full party setups.',
+      'Photo booth rental for parties, birthdays, Sweet 16s, quinceañeras, and private celebrations across Connecticut. 360, mirror, and selfie booth setups.',
     hero:
       'High-energy photo booth setups for Sweet 16s, birthdays, quinceañeras, and adult private parties.',
     about:
@@ -152,9 +152,9 @@ export const SERVICES: Service[] = [
     name: 'Glam Photo Booth',
     ctName: 'Glam Photo Booth Rental in Connecticut',
     h1: 'Glam Photo Booth Rental in Connecticut',
-    title: 'Glam Photo Booth Rental CT | Editorial Black & White Booth',
+    title: 'Glam Photo Booth Rental CT | B&W Editorial',
     description:
-      'Glam photo booth rental in Connecticut — editorial-style black-and-white skin-smoothing booth. Designed for luxury weddings, brand activations, galas, and Sweet 16s.',
+      'Glam photo booth rental in Connecticut — editorial-style black-and-white skin-smoothing booth. Built for luxury weddings, brand activations, and galas.',
     hero:
       'Black-and-white editorial-style portraits with flattering lighting and a refined luxury event feel.',
     about:
@@ -175,9 +175,9 @@ export const SERVICES: Service[] = [
     name: 'Mirror Photo Booth',
     ctName: 'Mirror Photo Booth Rental in Connecticut',
     h1: 'Mirror Photo Booth Rental in Connecticut',
-    title: 'Mirror Photo Booth Rental CT | Magic Mirror Booth',
+    title: 'Mirror Photo Booth Rental CT | Magic Mirror',
     description:
-      'Interactive full-length magic mirror photo booth rental across Connecticut. On-screen prompts, animated signatures, and a polished guest experience. Great for weddings and Sweet 16s.',
+      'Interactive full-length magic mirror photo booth rental across Connecticut. On-screen prompts, animated signatures, and a polished guest experience.',
     hero:
       'An interactive full-length mirror booth with guided prompts, animations, and a polished guest experience.',
     about:
@@ -198,7 +198,7 @@ export const SERVICES: Service[] = [
     name: 'Open-Air Photo Booth',
     ctName: 'Open-Air Photo Booth Rental in Connecticut',
     h1: 'Open-Air Photo Booth Rental in Connecticut',
-    title: 'Open-Air Photo Booth Rental CT | Custom Backdrop Booth',
+    title: 'Open-Air Photo Booth Rental CT | Backdrops',
     description:
       'Open-air photo booth rental across Connecticut. Premium lighting, custom overlays, digital sharing, optional prints. The most flexible booth for any venue.',
     hero:
@@ -222,9 +222,9 @@ export const SERVICES: Service[] = [
     name: 'Roaming Photo Booth',
     ctName: 'Roaming Photo Booth Rental in Connecticut',
     h1: 'Roaming Photo Booth Rental in Connecticut',
-    title: 'Roaming Photo Booth Rental CT | Mobile Booth for Cocktail Hours',
+    title: 'Roaming Photo Booth Rental CT | Mobile Booth',
     description:
-      'Mobile roaming photo booth rental across Connecticut. A handheld booth that moves through cocktail hours, receptions, trade shows, and crowded events with instant digital sharing.',
+      'Mobile roaming photo booth rental across Connecticut. A handheld booth for cocktail hours, receptions, trade shows, and crowded events. Instant digital sharing.',
     hero:
       'A mobile booth experience that moves through cocktail hours, receptions, trade shows, and crowded events.',
     about:
@@ -247,9 +247,9 @@ export const SERVICES: Service[] = [
     name: 'Selfie Booth',
     ctName: 'Selfie Booth Rental in Connecticut',
     h1: 'Selfie Booth Rental in Connecticut',
-    title: 'Selfie Booth Rental CT | Compact Self-Serve iPad Booth',
+    title: 'Selfie Booth Rental CT | iPad Self-Serve',
     description:
-      'Compact self-serve selfie booth rental across Connecticut. Sleek iPad-based booth with custom overlays, direct-to-phone delivery. Great for schools, brand activations, and pop-ups.',
+      'Compact self-serve selfie booth rental across Connecticut. Sleek iPad booth with custom overlays, direct-to-phone delivery. Schools, brand activations, pop-ups.',
     hero:
       'Compact digital booth for parties, schools, bars, pop-ups, and high-traffic event spaces.',
     about:
@@ -270,9 +270,9 @@ export const SERVICES: Service[] = [
     name: 'Audio Guestbook',
     ctName: 'Audio Guestbook Rental in Connecticut',
     h1: 'Audio Guestbook Rental in Connecticut',
-    title: 'Audio Guestbook Rental CT | Vintage Rotary Phone Guestbook',
+    title: 'Audio Guestbook Rental CT | Rotary Phone',
     description:
-      'Vintage rotary phone audio guestbook rental across Connecticut. Guests leave voice messages, stories, and toasts that you can keep forever. Wedding and event add-on.',
+      'Vintage rotary phone audio guestbook rental across Connecticut. Guests leave voice messages, stories, and toasts you keep forever. Wedding and event add-on.',
     hero:
       'A vintage rotary phone where guests leave voice messages, stories, toasts, and memories you can keep forever.',
     about:

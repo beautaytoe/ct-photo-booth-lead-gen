@@ -16,9 +16,9 @@ export const POSTS: BlogPost[] = [
   {
     slug: 'how-much-does-photo-booth-rental-cost-in-ct',
     title: 'How Much Does Photo Booth Rental Cost in Connecticut?',
-    metaTitle: 'How Much Does Photo Booth Rental Cost in CT? (2026 Pricing)',
+    metaTitle: 'Photo Booth Rental Cost in CT? (2026 Pricing)',
     description:
-      'A straight answer on photo booth rental pricing in Connecticut for 2026 — what drives cost, what is fair to pay, and how 360 booths and glam booths compare to open-air booths.',
+      'A straight answer on photo booth rental pricing in Connecticut for 2026 — what drives cost, fair pricing, and how 360, glam, and open-air booths compare.',
     date: '2026-05-18',
     readMinutes: 6,
     excerpt:
