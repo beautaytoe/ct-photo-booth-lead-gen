@@ -10,7 +10,7 @@ const ITEMS: { label: string; meta: string; href: string }[] = [
   { label: 'Glam Booth Rental CT', meta: 'Editorial B&W', href: '/glam-photo-booth-rental-ct/' },
   { label: 'Roaming Photo Booth Rental CT', meta: 'Mobile coverage', href: '/roaming-photo-booth-rental-ct/' },
   { label: 'Party Photo Booth Rental CT', meta: 'Sweet 16 · birthday', href: '/party-photo-booth-rental-ct/' },
-  { label: 'School Event Photo Booth Rental CT', meta: 'Prom · school', href: '/photo-booth-rental-ct/' },
+  { label: 'School & Prom Booths', meta: 'Schools · proms · graduations', href: '/photo-booth-rental-ct/' },
 ];
 
 export function PopularCTRentals() {
