@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Icons } from './Icons';
+import { TrackedLink } from './TrackedLink';
 
 const FEATURES: { icon: React.ReactNode; name: string; desc: string }[] = [
   { icon: <Icons.Brush />, name: 'Branded Overlays', desc: 'Brand-locked print + digital templates.' },
@@ -50,9 +51,13 @@ export function CorporateBlock() {
             </div>
 
             <div style={{ marginTop: 32, display: 'flex', flexWrap: 'wrap', gap: 14 }}>
-              <Link href="/check-availability/" className="btn btn-primary">
+              <TrackedLink
+                href="/check-availability/"
+                ctaId="check_availability_corporate_block"
+                className="btn btn-primary"
+              >
                 Plan a Corporate Booth<span className="arrow" />
-              </Link>
+              </TrackedLink>
               <Link href="/corporate-photo-booth-rental-ct/" className="btn btn-ghost">
                 View corporate details
               </Link>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { NAV, SITE } from '@/lib/site-data';
+import { trackEvent } from '@/lib/analytics';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -42,11 +43,20 @@ export function Header() {
                 href={`tel:${SITE.phone.e164}`}
                 className="nav-phone"
                 aria-label={`Call ${SITE.phone.display}`}
+                onClick={() =>
+                  trackEvent('cta_clicked', { cta_id: 'phone_call_header' })
+                }
               >
                 {SITE.phone.display}
               </a>
             )}
-            <Link href={NAV.cta.href} className="btn btn-primary nav-cta-btn">
+            <Link
+              href={NAV.cta.href}
+              className="btn btn-primary nav-cta-btn"
+              onClick={() =>
+                trackEvent('cta_clicked', { cta_id: 'check_availability_header' })
+              }
+            >
               <span className="nav-cta-label-full">{NAV.cta.label}</span>
               <span className="nav-cta-label-short">Book</span>
             </Link>

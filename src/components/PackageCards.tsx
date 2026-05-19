@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { TrackedLink } from './TrackedLink';
 
 const PACKAGES = [
   {
@@ -103,14 +104,16 @@ export function PackageCards() {
                 ))}
               </ul>
               <div className="pkg-foot">
-                <Link
+                <TrackedLink
                   href="/check-availability/"
+                  ctaId={`check_availability_package_${p.name.toLowerCase().replace(/\s+/g, '_')}`}
+                  trackParams={{ package_tier: p.name }}
                   className={`btn ${p.featured ? 'btn-primary' : 'btn-ghost'}`}
                   style={{ width: '100%', justifyContent: 'center' }}
                 >
                   {p.cta}
                   <span className="arrow" />
-                </Link>
+                </TrackedLink>
               </div>
             </div>
           ))}

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { SITE } from '@/lib/site-data';
 import { SERVICES } from '@/lib/services-data';
 import { COUNTIES, getTownBySlug } from '@/lib/towns-data';
+import { TrackedLink } from './TrackedLink';
 
 export function Footer() {
   const featuredTowns = [
@@ -33,8 +34,9 @@ export function Footer() {
             </p>
             {SITE.showPhonePublicly && (
               <div style={{ marginTop: 20 }}>
-                <a
+                <TrackedLink
                   href={`tel:${SITE.phone.e164}`}
+                  ctaId="phone_call_footer"
                   style={{
                     fontFamily: 'var(--mono)',
                     fontSize: 13,
@@ -45,13 +47,17 @@ export function Footer() {
                   aria-label={`Call ${SITE.phone.display}`}
                 >
                   {SITE.phone.display}
-                </a>
+                </TrackedLink>
               </div>
             )}
             <div style={{ marginTop: 24 }}>
-              <Link href="/check-availability/" className="btn btn-primary">
+              <TrackedLink
+                href="/check-availability/"
+                ctaId="check_availability_footer"
+                className="btn btn-primary"
+              >
                 Check Availability →
-              </Link>
+              </TrackedLink>
             </div>
           </div>
 

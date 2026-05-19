@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Icons } from './Icons';
 import { SITE } from '@/lib/site-data';
+import { TrackedLink } from './TrackedLink';
 
 /**
  * Compact CTA section used on internal pages.
@@ -34,10 +35,14 @@ export function CTASection({
               `Tell us your date, venue, and event type — we will check availability and send a tailored package. ${SITE.responseTime}.`}
           </p>
           <div style={{ marginTop: 28, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-            <Link href={primaryHref} className="btn btn-primary">
+            <TrackedLink
+              href={primaryHref}
+              ctaId="check_availability_cta_section"
+              className="btn btn-primary"
+            >
               {primaryLabel}
               <span className="arrow" />
-            </Link>
+            </TrackedLink>
             <Link href="#service-area" className="btn btn-ghost">
               <Icons.Spark size={14} /> Statewide CT coverage
             </Link>

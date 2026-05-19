@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SITE } from '@/lib/site-data';
+import { TrackedLink } from './TrackedLink';
 
 /**
  * Two-button sticky CTA bar for mobile.
@@ -18,8 +19,9 @@ export function StickyMobileCTA() {
       }}
     >
       {SITE.showPhonePublicly ? (
-        <a
+        <TrackedLink
           href={`tel:${SITE.phone.e164}`}
+          ctaId="phone_call_sticky_mobile"
           className="btn btn-ghost"
           style={{
             flex: 1,
@@ -32,7 +34,7 @@ export function StickyMobileCTA() {
           aria-label={`Call ${SITE.phone.display}`}
         >
           Call Us
-        </a>
+        </TrackedLink>
       ) : (
         <Link
           href="/photo-booth-rental-ct/"
@@ -49,13 +51,14 @@ export function StickyMobileCTA() {
           View Booths
         </Link>
       )}
-      <Link
+      <TrackedLink
         href="/check-availability/"
+        ctaId="check_availability_sticky_mobile"
         className="btn btn-primary"
         style={{ flex: 1.4, justifyContent: 'center', padding: 16, fontSize: 12 }}
       >
         Check Availability<span className="arrow" />
-      </Link>
+      </TrackedLink>
     </div>
   );
 }

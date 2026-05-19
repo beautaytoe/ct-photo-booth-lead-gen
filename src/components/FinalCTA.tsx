@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Icons } from './Icons';
+import { trackEvent } from '@/lib/analytics';
 
 const SERVICE_CHIPS = [
   'Open-Air Photo Booth',
@@ -33,12 +34,16 @@ export function FinalCTA() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [chipsExpanded, setChipsExpanded] = useState(false);
+  const hasFiredStart = useRef(false);
 
   const toggle = (s: string) => {
-    setForm((f) => ({
-      ...f,
-      services: f.services.includes(s) ? f.services.filter((x) => x !== s) : [...f.services, s],
-    }));
+    setForm((f) => {
+      if (f.services.includes(s)) {
+        return { ...f, services: f.services.filter((x) => x !== s) };
+      }
+      trackEvent('service_selected', { service: s, form_location: 'final_cta' });
+      return { ...f, services: [...f.services, s] };
+    });
   };
 
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,9 +69,16 @@ export function FinalCTA() {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.error || 'Failed to submit');
       setStatus('success');
+      trackEvent('form_submit', {
+        form_location: 'final_cta',
+        services: form.services.join(','),
+        event_type: form.type,
+      });
     } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
       setStatus('error');
-      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong');
+      setErrorMsg(message);
+      trackEvent('form_error', { form_location: 'final_cta', error_message: message });
     }
   };
 
@@ -106,7 +118,15 @@ export function FinalCTA() {
             </div>
           </div>
 
-          <form className="form" onSubmit={submit}>
+          <form
+            className="form"
+            onSubmit={submit}
+            onFocus={() => {
+              if (hasFiredStart.current) return;
+              trackEvent('form_start', { form_location: 'final_cta' });
+              hasFiredStart.current = true;
+            }}
+          >
             {/* Honeypot: hidden from humans, bots fill it and get silently dropped server-side */}
             <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
               <label>

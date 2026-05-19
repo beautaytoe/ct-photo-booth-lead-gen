@@ -34,6 +34,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Icons } from './Icons';
+import { trackEvent } from '@/lib/analytics';
 
 // ============================================================
 // Static config — easy to edit without touching layout
@@ -341,7 +342,13 @@ export function Hero({
                   transition={{ duration: 0.18 }}
                   style={{ display: 'inline-block' }}
                 >
-                  <Link href={primaryCta.href} className="btn btn-primary hero-primary-cta">
+                  <Link
+                    href={primaryCta.href}
+                    className="btn btn-primary hero-primary-cta"
+                    onClick={() =>
+                      trackEvent('cta_clicked', { cta_id: 'check_availability_hero' })
+                    }
+                  >
                     <span className="hero-primary-cta-shine" aria-hidden="true" />
                     <span className="hero-primary-cta-label">{primaryCta.label}</span>
                     <span className="arrow" aria-hidden="true" />
@@ -349,7 +356,13 @@ export function Hero({
                 </motion.div>
               )}
               {secondaryCta && (
-                <Link href={secondaryCta.href} className="btn btn-ghost hero-secondary-cta">
+                <Link
+                  href={secondaryCta.href}
+                  className="btn btn-ghost hero-secondary-cta"
+                  onClick={() =>
+                    trackEvent('cta_clicked', { cta_id: 'explore_booths_hero' })
+                  }
+                >
                   {secondaryCta.label}
                 </Link>
               )}

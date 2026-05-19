@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Icons } from './Icons';
+import { TrackedLink } from './TrackedLink';
 
 const CHECKLIST = [
   ['Glam Black & White Portraits', 'Editorial retouching for every guest, Vogue-style.'],
@@ -64,9 +65,13 @@ export function WeddingBlock() {
             </ul>
 
             <div style={{ marginTop: 36, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-              <Link href="/check-availability/" className="btn btn-dark">
+              <TrackedLink
+                href="/check-availability/"
+                ctaId="check_availability_wedding_block"
+                className="btn btn-dark"
+              >
                 Check Wedding Availability<span className="arrow" />
-              </Link>
+              </TrackedLink>
               <Link href="#experiences" className="btn btn-dark-ghost">
                 Browse booths
               </Link>

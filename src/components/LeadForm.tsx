@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Icons } from './Icons';
+import { trackEvent } from '@/lib/analytics';
 
 const SERVICE_CHIPS = [
   'Open-Air Photo Booth',
@@ -22,9 +23,14 @@ export function LeadForm() {
   const [services, setServices] = useState<string[]>(['Open-Air Photo Booth']);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const hasFiredStart = useRef(false);
 
   const toggle = (s: string) => {
-    setServices((cur) => (cur.includes(s) ? cur.filter((x) => x !== s) : [...cur, s]));
+    setServices((cur) => {
+      if (cur.includes(s)) return cur.filter((x) => x !== s);
+      trackEvent('service_selected', { service: s, form_location: 'lead_form' });
+      return [...cur, s];
+    });
   };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -44,10 +50,16 @@ export function LeadForm() {
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body?.error || 'Failed to submit');
       setStatus('success');
+      trackEvent('form_submit', {
+        form_location: 'lead_form',
+        services: services.join(','),
+      });
       form.reset();
     } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
       setStatus('error');
-      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong');
+      setErrorMsg(message);
+      trackEvent('form_error', { form_location: 'lead_form', error_message: message });
     }
   }
 
@@ -78,7 +90,15 @@ export function LeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <form
+      onSubmit={handleSubmit}
+      className="form"
+      onFocus={() => {
+        if (hasFiredStart.current) return;
+        trackEvent('form_start', { form_location: 'lead_form' });
+        hasFiredStart.current = true;
+      }}
+    >
       {/* Honeypot: hidden from humans, bots fill it and get silently dropped server-side */}
       <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
         <label>
