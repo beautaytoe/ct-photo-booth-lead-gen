@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     'Contact Gold Coast Photo Booth for CT photo booth rental — weddings, corporate events, Sweet 16s, and private parties. Fast replies during booking hours.',
   alternates: { canonical: '/contact/' },
+  openGraph: { url: '/contact/' },
 };
 
 export default function ContactPage() {

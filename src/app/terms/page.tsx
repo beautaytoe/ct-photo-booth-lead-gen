@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   description: `Terms of service for ${SITE.brand}.`,
   alternates: { canonical: '/terms/' },
   robots: { index: false, follow: true },
+  openGraph: { url: '/terms/' },
 };
 
 export default function TermsPage() {

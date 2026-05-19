@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     'Check CT photo booth rental availability for your wedding, corporate event, or private party. Fast replies during booking hours.',
   alternates: { canonical: '/check-availability/' },
+  openGraph: { url: '/check-availability/' },
 };
 
 export default function CheckAvailabilityPage() {

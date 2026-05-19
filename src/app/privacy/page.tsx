@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description: `Privacy policy for ${SITE.brand}.`,
   alternates: { canonical: '/privacy/' },
   robots: { index: false, follow: true },
+  openGraph: { url: '/privacy/' },
 };
 
 export default function PrivacyPage() {

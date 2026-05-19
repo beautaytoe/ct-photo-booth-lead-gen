@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     'Gold Coast Photo Booth Co. — premium photo booth, 360, glam, wedding, and corporate event-booth rentals across Connecticut.',
   alternates: { canonical: '/about/' },
+  openGraph: { url: '/about/' },
 };
 
 export default function AboutPage() {

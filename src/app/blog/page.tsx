@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description:
     'Pricing guides, comparisons, ideas, and checklists for CT photo booth rentals — 360 booths, glam booths, wedding planning, and corporate activations.',
   alternates: { canonical: '/blog/' },
+  openGraph: { url: '/blog/' },
 };
 
 export default function BlogPage() {
