@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { Icons } from './Icons';
 import { trackEvent } from '@/lib/analytics';
@@ -169,6 +170,29 @@ export function LeadForm() {
         <label>Message (optional)</label>
         <textarea name="message" rows={4} placeholder="Tell us about your event…" />
       </div>
+      {/* TCPA / SMS consent disclosure at point of phone-number collection.
+          Audit reference: Critical issue C2. Privacy policy contains the
+          full consent language; this is the visible "clear and conspicuous"
+          notice expected at the form. */}
+      <p
+        style={{
+          fontFamily: 'var(--mono)',
+          fontSize: 11,
+          lineHeight: 1.55,
+          color: 'var(--text-muted)',
+          margin: '4px 0 12px',
+        }}
+      >
+        By submitting, you agree to be contacted by phone, SMS, or email about your inquiry. See
+        our{' '}
+        <Link
+          href="/privacy/"
+          style={{ color: 'var(--gold-bright)', textDecoration: 'underline' }}
+        >
+          privacy policy
+        </Link>
+        .
+      </p>
       <button
         type="submit"
         className="btn btn-primary"

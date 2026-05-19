@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { Icons } from './Icons';
 import { trackEvent } from '@/lib/analytics';
@@ -284,6 +285,30 @@ export function FinalCTA() {
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                   />
                 </div>
+
+                {/* TCPA / SMS consent disclosure at point of phone-number
+                    collection. Audit reference: Critical issue C2. Privacy
+                    policy contains the full consent language; this is the
+                    visible "clear and conspicuous" notice expected at the form. */}
+                <p
+                  style={{
+                    fontFamily: 'var(--mono)',
+                    fontSize: 11,
+                    lineHeight: 1.55,
+                    color: 'var(--text-muted)',
+                    margin: '8px 0 8px',
+                  }}
+                >
+                  By submitting, you agree to be contacted by phone, SMS, or email about your
+                  inquiry. See our{' '}
+                  <Link
+                    href="/privacy/"
+                    style={{ color: 'var(--gold-bright)', textDecoration: 'underline' }}
+                  >
+                    privacy policy
+                  </Link>
+                  .
+                </p>
 
                 <button
                   type="submit"
