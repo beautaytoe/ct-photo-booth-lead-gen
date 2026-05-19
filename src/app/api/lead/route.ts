@@ -82,7 +82,15 @@ export async function POST(request: Request) {
       console.error('[ghl] contact upsert failed:', ghlResult.error);
     } else {
       // eslint-disable-next-line no-console
-      console.log('[ghl] contact upserted:', ghlResult.id, 'existing:', ghlResult.existing);
+      console.log(
+        '[ghl] contact upserted:',
+        ghlResult.id,
+        'existing:',
+        ghlResult.existing,
+        'noteCreated:',
+        ghlResult.noteCreated,
+        ghlResult.noteError ? `noteError: ${ghlResult.noteError}` : ''
+      );
     }
 
     // If Resend / Slack / etc. are not configured, result.configured === 0.
@@ -93,10 +101,6 @@ export async function POST(request: Request) {
       ok: true,
       delivered: result.delivered,
       configured: result.configured,
-      // TODO(claude): remove _ghl debug field once GHL push is verified working
-      _ghl: 'error' in ghlResult
-        ? { ok: false, error: ghlResult.error }
-        : { ok: true, id: ghlResult.id, existing: ghlResult.existing },
     });
   } catch (err) {
     // eslint-disable-next-line no-console
