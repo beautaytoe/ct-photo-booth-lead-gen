@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     // Default homepage title. Page-level titles use the template below; the
     // shortened "Gold Coast" suffix keeps total length under Google's ~60
     // char SERP truncation on most pages.
-    default: `${SITE.seoDescriptor} | ${SITE.shortBrand}`,
-    template: `%s | ${SITE.shortBrand}`,
+    default: `${SITE.seoDescriptor} | ${SITE.titleSuffix}`,
+    template: `%s | ${SITE.titleSuffix}`,
   },
   description:
     'Premium photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',

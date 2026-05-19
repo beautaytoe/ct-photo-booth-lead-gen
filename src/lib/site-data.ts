@@ -1,6 +1,9 @@
 export const SITE = {
   brand: 'Gold Coast Photo Booth Co.',
   shortBrand: 'Gold Coast Photo Booth',
+  /** Shortest brand form. Used in <title> templates to keep total title under
+   * Google's ~60-char SERP truncation. */
+  titleSuffix: 'Gold Coast',
   /** Used as `alternateName` in schema and as the small line under the brand mark. */
   seoDescriptor: 'Photo Booth Rental CT',
   /** Generic statewide tagline. Fairfield County is featured in a dedicated section, not the tagline. */

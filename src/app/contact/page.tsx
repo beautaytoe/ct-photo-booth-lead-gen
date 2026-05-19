@@ -7,7 +7,7 @@ import { Icons } from '@/components/Icons';
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Contact Gold Coast Photo Booth Co. for photo booth rental in Connecticut — weddings, corporate events, Sweet 16s, and private parties. Fast replies during booking hours.',
+    'Contact Gold Coast Photo Booth for CT photo booth rental — weddings, corporate events, Sweet 16s, and private parties. Fast replies during booking hours.',
   alternates: { canonical: '/contact/' },
 };
 
