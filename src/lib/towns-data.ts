@@ -683,12 +683,34 @@ export function getNearbyTowns(town: Town, limit = 6): Town[] {
   return [...explicit, ...fill];
 }
 
-/** Default intro for towns without a custom paragraph. */
+/**
+ * Vibe-specific event list used in the default town intro. Five variants
+ * (one per Vibe) so the 87 Tier 2 + 58 Tier 3 towns that share the default
+ * template still produce ~5x more uniqueness in body copy than a single
+ * one-size-fits-all event list — meaningful for Google's freshness scoring
+ * without writing 145 individual paragraphs.
+ *
+ * Tier 1 towns each have a hand-written `intro` already and don't reach this.
+ */
+function eventListForVibe(vibe: Vibe = 'family'): string {
+  switch (vibe) {
+    case 'luxury':
+      return 'a wedding reception, estate event, country-club gathering, gala, or milestone celebration';
+    case 'corporate':
+      return 'a corporate event, conference, brand activation, holiday party, or fundraiser';
+    case 'shoreline':
+      return 'a waterfront wedding, marina-area event, summer celebration, school function, or shoreline gathering';
+    case 'rural':
+      return 'a barn wedding, farm-venue event, prep-school gala, milestone celebration, or country-house reception';
+    case 'family':
+    default:
+      return 'a wedding, Sweet 16, bar/bat mitzvah, school event, milestone birthday, or community fundraiser';
+  }
+}
+
+/** Default intro for towns without a custom paragraph. Varies by vibe. */
 export function defaultIntroFor(town: Town): string {
-  return introFor(
-    town.name,
-    'a wedding, private party, school event, fundraiser, or corporate gathering'
-  );
+  return introFor(town.name, eventListForVibe(town.vibe));
 }
 
 /** Meta description that varies by vibe + town. Target 150–160 chars. */
