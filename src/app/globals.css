@@ -690,7 +690,15 @@ h3.display { font-size: clamp(28px, 2.4vw, 40px); line-height: 1.1; }
   position: absolute;
   inset: 0;
   z-index: 0;
+  /* First declaration is the fallback for browsers without image-set()
+     support; second declaration overrides with AVIF-preferred chain on
+     modern browsers (Chrome 85+, Firefox 93+, Safari 16+).
+     AVIF is ~80KB vs JPG ~334KB — 76% smaller for the same visual fidelity. */
   background-image: url('/assets/hero-bg.jpg');
+  background-image: image-set(
+    url('/assets/hero-bg.avif') type('image/avif'),
+    url('/assets/hero-bg.jpg') type('image/jpeg')
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
