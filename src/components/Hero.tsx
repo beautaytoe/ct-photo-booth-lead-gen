@@ -124,13 +124,26 @@ interface FloatCardData {
   depth: number;
 }
 
+/**
+ * Floating booth cards — 5-card S-curve, fully INSIDE the stage box so
+ * nothing gets clipped by `overflow-x: hidden` on body or by viewport
+ * edges. Parallax is intentionally modest (max ±14px drift) so the
+ * layout stays stable.
+ *
+ *   ┌──────────────── stage ────────────────┐
+ *   │  [360 Booth]                          │ ← row 1, left
+ *   │                       [Glam Booth]    │ ← row 2, right
+ *   │  [Audio Guestbook]                    │ ← row 3, left
+ *   │                       [Mirror Booth]  │ ← row 4, right
+ *   │            [Corporate]                │ ← row 5, center
+ *   └───────────────────────────────────────┘
+ */
 const CARDS: FloatCardData[] = [
-  { id: '360',       style: { top: '6%',    left: '-4%' },  delay: 0,   label: 'Showstopper', name: '360 Booth',       icon: <Icons.ThreeSixty size={20} />, depth: 20  },
-  { id: 'glam',      style: { top: '22%',   right: '-6%' }, delay: 1,   label: 'Editorial',   name: 'Glam Booth',      icon: <Icons.Glam size={20} />,       depth: -25 },
-  { id: 'open-air',  style: { top: '45%',   left: '10%' },  delay: 2,   label: 'Classic',     name: 'Open-Air',        icon: <Icons.Camera size={20} />,     depth: 15  },
-  { id: 'mirror',    style: { top: '58%',   right: '0%' },  delay: 1.5, label: 'Magic',       name: 'Mirror Booth',    icon: <Icons.Mirror size={20} />,     depth: -18 },
-  { id: 'audio',     style: { bottom: '8%', left: '-2%' },  delay: 0.5, label: 'Memory',      name: 'Audio Guestbook', icon: <Icons.Phone size={20} />,      depth: 28  },
-  { id: 'corporate', style: { bottom: '20%', right: '12%' }, delay: 2.5, label: 'Brand',      name: 'Corporate',       icon: <Icons.Corporate size={20} />,  depth: -12 },
+  { id: '360',       style: { top: '2%',    left: '6%' },   delay: 0,    label: 'Showstopper', name: '360 Booth',       icon: <Icons.ThreeSixty size={24} />, depth: 10 },
+  { id: 'glam',      style: { top: '21%',   right: '4%' },  delay: 0.9,  label: 'Editorial',   name: 'Glam Booth',      icon: <Icons.Glam size={24} />,        depth: -12 },
+  { id: 'audio',     style: { top: '44%',   left: '2%' },   delay: 0.4,  label: 'Memory',      name: 'Audio Guestbook', icon: <Icons.Phone size={24} />,       depth: 14 },
+  { id: 'mirror',    style: { top: '63%',   right: '6%' },  delay: 1.4,  label: 'Magic',       name: 'Mirror Booth',    icon: <Icons.Mirror size={24} />,      depth: -10 },
+  { id: 'corporate', style: { bottom: '4%', left: '24%' },  delay: 2,    label: 'Brand',       name: 'Corporate',       icon: <Icons.Corporate size={24} />,   depth: -6 },
 ];
 
 // ============================================================
@@ -178,12 +191,22 @@ export function Hero({
 
   return (
     <section className="hero" id="hero">
-      {/* Background gradient layers + vignette (unchanged) */}
+      {/* Background layer 1: radial gradient pools (champagne / blush /
+          emerald / deep gold). When you want to swap in a real photo or
+          looping video, set background-image on .hero-bg in globals.css —
+          comment block is in place. */}
       <div className="hero-bg" />
+      {/* Background layer 2: slow-drifting "aurora" of gold mist. Adds
+          gentle motion across the bg without needing video. */}
+      <div className="hero-aurora" aria-hidden="true" />
+      {/* Background layer 3: SVG film grain. Reads as premium texture
+          instead of flat CSS gradients. */}
+      <div className="hero-grain" aria-hidden="true" />
+      {/* Background layer 4: darkening edge vignette. */}
       <div className="hero-vignette" />
 
-      {/* Subtle gold sparkle particles — pure CSS, GPU-accelerated.
-          Visibility / motion is gated in globals.css for reduced-motion users. */}
+      {/* Background layer 5: six floating gold sparkle particles.
+          Disabled by globals.css when prefers-reduced-motion is set. */}
       <div className="hero-particles" aria-hidden="true">
         {Array.from({ length: 6 }).map((_, i) => (
           <span key={i} className={`hero-particle hero-particle-${i + 1}`} />

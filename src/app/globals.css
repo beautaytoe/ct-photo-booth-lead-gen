@@ -687,14 +687,60 @@ h3.display { font-size: clamp(28px, 2.4vw, 40px); line-height: 1.1; }
   position: absolute; inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(212,184,124,.18), transparent 70%),
-    radial-gradient(ellipse 50% 60% at 10% 80%, rgba(216,168,160,.10), transparent 70%),
-    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(31,58,51,.25), transparent 70%);
+    /* Soft champagne pool, upper right (main warm light source) */
+    radial-gradient(ellipse 65% 55% at 78% 22%, rgba(236,212,154,.22), transparent 70%),
+    /* Blush pool, lower left (warm low light) */
+    radial-gradient(ellipse 50% 60% at 12% 78%, rgba(216,168,160,.14), transparent 70%),
+    /* Emerald floor wash (subtle depth) */
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(31,58,51,.28), transparent 70%),
+    /* Deep gold pool, behind floating cards */
+    radial-gradient(ellipse 42% 42% at 72% 50%, rgba(212,184,124,.14), transparent 70%);
+  /* Replace the hero JPG/MP4 here when ready. See note in Hero.tsx.
+     background-image: url('/assets/hero-bg.jpg');
+     background-size: cover;
+     background-position: center;
+     opacity: 1; */
 }
 .hero-vignette {
   position: absolute; inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(0,0,0,.6) 100%);
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 50%, transparent 35%, rgba(0,0,0,.55) 80%, rgba(0,0,0,.85) 100%);
+}
+
+/* Aurora layer — slow drifting gold mist that breathes life into the bg */
+.hero-aurora {
+  position: absolute;
+  inset: -10%;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(circle 520px at 72% 38%, rgba(236,212,154,.16), transparent 60%),
+    radial-gradient(circle 420px at 28% 62%, rgba(216,168,160,.12), transparent 70%),
+    radial-gradient(circle 360px at 50% 90%, rgba(212,184,124,.08), transparent 70%);
+  filter: blur(8px);
+  animation: hero-aurora-drift 22s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+@keyframes hero-aurora-drift {
+  0%   { transform: translate3d(0,0,0) scale(1);     opacity: 0.85; }
+  50%  { transform: translate3d(-24px, 14px, 0) scale(1.04); opacity: 1; }
+  100% { transform: translate3d(20px, -10px, 0) scale(0.98); opacity: 0.9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora { animation: none; }
+}
+
+/* Subtle noise grain — pure SVG, very low opacity. Adds a film-grain
+   quality that reads as "premium" instead of "flat CSS gradient". */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .82  0 0 0 0 .72  0 0 0 0 .48  0 0 0 .15 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 .hero-inner {
   position: relative;
@@ -862,10 +908,16 @@ h1.hero-headline-mobile {
 
 .hero-stage {
   position: relative;
-  aspect-ratio: 1 / 1.08;
-  max-width: 600px;
+  width: 100%;
+  /* Stage is right-aligned in its grid column but capped so cards can
+     never spill past the container right edge. Width is explicit (not
+     just max-width) because the stage's children are position:absolute
+     — without width:100% the stage would collapse to 0 under aspect-ratio. */
+  max-width: 580px;
+  aspect-ratio: 1 / 1.25;
   margin-left: auto;
   perspective: 1400px;
+  overflow: visible;
 }
 @media (max-width: 1100px) {
   .hero-stage { display: none; }
@@ -907,20 +959,21 @@ h1.hero-headline-mobile {
 
 .float-card {
   position: absolute;
-  background: linear-gradient(160deg, rgba(255,250,240,.10), rgba(255,250,240,.03));
-  border: 1px solid rgba(255,250,240,.12);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  border-radius: 20px;
-  padding: 16px 18px;
+  background: linear-gradient(160deg, rgba(255,250,240,.14), rgba(255,250,240,.04));
+  border: 1px solid rgba(255,250,240,.16);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  border-radius: 22px;
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-width: 168px;
+  gap: 10px;
+  min-width: 220px;
+  max-width: 240px;
   box-shadow:
-    0 1px 0 rgba(255,255,255,.08) inset,
-    0 30px 60px -20px rgba(0,0,0,.6),
-    0 0 30px -10px rgba(212,184,124,.2);
+    0 1px 0 rgba(255,255,255,.10) inset,
+    0 30px 70px -20px rgba(0,0,0,.7),
+    0 0 40px -10px rgba(212,184,124,.22);
   transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease, border-color .4s ease;
   animation: floaty 6s ease-in-out infinite;
 }
@@ -932,24 +985,25 @@ h1.hero-headline-mobile {
     0 0 60px -10px rgba(212,184,124,.5);
 }
 .float-card .fc-icon {
-  width: 38px; height: 38px;
-  border-radius: 12px;
-  background: linear-gradient(160deg, rgba(212,184,124,.35), rgba(212,184,124,.08));
-  border: 1px solid rgba(212,184,124,.4);
+  width: 44px; height: 44px;
+  border-radius: 13px;
+  background: linear-gradient(160deg, rgba(212,184,124,.40), rgba(212,184,124,.10));
+  border: 1px solid rgba(212,184,124,.45);
   display: grid; place-items: center;
   color: var(--gold-bright);
 }
 .float-card .fc-label {
   font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.24em;
+  font-size: 10px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
 .float-card .fc-name {
   font-family: var(--serif);
-  font-size: 20px;
-  line-height: 1;
+  font-size: 23px;
+  line-height: 1.05;
+  letter-spacing: -0.005em;
   color: var(--ivory);
 }
 .float-card .fc-dot {
