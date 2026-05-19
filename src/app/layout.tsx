@@ -7,9 +7,10 @@ import { SiteSchema } from '@/components/SiteSchema';
 import { StickyMobileCTA } from '@/components/StickyMobileCTA';
 import { SITE } from '@/lib/site-data';
 
-// GA4 — provisioned 2026-05-19 via rize-analytics-audit
-// Property ID 538263912, account Rize Digital (290563461)
-const GA4_MEASUREMENT_ID = 'G-11QWB77VXP';
+// GTM container — version 4 published 2026-05-19 with custom event triggers
+// for form_start / form_submit / form_error / service_selected / cta_clicked.
+// GA4 (G-11QWB77VXP) is fired via the GTM container, not directly here.
+const GTM_CONTAINER_ID = 'GTM-THGBKX3L';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.domain),
@@ -70,25 +71,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         />
-        {/* GA4 — loaded only in production to keep dev console clean */}
+        {/* GTM — loaded only in production to keep dev console clean. The
+            container loads GA4 + any other vendor tags configured in GTM. */}
         {process.env.NODE_ENV === 'production' && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA4_MEASUREMENT_ID}', { send_page_view: true });
-              `}
-            </Script>
-          </>
+          <Script id="gtm-init" strategy="afterInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','${GTM_CONTAINER_ID}');`}
+          </Script>
         )}
       </head>
       <body>
+        {/* GTM noscript fallback — fires container even with JS disabled. */}
+        {process.env.NODE_ENV === 'production' && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}`}
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        )}
         <SiteSchema />
         <Header />
         <main id="main">{children}</main>
