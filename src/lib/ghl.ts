@@ -47,32 +47,25 @@ export type CreateContactInput = {
 };
 
 export type CreateContactResult =
-  | { id: string; existing: boolean }
+  | { id: string; existing: boolean; noteCreated: boolean; noteError?: string }
   | { error: string };
 
 /**
  * Upsert a contact (create new or update existing) in the GHL sub-account.
  * `upsert` keys on email + phone, so repeat submissions from the same lead
  * don't create duplicates.
+ *
+ * GHL v2 contacts/upsert rejects unknown top-level properties (422), so the
+ * free-form context (event_type, event_date, services, etc.) is written as a
+ * separate Note via POST /contacts/{contactId}/notes after the upsert. A
+ * note failure does NOT fail the overall result — the contact is still
+ * created/updated, the operator just loses the context blob.
  */
 export async function createOrUpsertContact(
   input: CreateContactInput
 ): Promise<CreateContactResult> {
   const locationId = process.env.GHL_LOCATION_ID;
   if (!locationId) return { error: 'GHL_LOCATION_ID not set' };
-
-  // Build a structured notes blob from the free-form context. Each line is
-  // stable order so an operator scanning many leads can scan vertically.
-  const noteParts: string[] = [];
-  if (input.event_type) noteParts.push(`Event type: ${input.event_type}`);
-  if (input.event_date) noteParts.push(`Event date: ${input.event_date}`);
-  if (input.guest_count) noteParts.push(`Guest count: ${input.guest_count}`);
-  if (input.services?.length)
-    noteParts.push(`Services: ${input.services.join(', ')}`);
-  if (input.form_location)
-    noteParts.push(`Form location: ${input.form_location}`);
-  if (input.notes) noteParts.push(`Notes: ${input.notes}`);
-  const combinedNote = noteParts.join('\n');
 
   let resp: Response;
   try {
@@ -88,7 +81,6 @@ export async function createOrUpsertContact(
         source: input.source ?? 'website',
         tags: input.tags ?? [],
         customFields: input.customFields,
-        notes: combinedNote || undefined,
       }),
     });
   } catch (err) {
@@ -106,5 +98,59 @@ export async function createOrUpsertContact(
   };
   const id = data?.contact?.id;
   if (!id) return { error: 'GHL response missing contact.id' };
-  return { id, existing: data?.new === false };
+
+  // Build the note body from any free-form context the form captured. Stable
+  // ordering so an operator can scan many notes vertically.
+  const noteParts: string[] = [];
+  if (input.event_type) noteParts.push(`Event type: ${input.event_type}`);
+  if (input.event_date) noteParts.push(`Event date: ${input.event_date}`);
+  if (input.guest_count) noteParts.push(`Guest count: ${input.guest_count}`);
+  if (input.services?.length)
+    noteParts.push(`Services: ${input.services.join(', ')}`);
+  if (input.form_location)
+    noteParts.push(`Form location: ${input.form_location}`);
+  if (input.notes) noteParts.push(`Notes: ${input.notes}`);
+  const noteBody = noteParts.join('\n');
+
+  if (!noteBody) {
+    return { id, existing: data?.new === false, noteCreated: false };
+  }
+
+  const noteResult = await addContactNote(id, noteBody);
+  if ('error' in noteResult) {
+    return {
+      id,
+      existing: data?.new === false,
+      noteCreated: false,
+      noteError: noteResult.error,
+    };
+  }
+  return { id, existing: data?.new === false, noteCreated: true };
+}
+
+/**
+ * Attach a free-form note to an existing GHL contact. Used after a contact
+ * upsert to record event_type / event_date / services / form_location etc.
+ * that the contacts/upsert endpoint doesn't accept as top-level fields.
+ */
+export async function addContactNote(
+  contactId: string,
+  body: string
+): Promise<{ id: string } | { error: string }> {
+  let resp: Response;
+  try {
+    resp = await fetch(`${BASE}/contacts/${contactId}/notes`, {
+      method: 'POST',
+      headers: headers(),
+      body: JSON.stringify({ body }),
+    });
+  } catch (err) {
+    return { error: `GHL note network error: ${err instanceof Error ? err.message : 'unknown'}` };
+  }
+  if (!resp.ok) {
+    const txt = await resp.text().catch(() => '');
+    return { error: `GHL note ${resp.status}: ${txt.slice(0, 300)}` };
+  }
+  const data = (await resp.json().catch(() => ({}))) as { note?: { id?: string } };
+  return { id: data?.note?.id ?? '' };
 }
