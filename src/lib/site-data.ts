@@ -14,10 +14,18 @@ export const SITE = {
   region: 'CT',
   founded: 2026,
 
-  // Contact channel: form-only until a verified phone/email is wired.
-  _placeholderPhone: '',
+  // Public call-tracking number (routed to GHL sub-account). Renders in
+  // Header (desktop), Footer, Contact page, StickyMobileCTA, and is exposed
+  // in the Organization schema as `telephone`.
+  phone: {
+    /** For tel: hrefs. E.164 format. */
+    e164: '+12037175857',
+    /** For visible link text. */
+    display: '(203) 717-5857',
+  },
+  /** Email channel intentionally form-only until a branded info@ alias is wired. */
   _placeholderEmail: '',
-  showPhonePublicly: false,
+  showPhonePublicly: true,
   showEmailPublicly: false,
 
   // Canonical response-time phrasing. Soft/vague today (defensible while

@@ -1,12 +1,11 @@
 import Link from 'next/link';
+import { SITE } from '@/lib/site-data';
 
 /**
  * Two-button sticky CTA bar for mobile.
- * Left routes to the booth lineup (low-commitment browse).
- * Right routes to the availability form (high-intent).
- *
- * When a real phone is provisioned, swap the left button for `tel:` and the
- * intent label for "Call".
+ * When phone is provisioned (SITE.showPhonePublicly): left button is a tel:
+ * "Call" link. Otherwise: left button browses the booth lineup.
+ * Right button is always the availability form (high-intent).
  */
 export function StickyMobileCTA() {
   return (
@@ -18,20 +17,38 @@ export function StickyMobileCTA() {
         gap: 8,
       }}
     >
-      <Link
-        href="/photo-booth-rental-ct/"
-        className="btn btn-ghost"
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          padding: 16,
-          fontSize: 12,
-          background: 'rgba(11,10,9,.92)',
-          backdropFilter: 'blur(10px)',
-        }}
-      >
-        View Booths
-      </Link>
+      {SITE.showPhonePublicly ? (
+        <a
+          href={`tel:${SITE.phone.e164}`}
+          className="btn btn-ghost"
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            padding: 16,
+            fontSize: 12,
+            background: 'rgba(11,10,9,.92)',
+            backdropFilter: 'blur(10px)',
+          }}
+          aria-label={`Call ${SITE.phone.display}`}
+        >
+          Call Us
+        </a>
+      ) : (
+        <Link
+          href="/photo-booth-rental-ct/"
+          className="btn btn-ghost"
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            padding: 16,
+            fontSize: 12,
+            background: 'rgba(11,10,9,.92)',
+            backdropFilter: 'blur(10px)',
+          }}
+        >
+          View Booths
+        </Link>
+      )}
       <Link
         href="/check-availability/"
         className="btn btn-primary"

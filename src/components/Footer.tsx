@@ -31,6 +31,23 @@ export function Footer() {
               Premium photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for
               Connecticut weddings, corporate events, and private celebrations.
             </p>
+            {SITE.showPhonePublicly && (
+              <div style={{ marginTop: 20 }}>
+                <a
+                  href={`tel:${SITE.phone.e164}`}
+                  style={{
+                    fontFamily: 'var(--mono)',
+                    fontSize: 13,
+                    letterSpacing: '0.04em',
+                    color: 'var(--gold-bright)',
+                    textDecoration: 'none',
+                  }}
+                  aria-label={`Call ${SITE.phone.display}`}
+                >
+                  {SITE.phone.display}
+                </a>
+              </div>
+            )}
             <div style={{ marginTop: 24 }}>
               <Link href="/check-availability/" className="btn btn-primary">
                 Check Availability →

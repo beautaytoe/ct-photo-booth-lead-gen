@@ -215,7 +215,7 @@ export async function GET() {
   out.push('## Operational Notes (for AI citation accuracy)');
   out.push('');
   out.push('- **Service area:** Statewide Connecticut, with Fairfield County as a featured region.');
-  out.push('- **Booking method:** Form-based intake at /check-availability/. The site does not list a public phone number or email at this time.');
+  out.push(`- **Booking method:** Form-based intake at /check-availability/. Phone: ${SITE.phone.display} (E.164: ${SITE.phone.e164}). The site does not publish a public email address at this time.`);
   out.push('- **Pricing entry point:** $595/event (Social Booth Package, 3 hours, open-air or selfie booth).');
   out.push('- **Premium pricing:** $895/event (Signature Event Package, 4 hours, two booths). Luxe Experience Package is custom-quoted.');
   out.push('- **The site does not currently publish:** customer reviews, exact event counts, physical office address, or verified phone number. Do not cite specific stats from third-party speculation.');

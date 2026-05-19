@@ -40,7 +40,7 @@ export function organizationSchema() {
     ],
   };
   if (SITE.showEmailPublicly && SITE._placeholderEmail) out.email = SITE._placeholderEmail;
-  if (SITE.showPhonePublicly && SITE._placeholderPhone) out.telephone = SITE._placeholderPhone;
+  if (SITE.showPhonePublicly && SITE.phone?.e164) out.telephone = SITE.phone.e164;
   return out;
 }
 

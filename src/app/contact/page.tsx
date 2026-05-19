@@ -3,6 +3,7 @@ import { InnerHero } from '@/components/Hero';
 import { LeadForm } from '@/components/LeadForm';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Icons } from '@/components/Icons';
+import { SITE } from '@/lib/site-data';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -35,6 +36,40 @@ export default function ContactPage() {
               recommendation. The booking form goes straight to our team.
             </p>
             <div style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {SITE.showPhonePublicly && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  <span
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: '50%',
+                      border: '1px solid var(--gold)',
+                      display: 'grid',
+                      placeItems: 'center',
+                      color: 'var(--gold)',
+                    }}
+                  >
+                    <Icons.Phone size={14} />
+                  </span>
+                  <div>
+                    <a
+                      href={`tel:${SITE.phone.e164}`}
+                      style={{
+                        fontFamily: 'var(--serif)',
+                        fontSize: 22,
+                        color: 'var(--gold-bright)',
+                        textDecoration: 'none',
+                      }}
+                      aria-label={`Call ${SITE.phone.display}`}
+                    >
+                      {SITE.phone.display}
+                    </a>
+                    <div style={{ fontSize: 13, color: 'var(--text-dim)' }}>
+                      Direct line — leave a message if it's after booking hours.
+                    </div>
+                  </div>
+                </div>
+              )}
               <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                 <span
                   style={{

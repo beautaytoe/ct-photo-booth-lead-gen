@@ -88,7 +88,7 @@ export async function GET() {
   lines.push('- Booth experiences: 11 booth styles + add-ons (open-air, 360, glam, mirror, roaming, selfie, audio guestbook, corporate brand activation, custom backdrops, props & styling, print packages, digital gallery).');
   lines.push('- Entry pricing: Social Booth Package starts at $595/event. Signature Event Package starts at $895/event. Luxe Experience is custom quoted.');
   lines.push('- Included on most bookings: on-site attendant, custom photo overlay, premium lighting, digital sharing by QR/text/email, online gallery, backdrop options, optional print packages.');
-  lines.push('- Contact channel: Form-based intake at /check-availability/. Fast replies during booking hours.');
+  lines.push(`- Contact channels: Form-based intake at /check-availability/. Phone: ${SITE.phone.display} (${SITE.phone.e164}). Fast replies during booking hours.`);
   lines.push('');
 
   lines.push('## Optional');
