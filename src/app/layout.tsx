@@ -28,13 +28,17 @@ export const metadata: Metadata = {
   generator: 'Next.js',
   alternates: { canonical: '/' },
   openGraph: {
+    // INVARIANT fields only at the layout level. title/description/url are
+    // intentionally NOT set here — Next.js derives them per-page from the
+    // page's `title` and `description` metadata + the request URL. Setting
+    // them at the layout overrides per-page values on routes that use the
+    // static `metadata: Metadata = {...}` pattern without their own
+    // openGraph block (/about/, /contact/, /check-availability/, /blog/,
+    // /privacy/), forcing those pages to render the homepage's social
+    // preview instead of their own. Audit: see Critical #C1.
     type: 'website',
     locale: 'en_US',
-    url: SITE.domain,
     siteName: SITE.brand,
-    title: `${SITE.seoDescriptor} | ${SITE.brand}`,
-    description:
-      'Premium photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
     // /og-default.png is generated dynamically by src/app/og-default.png/route.tsx
     // via Next 16's ImageResponse (edge runtime, 24h cache). Every page that
     // doesn't override openGraph.images picks this up.
