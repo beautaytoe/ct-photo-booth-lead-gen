@@ -161,7 +161,9 @@ export function CountyHubPage({
               name: `Photo Booth Rental in ${info.name}, Connecticut`,
               description: `Booth rental for weddings, corporate events, and private gatherings in ${info.name}, CT.`,
               url: `${SITE.domain}${pathPrefix}/`,
-              areaServed: info.name,
+              // County-level service area — AdministrativeArea ↳ State
+              area: { county: info.name },
+              includeOfferCatalog: true,
             })
           ),
         }}

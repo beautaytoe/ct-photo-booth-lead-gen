@@ -224,6 +224,9 @@ export default async function ServicePage({ params }: PageProps) {
               name: service.ctName,
               description: service.description,
               url: `${SITE.domain}/${service.slug}/`,
+              // Service pages target the whole state
+              area: { state: 'Connecticut' },
+              includeOfferCatalog: true,
             })
           ),
         }}

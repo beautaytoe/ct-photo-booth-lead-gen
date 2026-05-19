@@ -18,6 +18,8 @@ import {
   metaDescriptionFor,
 } from '@/lib/towns-data';
 import { SERVICES, FAQ_GENERAL } from '@/lib/services-data';
+import { POSTS } from '@/lib/blog-data';
+import { getVenuesForTown, venueTypeLabel } from '@/lib/venues-data';
 import { faqSchema, serviceSchema } from '@/lib/schema';
 import { SITE } from '@/lib/site-data';
 
@@ -69,6 +71,15 @@ const INCLUDED = [
   'Optional print packages',
 ];
 
+/** Pick the two most relevant blog posts for the town's vibe. */
+function relatedPostsFor(vibe: string | undefined) {
+  const slugs =
+    vibe === 'corporate'
+      ? ['corporate-photo-booth-rental-ideas', 'how-much-does-photo-booth-rental-cost-in-ct']
+      : ['best-photo-booth-ideas-for-weddings-in-ct', 'how-much-does-photo-booth-rental-cost-in-ct'];
+  return slugs.map((s) => POSTS.find((p) => p.slug === s)).filter((p): p is NonNullable<typeof p> => !!p);
+}
+
 export default async function TownPage({ params }: PageProps) {
   const { town: slug } = await params;
   const town = getTownBySlug(slug);
@@ -77,6 +88,8 @@ export default async function TownPage({ params }: PageProps) {
   const nearby = getNearbyTowns(town, 6);
   const indexable = isIndexable(town);
   const localIntro = town.intro ?? defaultIntroFor(town);
+  const venues = getVenuesForTown(town.slug);
+  const relatedPosts = relatedPostsFor(town.vibe);
 
   // Town-specific FAQ — keeps an exact-match keyword phrase in one place
   // without scattering it through H2s.
@@ -158,6 +171,11 @@ export default async function TownPage({ params }: PageProps) {
                   <strong style={{ color: 'var(--ivory)' }}>Setup details:</strong> timing, access, power, and venue documents confirmed during booking
                 </li>
               </ul>
+              <div className="pkg-foot">
+                <Link href="/photo-booth-rental-prices-ct/" className="btn btn-ghost" style={{ width: '100%', justifyContent: 'center' }}>
+                  View CT pricing →
+                </Link>
+              </div>
             </aside>
           </div>
         </div>
@@ -186,6 +204,14 @@ export default async function TownPage({ params }: PageProps) {
             {SERVICES.slice(0, 6).map((s) => (
               <ServiceCard key={s.slug} service={s} />
             ))}
+          </div>
+          <div style={{ marginTop: 24, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+            <Link href="/photo-booth-rental-ct/" className="btn btn-ghost">
+              <Icons.Spark size={14} /> All booth styles
+            </Link>
+            <Link href="/photo-booth-rental-prices-ct/" className="btn btn-ghost">
+              See CT pricing
+            </Link>
           </div>
         </div>
       </section>
@@ -300,7 +326,62 @@ export default async function TownPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Section 5: Nearby */}
+      {/* Section 5: Local event venues — outbound links to real {Town} venue websites.
+          Framed as public-knowledge reference; we do NOT claim partnerships. */}
+      {venues.length > 0 && (
+        <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <span className="eyebrow">Local venues</span>
+                <h2 className="display" style={{ marginTop: 24 }}>
+                  Common event venues<br />
+                  in <em>{town.name}.</em>
+                </h2>
+              </div>
+              <div className="section-head-right">
+                <p className="lede">
+                  Publicly-known event venues in and around {town.name}. We are not affiliated with
+                  these venues — they're listed for reference. We'll coordinate booth setup with
+                  any venue you book.
+                </p>
+              </div>
+            </div>
+            <ul
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: 12,
+                listStyle: 'none',
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              {venues.map((v) => (
+                <li key={v.url}>
+                  <a
+                    href={v.url}
+                    target="_blank"
+                    rel="noopener"
+                    className="tile"
+                    style={{ display: 'flex', flexDirection: 'column', gap: 6, height: '100%' }}
+                  >
+                    <span className="tile-meta">{venueTypeLabel(v.type)}</span>
+                    <span className="tile-name" style={{ fontSize: 17, lineHeight: 1.25 }}>
+                      {v.name}{' '}
+                      <span style={{ color: 'var(--gold)', fontSize: 12, marginLeft: 4 }} aria-hidden="true">
+                        ↗
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* Section 6: Nearby */}
       <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
         <div className="container">
           <div className="section-head">
@@ -354,7 +435,61 @@ export default async function TownPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Section 6: FAQ */}
+      {/* Section 7: Related reading — internal links to relevant blog posts */}
+      {relatedPosts.length > 0 && (
+        <section className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <span className="eyebrow">Related reading</span>
+                <h2 className="display" style={{ marginTop: 24 }}>
+                  Planning a {town.name}<br />
+                  <em>event?</em>
+                </h2>
+              </div>
+              <div className="section-head-right">
+                <p className="lede">
+                  Short guides with practical context — pricing, booth comparisons, and ideas to
+                  help you build the right setup for your venue.
+                </p>
+              </div>
+            </div>
+            <ul
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: 16,
+                listStyle: 'none',
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              {relatedPosts.map((p) => (
+                <li key={p.slug}>
+                  <Link
+                    href={`/blog/${p.slug}/`}
+                    className="booth-card bc-span-4"
+                    style={{ minHeight: 200, gridColumn: 'auto' }}
+                  >
+                    <div className="booth-card-num">{p.readMinutes} min read</div>
+                    <h3 className="booth-card-name" style={{ fontSize: 22 }}>
+                      {p.title}
+                    </h3>
+                    <p className="booth-card-desc">{p.excerpt}</p>
+                    <div className="booth-card-foot">
+                      <span className="bc-link">
+                        Read <span style={{ fontSize: 14 }}>↗</span>
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* Section 8: FAQ */}
       <FAQ
         items={townFaqs}
         eyebrow={`${town.name} · FAQ`}
@@ -366,7 +501,7 @@ export default async function TownPage({ params }: PageProps) {
         }
       />
 
-      {/* Section 7: Final CTA */}
+      {/* Section 9: Final CTA */}
       <CTASection
         title={
           <>
@@ -387,7 +522,15 @@ export default async function TownPage({ params }: PageProps) {
                   name: `Photo Booth Rental in ${town.name}, Connecticut`,
                   description: `Booth rental for weddings, corporate events, and private gatherings in ${town.name}, CT.`,
                   url: `${SITE.domain}/service-areas/${town.slug}/`,
-                  areaServed: town.name,
+                  // City + containedInPlace chain: City ↳ County ↳ State.
+                  // This is the Google-preferred structure for service-area
+                  // businesses serving a specific municipality.
+                  area: {
+                    city: town.name,
+                    cityCounty: countyInfo.name,
+                    state: 'Connecticut',
+                  },
+                  includeOfferCatalog: true,
                 })
               ),
             }}
