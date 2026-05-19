@@ -35,8 +35,9 @@ export const metadata: Metadata = {
     title: `${SITE.seoDescriptor} | ${SITE.brand}`,
     description:
       'Premium photo booth, 360, glam, mirror, roaming, and audio guestbook rentals for Connecticut weddings, corporate events, and private celebrations.',
-    // TODO: when /og-default.png is created (1200x630 branded image), this
-    // wiring sends it to every page that doesn't override openGraph.images.
+    // /og-default.png is generated dynamically by src/app/og-default.png/route.tsx
+    // via Next 16's ImageResponse (edge runtime, 24h cache). Every page that
+    // doesn't override openGraph.images picks this up.
     images: [
       {
         url: '/og-default.png',
