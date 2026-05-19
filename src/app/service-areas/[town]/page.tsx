@@ -15,6 +15,7 @@ import {
   isIndexable,
   defaultIntroFor,
   metaDescriptionFor,
+  secondParagraphForVibe,
 } from '@/lib/towns-data';
 import { SERVICES, FAQ_GENERAL } from '@/lib/services-data';
 import { POSTS } from '@/lib/blog-data';
@@ -140,10 +141,7 @@ export default async function TownPage({ params }: PageProps) {
               </h2>
               <p className="lede" style={{ marginTop: 24 }}>{localIntro}</p>
               <p className="lede" style={{ marginTop: 16 }}>
-                Popular settings include private residences, clubs, hotels, waterfront venues,
-                school events, fundraisers, and corporate gatherings. Each booth style fits a
-                slightly different room, guest count, and vibe — we help match the right setup to
-                your event.
+                {secondParagraphForVibe(town)}
               </p>
               <div style={{ marginTop: 28, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
                 <Link href="/check-availability/" className="btn btn-primary">

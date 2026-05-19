@@ -713,6 +713,37 @@ export function defaultIntroFor(town: Town): string {
   return introFor(town.name, eventListForVibe(town.vibe));
 }
 
+/**
+ * Vibe-specific second paragraph for the town-page hero section. Replaces
+ * a single identical "Popular settings include private residences, clubs,
+ * hotels, waterfront venues..." sentence that previously appeared on all
+ * 169 town pages. 5 variants drop duplication and read more naturally per
+ * town personality. Audit reference: High-priority H5.
+ *
+ * Constraints applied:
+ *  - No "photo booth rental" repetition
+ *  - No "near me" / "best" / "top-rated"
+ *  - No implication of a physical office in the town
+ *  - No fake claims (no specific venue partnerships, no headcount claims)
+ *  - {name} substituted in for natural per-town variation
+ */
+export function secondParagraphForVibe(town: Town): string {
+  const name = town.name;
+  switch (town.vibe ?? 'family') {
+    case 'luxury':
+      return `${name} events often lean polished and gallery-style — country-club receptions, estate weddings, and charity galas where the booth itself becomes part of the décor. We design the setup to feel deliberate, not just present.`;
+    case 'corporate':
+      return `${name} events often combine business and celebration — conferences with after-parties, holiday gatherings, employee recognition nights, and brand activations. The booth is built around brand visibility and guest flow.`;
+    case 'shoreline':
+      return `${name} events span waterfront weddings, marina-area parties, summer celebrations, and shoreline gatherings. We pick the booth style and footprint based on whether the room is indoor, outdoor, or tented.`;
+    case 'rural':
+      return `${name} events often happen in barns, farms, and private estates — each with its own constraints around power, ceiling clearance, and layout. We pick the booth setup to fit the venue, not the other way around.`;
+    case 'family':
+    default:
+      return `${name} events range from Sweet 16s and bar/bat mitzvahs to milestone birthdays, school galas, and community fundraisers. We pick the booth style and prop selection to keep the line moving and the energy high.`;
+  }
+}
+
 /** Meta description that varies by vibe + town. Target 150–160 chars. */
 export function metaDescriptionFor(town: Town): string {
   const v = town.vibe ?? 'family';

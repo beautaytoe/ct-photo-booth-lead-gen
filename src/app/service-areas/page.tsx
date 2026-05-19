@@ -85,12 +85,18 @@ export default function ServiceAreasPage() {
         return (
           <section key={c.slug} className="section dark" style={{ borderTop: '1px solid var(--line)' }}>
             <div className="container">
-              <div className="section-head">
+              {/* Per-county town-list section. The H3 that used to live here
+                  ("Photo booth rental — {County}.") duplicated the county
+                  heading already present in the top "Browse by county" grid,
+                  creating 16 H3s on the page with near-identical content.
+                  Removed for content-quality reasons (audit High-priority H1).
+                  The county is still clearly labeled via the eyebrow and the
+                  prominent "{County} hub →" CTA button. */}
+              <div className="section-head" style={{ alignItems: 'center' }}>
                 <div>
-                  <span className="eyebrow">{c.name}</span>
-                  <h3 className="display" style={{ marginTop: 24, fontSize: 'clamp(28px, 3vw, 48px)' }}>
-                    Photo booth rental — <em>{c.name}.</em>
-                  </h3>
+                  <span className="eyebrow" style={{ fontSize: 13, letterSpacing: '0.22em' }}>
+                    {c.name}
+                  </span>
                 </div>
                 <div className="section-head-right">
                   <Link

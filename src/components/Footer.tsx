@@ -5,13 +5,19 @@ import { COUNTIES, getTownBySlug } from '@/lib/towns-data';
 import { TrackedLink } from './TrackedLink';
 
 export function Footer() {
+  // Statewide spread — one anchor town per county. Reinforces the brand's
+  // statewide Connecticut positioning instead of the previous Fairfield-only
+  // bias. All 8 are indexable (Tier 1 or Tier 2). Audit reference:
+  // High-priority H4 (footer rebalance).
   const featuredTowns = [
-    'stamford-ct',
-    'greenwich-ct',
-    'norwalk-ct',
-    'westport-ct',
-    'darien-ct',
-    'new-canaan-ct',
+    'greenwich-ct',     // Fairfield County (Tier 1)
+    'new-haven-ct',     // New Haven County (Tier 1)
+    'hartford-ct',      // Hartford County (Tier 2)
+    'litchfield-ct',    // Litchfield County (Tier 2)
+    'old-saybrook-ct',  // Middlesex County (Tier 2)
+    'groton-ct',        // New London County (Tier 2)
+    'mansfield-ct',     // Tolland County (Tier 2)
+    'putnam-ct',        // Windham County (Tier 2)
   ]
     .map((s) => getTownBySlug(s))
     .filter((t): t is NonNullable<ReturnType<typeof getTownBySlug>> => !!t);
